@@ -1,0 +1,5 @@
+*.pyc
+.DS_Store
+mezzanine_api.egg-info/
+build/
+dist/
