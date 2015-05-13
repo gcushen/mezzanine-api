@@ -4,8 +4,10 @@ from .serializers import UserSerializer, PostSerializer, CategorySerializer, Pag
 from django.contrib.auth.models import User
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
-#from django.contrib.sites.models import Site
-#from mezzanine.generic.models import ThreadedComment
+import django_filters
+# from django.contrib.sites.models import Site
+# from mezzanine.generic.models import ThreadedComment
+# from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 
 class CustomPagination(PageNumberPagination):
@@ -24,6 +26,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     pagination_class = CustomPagination
+    permission_classes = (permissions.IsAdminUser,)
 
 
 class PageViewSet(viewsets.ReadOnlyModelViewSet):
@@ -38,18 +41,60 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
     For listing or retrieving blog categories.
+    ---
+    list:
+        parameters:
+            - name: search
+              type: string
+              description: Search for category names that match the query
+              paramType: query
     """
     queryset = BlogCategory.objects.all()
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
     serializer_class = CategorySerializer
     pagination_class = CustomPagination
+
+
+class PostFilter(django_filters.FilterSet):
+    """
+    A class for filtering blog posts.
+    """
+    category = django_filters.NumberFilter(name="categories")
+    user = django_filters.NumberFilter(name="user__id")
+    username = django_filters.CharFilter(name="user__username")
+
+    class Meta:
+        model = Post
+        fields = ['category', 'username', 'user']
 
 
 class PostViewSet(viewsets.ReadOnlyModelViewSet):
     """
     For listing or retrieving blog posts.
+    ---
+    list:
+        parameters:
+            - name: category
+              type: integer
+              description: Filter posts by category ID
+              paramType: query
+            - name: user
+              type: integer
+              description: Filter posts by user ID
+              paramType: query
+            - name: username
+              type: string
+              description: Filter posts by username
+              paramType: query
+            - name: search
+              type: string
+              description: Search for blog posts that match the query
+              paramType: query
     """
     queryset = Post.objects.all().order_by("-publish_date")
-    filter_fields = ('categories',)
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = PostFilter
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter,)
+    search_fields = ('title', 'content',)
     serializer_class = PostSerializer
     pagination_class = CustomPagination
