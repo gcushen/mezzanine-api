@@ -83,7 +83,7 @@ on `GitHub`_ , so contributing is as easy as forking the project and committing 
 Support
 =======
 
-If you have questions about the API, consider discussing it on the `mezzanine-users`_ mailing list.
+If you have questions about the API, consider discussing them on the `mezzanine-users`_ mailing list.
 
 Otherwise, if you have found a bug, please use the `GitHub issue tracker`_ and include the steps necessary to reproduce
 it.
