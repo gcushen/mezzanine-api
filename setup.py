@@ -1,6 +1,7 @@
 import os
 import sys
 from setuptools import setup, find_packages
+from shutil import rmtree
 from mezzanine_api import __version__ as version
 
 # allow setup.py to be run from any path
@@ -30,7 +31,8 @@ setup(
         "django-rest-swagger==0.2.9",
         "djangorestframework==3.1.1",
         "markdown",
-        "django-filter"
+        "django-filter",
+        "django-oauth-toolkit==0.8.1"
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
