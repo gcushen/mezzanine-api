@@ -1,2 +1,2 @@
 include LICENSE README.rst
-recursive-include api *
+recursive-include mezzanine_api *
