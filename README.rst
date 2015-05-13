@@ -16,10 +16,10 @@ Features
 ========
 * REST API resources for posts, pages, users, and categories
 * OAuth 2.0 allows users to authorize and revoke access to third party applications without the need for those
-applications to request the user's credentials
-* Web browsable API
+  applications to request the user's credentials
 * Endpoints documented with `Swagger UI`_
 * Leverages `Django Rest Framework`_
+* Web browsable API
 * Highly efficient
 * Easy to use
 
@@ -96,4 +96,4 @@ it.
 .. _`GitHub`: https://github.com/gcushen/mezzanine-api
 .. _`GitHub issue tracker`: https://github.com/gcushen/mezzanine-api/issues
 .. _`mezzanine-users`: http://groups.google.com/group/mezzanine-users/topics
-.. _`Swagger UI`_: http://swagger.io/
+.. _`Swagger UI`: http://swagger.io/
