@@ -15,13 +15,12 @@ Ember.js or a mobile app.
 Features
 ========
 * REST API resources for posts, pages, users, and categories
+* Apply filters and search queries to narrow down results
 * OAuth 2.0 allows users to authorize and revoke access to third party applications without the need for those
-applications to request the user's credentials
+  applications to request the user's credentials
 * Web browsable API
 * Endpoints documented with `Swagger UI`_
 * Leverages `Django Rest Framework`_
-* Highly efficient
-* Easy to use
 
 Roadmap
 ========
@@ -29,6 +28,7 @@ Roadmap
 * Refinement
 * Writeable API access
 * Test Suite
+* Further documentation for configuration and customization
 
 Installation
 ============
@@ -96,4 +96,4 @@ it.
 .. _`GitHub`: https://github.com/gcushen/mezzanine-api
 .. _`GitHub issue tracker`: https://github.com/gcushen/mezzanine-api/issues
 .. _`mezzanine-users`: http://groups.google.com/group/mezzanine-users/topics
-.. _`Swagger UI`_: http://swagger.io/
+.. _`Swagger UI`: http://swagger.io/
