@@ -1,2 +1,3 @@
 include LICENSE README.rst
 recursive-include mezzanine_api *
+recursive-exclude * *.py[co]
