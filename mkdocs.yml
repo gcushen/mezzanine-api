@@ -1,0 +1,11 @@
+site_name: Mezzanine REST API
+site_url: http://gcushen.github.io/mezzanine-api
+site_description: RESTful web API for Mezzanine CMS
+
+repo_url: https://github.com/gcushen/mezzanine-api/
+
+markdown_extensions:
+    admonition:
+
+copyright: Copyright &copy; 2015 <a href="https://github.com/gcushen/">George Cushen</a>.
+google_analytics: ['UA-62992791-1', 'auto']
