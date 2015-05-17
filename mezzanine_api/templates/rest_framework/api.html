@@ -1,0 +1,77 @@
+{% extends "rest_framework/base.html" %}
+{% load url from future %}
+{% load staticfiles %}
+{% load rest_framework %}
+{% load pages_tags mezzanine_tags i18n %}
+{% load mezzanine_api %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+
+            {% block meta %}
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                <meta name="robots" content="NONE,NOARCHIVE" />
+            {% endblock %}
+
+            <title>{% block title %}Mezzanine API{% endblock %}</title>
+
+            {% block style %}
+            {% compress css %}
+                {% block bootstrap_theme %}
+                    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
+                    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/>
+                {% endblock %}
+                <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
+                <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+            {% endcompress %}
+
+            <style media="screen" type="text/css">
+            .navbar {
+                background: #BD362F;
+            }
+            .navbar-inverse .navbar-brand {
+                color: #FFF;
+            }
+            .btn-primary {
+                color: #FFF;
+                background-color: #BD362F;
+                border-color: #EE5F5B;
+            }
+            .content-main p:nth-of-type(1) {
+                display: none;
+            }
+            </style>
+
+            {% endblock %}
+
+        {% endblock %}
+    </head>
+
+    <body class="{% block bodyclass %}{% endblock %}">
+
+            {% block navbar %}
+                <div class="navbar navbar-static-top {% block bootstrap_navbar_variant %}navbar-inverse{% endblock %}">
+                    <div class="container">
+                        <span>
+                            {% block branding %}
+                                <a class='navbar-brand' rel="nofollow" href='http://gcushen.github.io/mezzanine-api' target="_blank">
+                                    Mezzanine API <span class="version">{% get_mezzanine_api_version %}</span>
+                                </a>
+                            {% endblock %}
+                        </span>
+                        <ul class="nav navbar-nav pull-right">
+                            {% block userlinks %}
+                                {% if user.is_authenticated %}
+                                    {% optional_logout request user %}
+                                {% else %}
+                                    {% optional_login request %}
+                                {% endif %}
+                            {% endblock %}
+                        </ul>
+                    </div>
+                </div>
+            {% endblock %}
+
+    </body>
+</html>
