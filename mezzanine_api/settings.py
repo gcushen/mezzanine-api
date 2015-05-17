@@ -16,18 +16,21 @@ OAUTH2_PROVIDER = {
 
 SWAGGER_SETTINGS = {
     'exclude_namespaces': [],
-    'api_version': '0.1',
+    'api_version': '',
     'api_path': '/',
-    'api_key': '',
+    'api_key': '',  # Your OAuth2 Access Token
+    'token_type': 'Bearer',
     'is_authenticated': False,
     'is_superuser': False,
     'permission_denied_handler': None,
     'info': {
-        'title': 'REST API Resource Documentation',
-        'description': 'The RESTful web API exposes Mezzanine data using JSON serialization. This interactive document '
-                       'will guide you through the relevant data structures, API endpoints, filtering, and searching. '
-                       'Bugs should be reported on'
-                       ' <a href="https://github.com/gcushen/mezzanine-api/issues" target="_blank">Github</a>.',
+        'title': 'API Resource Documentation',
+        'description': 'The RESTful web API exposes Mezzanine data using JSON serialization and OAuth2 protection. '
+                       'This interactive document will guide you through the relevant API endpoints, data structures, '
+                       'and query parameters for filtering, searching and pagination. Otherwise, for further '
+                       'information and examples, consult the general '
+                       '<a href="http://gcushen.github.io/mezzanine-api" target="_blank">Mezzanine API Documentation'
+                       '</a>.',
     },
     'doc_expansion': 'none',
 }
