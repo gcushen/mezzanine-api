@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="RESTful web API for Mezzanine CMS">
+        
+        <link rel="canonical" href="http://gcushen.github.io/mezzanine-api/">
+        <link rel="shortcut icon" href="./img/favicon.ico">
+
+	<title>Mezzanine REST API</title>
+
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/highlight.css">
+        <link href="./css/extra.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-62992791-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href=".">Mezzanine REST API</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                
+                <li>
+                    <a href="https://github.com/gcushen/mezzanine-api/">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#mezzanine-api">Mezzanine API</a></li>
+        
+            <li><a href="#overview">Overview</a></li>
+        
+            <li><a href="#installation">Installation</a></li>
+        
+            <li><a href="#endpoint-resources">Endpoint Resources</a></li>
+        
+            <li><a href="#pagination">Pagination</a></li>
+        
+            <li><a href="#permissions">Permissions</a></li>
+        
+            <li><a href="#authenticate-with-oauth2">Authenticate with OAuth2</a></li>
+        
+            <li><a href="#getting-help">Getting help</a></li>
+        
+            <li><a href="#contributing">Contributing</a></li>
+        
+            <li><a href="#roadmap">Roadmap</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="mezzanine-api">Mezzanine API</h1>
+<p>RESTful API for Mezzanine CMS</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Mezzanine API is a <strong>RESTful API</strong> using <strong>JSON</strong> serialization and protected with <strong>OAuth 2</strong>. It is an extension 
+for the <a href="http://mezzanine.jupo.org/">Mezzanine</a> content management platform, built using the <a href="http://djangoproject.com/">Django</a> framework. The API empowers developers to <strong>automate, 
+extend and combine Mezzanine with other services</strong> such as Ember.js or a mobile app.</p>
+<hr />
+<p><strong>Mezzanine API is in development.</strong></p>
+<p>Check back regularly here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. </p>
+<p>Tell us what you need from the API so we can prioritize improvements. </p>
+<hr />
+<h4 id="access-all-the-data-your-frontend-needs">Access all the data your frontend needs</h4>
+<p>REST API resources for posts, categories, comments, pages, users, and public site data.</p>
+<h4 id="we-care-about-security">We care about security</h4>
+<p>That's why OAuth2 is utilized for authentication, allowing users to authorize and revoke access to third party 
+applications without the need for those applications to request the user's confidential credentials. Member's only 
+pages can only be accessed over the API if the requesting user is authenticated and has permission.</p>
+<h4 id="filter-and-search-results">Filter and search results</h4>
+<p>Apply filters such as <code>posts?date_min=2015-01-01&amp;category=2</code> or search <code>posts?search=fitness</code> to narrow down results. 
+Results are paginated to handle large datasets.</p>
+<h4 id="interactive-endpoint-documentation">Interactive endpoint documentation</h4>
+<p>The best way to learn about the API is via the interactive resource documentation which utilizes the popular <a href="http://swagger.io/">Swagger 
+UI</a>.</p>
+<h4 id="easy-to-customize">Easy to customize</h4>
+<p>The API leverages <a href="http://www.django-rest-framework.org/">Django Rest Framework</a> which has a large active community.</p>
+<p><img alt="mezzanine api" src="./img/api_resources.png" /></p>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>In order to install Mezzanine API you'll need <a href="https://www.python.org/">Python</a> installed on your system, as well as the <a href="http://mezzanine.jupo.org/">Mezzanine</a> CMS.  </p>
+<ol>
+<li>
+<p>Install the <code>mezzanine-api</code> package using pip:</p>
+<pre><code>$ pip install mezzanine-api
+</code></pre>
+</li>
+<li>
+<p>Add the following apps in this order to INSTALLED_APPS in your Mezzanine <code>settings.py</code>:</p>
+<pre><code>INSTALLED_APPS = (
+    ...
+    'mezzanine_api',
+    'rest_framework',
+    'rest_framework_swagger',
+    'oauth2_provider',
+)
+</code></pre>
+</li>
+<li>
+<p>Also, add the following lines at the end of your <code>settings.py</code> module:</p>
+<pre><code>#####################
+# REST API SETTINGS #
+#####################
+try:
+    from mezzanine_api.settings import *
+except ImportError as e:
+    pass
+</code></pre>
+</li>
+<li>
+<p>Add the following code in your Mezzanine <code>urls.py</code> somewhere after the <code>urlpatterns = []</code> line:</p>
+<pre><code># REST API URLs
+urlpatterns += patterns("",
+    ("^api/", include("mezzanine_api.urls")),
+)
+</code></pre>
+</li>
+<li>
+<p>Migrate the database to support OAuth2:</p>
+<pre><code>$ python manage.py migrate
+</code></pre>
+</li>
+<li>
+<p>Start the server:</p>
+<pre><code>$ python manage.py runserver
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="endpoint-resources">Endpoint Resources</h2>
+<p>The best way to learn about the API resources is via the interactive resource documentation which utilizes the popular <a href="http://swagger.io/">Swagger 
+UI</a>. Open up <a href="http://127.0.0.1:8000/api/docs/">http://127.0.0.1:8000/api/docs/</a> in your browser, and you'll see the 
+interactive endpoint resource documentation being displayed (refer to above screenshot). Here you can easily test out the 
+different kinds of endpoint, method, and query parameter whilst you are learning.</p>
+<p>Also, if you attempt to access the API itself directly in your browser, you will be shown a browsable web API:
+<img alt="browsable api" src="./img/browsable_api.png" /></p>
+<p>Enjoy designing a frontend to interact with the REST API using your technology of choice! Alternatively, you can use it 
+to automate, analyse, extend and combine Mezzanine with other services.</p>
+<h2 id="pagination">Pagination</h2>
+<p>In order to handle large datasets, pagination is employed. To be consistent, all <em>listing</em> type endpoints 
+provide a structure that allows for pagination. Please use a "page" parameter to fetch multiple pages of records. For
+ example listing categories with <code>categories?page=2</code> will return a JSON structure similar to this:</p>
+<pre><code>{
+    "count": ...,
+    "next": "http://127.0.0.1:8000/api/categories?page=3",
+    "previous": "http://127.0.0.1:8000/api/categories",
+    "results": [
+        {
+            ...
+        }
+    ]
+}
+</code></pre>
+<h2 id="permissions">Permissions</h2>
+<p>Currently, the API is readonly with the exception of the <code>categories</code> resource. Categories may be created or updated 
+over the API by a <em>superuser</em>. The rest of the API will also gradually be opened up for write access over forthcoming 
+releases. This would allow you to make new blog posts, for example, using your own innovative frontend or web hooks.</p>
+<p>Note that the <code>users</code> resource is provided so that you can carry out tasks such as retrieving the current user's 
+details, view a blog post author's name, and list suggested usernames for predicted text entry. For privacy, the email 
+field can only be accessed by the relevant owner or a <em>superuser</em>. However, the author's full name is accessible to all
+by default (if provided) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
+at the <code>UserSerializer</code> class.</p>
+<h2 id="authenticate-with-oauth2">Authenticate with OAuth2</h2>
+<h3 id="register">Register</h3>
+<p>Open up <a href="http://127.0.0.1:8000/api/oauth2/applications/register/">http://127.0.0.1:8000/api/oauth2/applications/register/</a> in your browser.</p>
+<p>Go ahead and register a new OAuth application. Just enter a reference name, choose <code>confidential</code> client type and 
+<code>...password-based</code> authorization grant type:</p>
+<p><img alt="OAuth Screenshot" src="./img/oauth_register.png" /></p>
+<p>Request your access token to use for API authentication:</p>
+<pre><code>$ curl -X POST -H "Accept: application/json; indent=4" \
+  -d "grant_type=password&amp;username=&lt;username&gt;&amp;password=&lt;password&gt;" -u"&lt;client_id&gt;:&lt;client_secret&gt;" \
+  http://localhost:8000/api/oauth2/token/
+</code></pre>
+<p>For <code>client_id</code> and <code>client_secret</code>, copy and paste those that you were given in the previous step. The <code>username</code> and 
+<code>password</code> are the credentials of the Mezzanine user you wish to login as. You will get a JSON response like:</p>
+<pre><code>{
+    "access_token": "&lt;your_access_token&gt;",
+    "token_type": "Bearer",
+    "expires_in": 36000,
+    "refresh_token": "&lt;your_refresh_token&gt;",
+    "scope": "read write groups"
+}
+</code></pre>
+<h3 id="test">Test</h3>
+<p>The following test should <em>fail</em> (i.e. no user listings shown) if you are not currently authenticated:</p>
+<pre><code>$ curl http://localhost:8000/api/users
+
+{
+    "detail": "Authentication credentials were not provided."
+}
+</code></pre>
+<p>The following authenticated test should <em>succeed</em> and show you a list of users if you registered OAuth with a 
+<em>superuser</em> account:    </p>
+<pre><code>$ curl -H "Authorization: Bearer &lt;your_access_token&gt;" http://localhost:8000/api/users
+</code></pre>
+<p>You can also test your access token by entering it at the top of your interactive 
+<a href="http://127.0.0.1:8000/api/docs/">API Resource Documentation</a> page.</p>
+<h2 id="getting-help">Getting help</h2>
+<p>If you have questions about the API, consider using the <a href="http://groups.google.com/group/mezzanine-users/topics">Mezzanine discussion group</a>.</p>
+<p>Otherwise, if you think you have found a bug, please use <a href="https://github.com/gcushen/mezzanine-api/issues">GitHub issues</a> and include the steps necessary to reproduce
+ it.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Mezzanine API is an open source project managed using the Git version control system. The repository is hosted
+on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributing is as easy as forking the project and committing back your enhancements.</p>
+<h2 id="roadmap">Roadmap</h2>
+<ul>
+<li>Refinement</li>
+<li>Example API client</li>
+<li>Gradual roll-out of writeable API access</li>
+<li>Test Suite</li>
+<li>Further documentation</li>
+</ul></div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Copyright &copy; 2015 <a href="https://github.com/gcushen/">George Cushen</a>.</p>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="./js/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap-3.0.3.min.js"></script>
+        <script src="./js/highlight.pack.js"></script>
+        <script src="./js/base.js"></script>
+
+        <!--
+        MkDocs version  : 0.12.2
+        Docs Build Date : 2015-05-17 20:04:58.696466
+        -->
+    </body>
+</html>
