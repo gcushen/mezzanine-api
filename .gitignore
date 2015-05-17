@@ -3,4 +3,5 @@
 mezzanine_api.egg-info/
 build/
 dist/
+site/
 .idea/
