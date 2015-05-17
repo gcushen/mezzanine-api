@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.conf.urls import url, include
 from rest_framework import routers
-from .views import UserViewSet, PostViewSet, CategoryViewSet, PageViewSet
+from .views import UserViewSet, PostViewSet, CategoryViewSet, PageViewSet, SiteViewSet
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -9,6 +9,7 @@ router.register(r'users', UserViewSet)
 router.register(r'pages', PageViewSet)
 router.register(r'posts', PostViewSet)
 router.register(r'categories', CategoryViewSet)
+router.register(r'site', SiteViewSet, SiteViewSet.as_view({'get': 'retrieve'}))
 
 urlpatterns = [
     url(r'^', include(router.urls)),
