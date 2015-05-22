@@ -14,6 +14,9 @@ OAUTH2_PROVIDER = {
     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
+# API login URL for oauth2_provider (based on default routing in urls.py)
+LOGIN_URL = "/api/auth/login/"
+
 SWAGGER_SETTINGS = {
     'exclude_namespaces': [],
     'api_version': '',
@@ -34,3 +37,4 @@ SWAGGER_SETTINGS = {
     },
     'doc_expansion': 'none',
 }
+
