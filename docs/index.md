@@ -138,7 +138,7 @@ at the `UserSerializer` class.
 
 ### Register
 
-Open up [http://127.0.0.1:8000/api/oauth2/applications/register/](http://127.0.0.1:8000/api/oauth2/applications/register/) in your browser.
+Open up [http://127.0.0.1:8000/api/oauth2/applications/register/](http://127.0.0.1:8000/api/oauth2/applications/register/) in your browser. (If you are using API version <= 0.3.0, you may experience a 404 error. To resolve this, add the line `LOGIN_URL = "/api/auth/login/"` to your `settings.py`.)
 
 Go ahead and register a new OAuth application. Just enter a reference name, choose `confidential` client type and 
 `...password-based` authorization grant type:
