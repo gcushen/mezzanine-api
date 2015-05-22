@@ -4,18 +4,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="RESTful web API for Mezzanine CMS">
         
         
-        <link rel="shortcut icon" href="./img/favicon.ico">
+        <link rel="canonical" href="http://gcushen.github.io/mezzanine-api/release-notes/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Mezzanine REST API</title>
+	<title>Release notes - Mezzanine REST API</title>
 
-        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link href="./css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="./css/highlight.css">
-        <link href="./css/extra.css" rel="stylesheet">
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/extra.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -54,7 +54,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">Mezzanine REST API</a>
+            <a class="navbar-brand" href="..">Mezzanine REST API</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -65,13 +65,13 @@
                 
                 
                     <li >
-                        <a href=".">Home</a>
+                        <a href="..">Home</a>
                     </li>
                 
                 
                 
-                    <li >
-                        <a href="release-notes/">Release notes</a>
+                    <li class="active">
+                        <a href="./">Release notes</a>
                     </li>
                 
                 
@@ -83,8 +83,8 @@
             <ul class="nav navbar-nav navbar-right">
                 
                 
-                <li class="disabled">
-                    <a rel="next" >
+                <li >
+                    <a rel="next" href="..">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
@@ -112,15 +112,40 @@
 
         <div class="container">
             
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#release-notes">Release Notes</a></li>
+        
+            <li><a href="#upgrading">Upgrading</a></li>
+        
+            <li><a href="#version-030-2015-05-17">Version 0.3.0 (2015-05-17)</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
 
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
-    </div>
-
-
+<h1 id="release-notes">Release Notes</h1>
+<hr />
+<h2 id="upgrading">Upgrading</h2>
+<p>To upgrade Mezzanine API to the latest version, use pip:</p>
+<pre><code>pip install -U mezzanine-api
+</code></pre>
+<p>You can determine your currently installed version using <code>pip freeze</code>:</p>
+<pre><code>$ pip freeze | grep mezzanine-api
+</code></pre>
+<h2 id="version-030-2015-05-17">Version 0.3.0 (2015-05-17)</h2>
+<ul>
+<li>Add superuser write access (POST and PUT) for categories</li>
+<li>Add site endpoint</li>
+<li>Add themes</li>
+<li>Update filters</li>
+<li>Update permission handling and security</li>
+<li>Update settings</li>
+<li>Expose more model fields to API</li>
+</ul></div>
+            
         </div>
 
         <footer class="col-md-12">
@@ -133,14 +158,14 @@
 
         
 
-        <script src="./js/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap-3.0.3.min.js"></script>
-        <script src="./js/highlight.pack.js"></script>
-        <script src="./js/base.js"></script>
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
 
         <!--
         MkDocs version  : 0.12.2
-        Docs Build Date : 2015-05-22 21:41:00.833131
+        Docs Build Date : 2015-05-22 21:41:00.885015
         -->
     </body>
 </html>

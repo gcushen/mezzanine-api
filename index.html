@@ -60,11 +60,39 @@
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="active">
+                        <a href=".">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="release-notes/">Release notes</a>
+                    </li>
+                
+                
+                </ul>
+            
 
             
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 
+                
+                <li class="disabled">
+                    <a rel="next" >
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="release-notes/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
                 
                 
                 <li>
@@ -225,7 +253,7 @@ by default (if provided) since blogs tend to operate on a real name basis. If yo
 at the <code>UserSerializer</code> class.</p>
 <h2 id="authenticate-with-oauth2">Authenticate with OAuth2</h2>
 <h3 id="register">Register</h3>
-<p>Open up <a href="http://127.0.0.1:8000/api/oauth2/applications/register/">http://127.0.0.1:8000/api/oauth2/applications/register/</a> in your browser.</p>
+<p>Open up <a href="http://127.0.0.1:8000/api/oauth2/applications/register/">http://127.0.0.1:8000/api/oauth2/applications/register/</a> in your browser. (If you are using API version &lt;= 0.3.0, you may experience a 404 error. To resolve this, add the line <code>LOGIN_URL = "/api/auth/login/"</code> to your <code>settings.py</code>.)</p>
 <p>Go ahead and register a new OAuth application. Just enter a reference name, choose <code>confidential</code> client type and 
 <code>...password-based</code> authorization grant type:</p>
 <p><img alt="OAuth Screenshot" src="./img/oauth_register.png" /></p>
@@ -293,7 +321,7 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
 
         <!--
         MkDocs version  : 0.12.2
-        Docs Build Date : 2015-05-17 20:04:58.696466
+        Docs Build Date : 2015-05-22 21:41:00.877469
         -->
     </body>
 </html>
