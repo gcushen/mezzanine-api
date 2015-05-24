@@ -2,9 +2,9 @@
 Mezzanine API
 =============
 
-.. image:: https://pypip.in/version/mezzanine-api/badge.svg
+.. image:: https://img.shields.io/pypi/v/mezzanine-api.svg
  :target: `PyPi`_
-.. image:: https://pypip.in/license/mezzanine-api/badge.svg
+.. image:: https://img.shields.io/pypi/l/mezzanine-api.svg
  :target: `PyPi`_
 
 Mezzanine API is a RESTful API using JSON serialization and protected with OAuth 2. It is an extension for the `Mezzanine`_ content management platform, built using the `Django`_ framework. The API empowers developers to automate, extend and combine Mezzanine with other services such as Ember.js or a mobile app.
