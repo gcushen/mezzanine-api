@@ -1,0 +1,19 @@
+language: python
+
+sudo: false
+
+env:
+    - TOX_ENV=py27-mezzaninemaster
+    - TOX_ENV=py34-mezzaninemaster
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: TOX_ENV=py27-mezzaninemaster
+    - env: TOX_ENV=py34-mezzaninemaster
+
+install:
+  - pip install tox
+
+script:
+    - tox -e $TOX_ENV

@@ -5,3 +5,4 @@ build/
 dist/
 site/
 .idea/
+.tox/
