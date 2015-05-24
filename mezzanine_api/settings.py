@@ -1,4 +1,3 @@
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
@@ -37,4 +36,3 @@ SWAGGER_SETTINGS = {
     },
     'doc_expansion': 'none',
 }
-
