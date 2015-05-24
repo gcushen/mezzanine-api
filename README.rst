@@ -35,4 +35,3 @@ Created by `George Cushen <https://github.com/gcushen>`_
 .. _`GitHub`: https://github.com/gcushen/mezzanine-api
 .. _`GitHub issue tracker`: https://github.com/gcushen/mezzanine-api/issues
 .. _`mezzanine-users`: http://groups.google.com/group/mezzanine-users/topics
-.. _`Swagger UI`: http://swagger.io/
