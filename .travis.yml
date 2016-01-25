@@ -4,8 +4,8 @@ sudo: false
 
 env:
     - TOX_ENV=flake8
-    - TOX_ENV=py27-django1.6-drf3.1-mezzanine3.1
-    - TOX_ENV=py34-django1.6-drf3.1-mezzanine3.1
+    - TOX_ENV=py27-django1.9-drf3.3-mezzanine4.1
+    - TOX_ENV=py34-django1.9-drf3.3-mezzanine4.1
     - TOX_ENV=py27-mezzaninemaster
     - TOX_ENV=py34-mezzaninemaster
 
