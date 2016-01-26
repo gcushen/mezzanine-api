@@ -39,11 +39,11 @@ setup(
     license='BSD',
     packages=find_packages(),
     install_requires=[
-        "Mezzanine",
-        "django-rest-swagger==0.2.9",
-        "djangorestframework==3.1.1",
+        "Mezzanine >= 4.1.0",
+        "django-rest-swagger==0.3.5",
+        "djangorestframework==3.3.2",
         "django-filter",
-        "django-oauth-toolkit==0.8.1"
+        "django-oauth-toolkit==0.10.0"
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -53,10 +53,10 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Internet :: WWW/HTTP :: WSGI',
