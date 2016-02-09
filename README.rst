@@ -8,6 +8,8 @@ Mezzanine API
    :target: https://travis-ci.org/gcushen/mezzanine-api
 .. image:: https://img.shields.io/pypi/l/mezzanine-api.svg
    :target: `PyPi`_
+.. image:: https://badges.gitter.im/gcushen/mezzanine-api.svg
+   :target: https://gitter.im/gcushen/mezzanine-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 
 Mezzanine API is a RESTful API using JSON serialization and protected with OAuth 2. It is an extension for the `Mezzanine`_ content management platform, built using the `Django`_ framework. The API empowers developers to automate, extend and combine Mezzanine with other services such as Ember.js or a mobile app.
 
@@ -27,7 +29,7 @@ Screenshot
 ==========
 .. image:: http://gcushen.github.io/mezzanine-api/img/api_resources_scaled.png
 
-Created by `George Cushen <https://github.com/gcushen>`_
+Created by `George Cushen <https://twitter.com/GeorgeCushen>`_
 
 .. _`Mezzanine`: http://mezzanine.jupo.org/
 .. _`Django`: http://djangoproject.com/
