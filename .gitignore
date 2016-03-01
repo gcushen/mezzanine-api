@@ -6,3 +6,4 @@ dist/
 site/
 .idea/
 .tox/
+.cache/
