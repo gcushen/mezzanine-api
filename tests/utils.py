@@ -1,36 +1,27 @@
 from __future__ import unicode_literals, print_function
-from django.test import TestCase as BaseTestCase
 from django.contrib.auth import get_user_model
-from rest_framework.test import APIRequestFactory   # , APIClient
-from oauth2_provider.models import get_application_model, AccessToken
 from django.utils.timezone import now, timedelta
+from rest_framework.test import APITestCase as BaseAPITestCase
+from oauth2_provider.models import get_application_model, AccessToken
 
 
-User = get_user_model()
-ApplicationModel = get_application_model()
-
-
-class TestCase(BaseTestCase):
+class TestCase(BaseAPITestCase):
     """
     This is the base test case providing common features for all tests
     """
 
     def setUp(self):
         """
-        Create a request factory for view testing.
         Create a superuser and standard user.
         Create an Oauth2 app for superuser.
         """
-        self.factory = APIRequestFactory()
-        # self.client = APIClient()
+        self.superuser = get_user_model().objects.create_superuser('admin', password='admin', email='admin@example.com')
+        self.user = get_user_model().objects.create_user('test', password='test', email='test@example.com')
 
-        self.superuser = User.objects.create_superuser('admin', password='admin', email='admin@example.com')
-        self.user = User.objects.create_user('test', password='test', email='test@example.com')
-
-        self.app = ApplicationModel.objects.create(
+        self.app = get_application_model().objects.create(
             name='app',
-            client_type=ApplicationModel.CLIENT_CONFIDENTIAL,
-            authorization_grant_type=ApplicationModel.GRANT_CLIENT_CREDENTIALS,
+            client_type=get_application_model().CLIENT_CONFIDENTIAL,
+            authorization_grant_type=get_application_model().GRANT_CLIENT_CREDENTIALS,
             user=self.superuser
         )
 
