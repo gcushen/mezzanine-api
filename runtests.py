@@ -14,7 +14,7 @@ PYTEST_ARGS = {
 
 FLAKE8_ARGS = ['mezzanine_api', 'tests', '--ignore=E501']
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
 
 sys.path.append(os.path.dirname(__file__))
 
