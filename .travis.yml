@@ -1,13 +1,16 @@
 language: python
 
+python:
+  - 3.5
+
 sudo: false
 
 env:
-    - TOX_ENV=flake8
-    - TOX_ENV=py27-django1.9-drf3.3-mezzanine4.1
-    - TOX_ENV=py35-django1.9-drf3.3-mezzanine4.1
-    - TOX_ENV=py27-mezzaninemaster
-    - TOX_ENV=py35-mezzaninemaster
+  - TOX_ENV=flake8
+  - TOX_ENV=py27-django1.9-drf3.3-mezzanine4.1
+  - TOX_ENV=py35-django1.9-drf3.3-mezzanine4.1
+  - TOX_ENV=py27-mezzaninemaster
+  - TOX_ENV=py35-mezzaninemaster
 
 matrix:
   fast_finish: true
@@ -19,4 +22,4 @@ install:
   - pip install tox
 
 script:
-    - tox -e $TOX_ENV
+  - tox -e $TOX_ENV
