@@ -25,14 +25,16 @@ class TestCase(BaseAPITestCase):
             user=self.superuser
         )
 
-        self.token = AccessToken.objects.create(user=self.superuser,
-                                                token='token_monster',
-                                                application=self.app,
-                                                expires=now() + timedelta(days=365))
+        self.access_token = AccessToken.objects.create(user=self.superuser,
+                                                       token='token_monster',
+                                                       application=self.app,
+                                                       expires=now() + timedelta(seconds=300))
 
-        self.auth_headers = {
-            'HTTP_AUTHORIZATION': 'Bearer ' + 'token_monster',
-        }
+        self.auth_valid = self._gen_authorization_header(self.access_token.token)
+        self.auth_invalid = self._gen_authorization_header("fake-token")
+
+    def _gen_authorization_header(self, token):
+        return "Bearer {0}".format(token)
 
     def tearDown(self):
         """
@@ -41,4 +43,4 @@ class TestCase(BaseAPITestCase):
         self.superuser.delete()
         self.user.delete()
         self.app.delete()
-        self.token.delete()
+        self.access_token.delete()
