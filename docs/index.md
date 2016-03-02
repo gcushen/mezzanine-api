@@ -8,7 +8,7 @@ RESTful API for Mezzanine CMS
 
 Mezzanine API is a **RESTful API** using **JSON** serialization and protected with **OAuth 2**. It is an extension 
 for the [Mezzanine] content management platform, built using the [Django] framework. The API empowers developers to **automate, 
-extend and combine Mezzanine with other services** such as Ember.js or a mobile app.
+extend and combine Mezzanine with other services** such as mobile apps.
 
 ---
 
@@ -55,7 +55,7 @@ In order to install Mezzanine API you'll need [Python] installed on your system,
 
         $ pip install mezzanine-api
 
-2. Add the following apps in this order to INSTALLED_APPS in your Mezzanine `settings.py`:
+2. Add the following apps in this order to *INSTALLED_APPS* in your Mezzanine `settings.py`:
 
         INSTALLED_APPS = (
             ...
@@ -75,12 +75,10 @@ In order to install Mezzanine API you'll need [Python] installed on your system,
         except ImportError as e:
             pass
 
-4. Add the following code in your Mezzanine `urls.py` somewhere after the ``urlpatterns = []`` line:
+4. For Mezzanine 4.1.0 and above, add the following code in your Mezzanine `urls.py` somewhere after ``urlpatterns += [`` (approx line 29):
 
         # REST API URLs
-        urlpatterns += patterns("",
-            ("^api/", include("mezzanine_api.urls")),
-        )
+        url("^api/", include("mezzanine_api.urls")),
 
 5. Migrate the database to support OAuth2:
 
@@ -124,15 +122,23 @@ provide a structure that allows for pagination. Please use a "page" parameter to
     } 
 
 ## Permissions
-Currently, the API is readonly with the exception of the `categories` resource. Categories may be created or updated 
-over the API by a *superuser*. The rest of the API will also gradually be opened up for write access over forthcoming 
-releases. This would allow you to make new blog posts, for example, using your own innovative frontend or web hooks.
+Blog posts and categories may be created or updated over the API by a *superuser*. This enables you to make new blog posts, for 
+example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
+feature and should be used with caution. There are plans to gradually open up the rest of the API for write access over forthcoming releases. 
 
 Note that the `users` resource is provided so that you can carry out tasks such as retrieving the current user's 
 details, view a blog post author's name, and list suggested usernames for predicted text entry. For privacy, the email 
 field can only be accessed by the relevant owner or a *superuser*. However, the author's full name is accessible to all
 by default (if provided) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
 at the `UserSerializer` class.
+
+## Secure communication
+**You SHOULD use HTTPS in production!**
+
+In this guide, we consider a development environment on a local machine and connect to the server over HTTP. Whereas for production, you SHOULD use HTTPS for secure communication over the internet. Without it, all the API and Mezzanine authentication mechanisms can be compromised.
+
+## Authenticate with sessions
+Session authentication is enabled by default. It can be disabled by commenting out the relevant line in `settings.py`. If you wish to use session based authentication for write access as well as read access, you will need to setup a valid CSRF token for any PUT or POST requests. See the [Django CSRF documentation](https://docs.djangoproject.com/en/dev/ref/csrf/#ajax) for more details.
 
 ## Authenticate with OAuth2
 
@@ -181,7 +187,7 @@ You can also test your access token by entering it at the top of your interactiv
 [API Resource Documentation](http://127.0.0.1:8000/api/docs/) page.
 
 ## Getting help
-If you have questions about the API, consider using the [Mezzanine discussion group].
+If you have questions about the API, consider leaving a message in our [Gitter chat room] or using the general [Mezzanine discussion group].
 
 Otherwise, if you think you have found a bug, please use [GitHub issues] and include the steps necessary to reproduce
  it.
@@ -192,17 +198,17 @@ on [GitHub], so contributing is as easy as forking the project and committing ba
 
 ## Roadmap
 * Refinement
-* Example API client
 * Gradual roll-out of writeable API access
-* Test Suite
+* More tests
 * Further documentation
- 
+* Example API client 
 
 [Python]: https://www.python.org/
 [Mezzanine]: http://mezzanine.jupo.org/
 [Django]: http://djangoproject.com/
 [GitHub issues]: https://github.com/gcushen/mezzanine-api/issues
 [Swagger UI]: http://swagger.io/
+[Gitter chat room]: https://gitter.im/gcushen/mezzanine-api
 [Mezzanine discussion group]: http://groups.google.com/group/mezzanine-users/topics
 [Django Rest Framework]: http://www.django-rest-framework.org/
 [PyPi]: https://pypi.python.org/pypi/mezzanine-api
