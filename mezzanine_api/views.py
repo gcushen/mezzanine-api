@@ -2,7 +2,7 @@ from rest_framework import viewsets, filters, permissions, mixins
 from rest_framework.pagination import PageNumberPagination
 import django_filters
 
-from .serializers import UserSerializer, PostSerializer, CategorySerializer
+from .serializers import UserSerializer, CategorySerializer, PostInputSerializer, PostOutputSerializer
 from .serializers import PageSerializer, SiteSerializer
 from .permissions import IsAdminOrReadOnly
 from .mixins import PutUpdateModelMixin
@@ -141,6 +141,7 @@ class PostFilter(django_filters.FilterSet):
     """
     category_id = django_filters.NumberFilter(name="categories__id")
     category_name = django_filters.CharFilter(name="categories__title", lookup_type='contains')
+    category_slug = django_filters.CharFilter(name="categories__slug", lookup_type='exact')
     tag = django_filters.CharFilter(name='keywords_string', lookup_type='contains')
     author_id = django_filters.NumberFilter(name="user__id")
     author_name = django_filters.CharFilter(name="user__username", lookup_type='istartswith')
@@ -152,9 +153,13 @@ class PostFilter(django_filters.FilterSet):
         fields = ['category_id', 'category_name', 'tag', 'author_id', 'author_name', 'date_min', 'date_max']
 
 
-class PostViewSet(viewsets.ReadOnlyModelViewSet):
+class PostViewSet(mixins.CreateModelMixin,
+                  mixins.RetrieveModelMixin,
+                  PutUpdateModelMixin,
+                  mixins.ListModelMixin,
+                  viewsets.GenericViewSet):
     """
-    For listing or retrieving blog posts.
+    For listing, retrieving, creating or updating blog posts.
     ---
     list:
         parameters:
@@ -165,6 +170,10 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
             - name: category_name
               type: string
               description: Filter posts by category name
+              paramType: query
+            - name: category_slug
+              type: string
+              description: Filter posts by category slug
               paramType: query
             - name: tag
               type: string
@@ -196,8 +205,19 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
               paramType: query
     """
     queryset = Post.objects.published().order_by("-publish_date")
-    filter_class = PostFilter
     filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter,)
     search_fields = ('title', 'content',)
-    serializer_class = PostSerializer
     pagination_class = PostPagination
+    permission_classes = [IsAdminOrReadOnly]
+
+    def get_serializer_class(self):
+            if self.request.method in permissions.SAFE_METHODS:
+                return PostOutputSerializer
+            else:
+                return PostInputSerializer
+
+    def get_filter_class(self):
+            if self.request.method in permissions.SAFE_METHODS:
+                return PostFilter
+            else:
+                return None
