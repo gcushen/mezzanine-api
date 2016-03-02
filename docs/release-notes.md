@@ -12,6 +12,14 @@ You can determine your currently installed version using `pip freeze`:
 
     $ pip freeze | grep mezzanine-api
 
+## Version 0.4.0 (2016-03-02)
+
+* Add superuser write access (POST and PUT) for blog posts
+* Add support for Mezzanine 4.1.0, Django 1.9, and latest versions of other dependencies
+* Switch test suite from factory to client based tests
+* Add tests for blog posts
+* Update docs
+
 ## Version 0.3.0 (2015-05-17)
 
 * Add superuser write access (POST and PUT) for categories
