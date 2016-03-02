@@ -1,7 +1,7 @@
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',  # Requires CSRF token for write access
         'oauth2_provider.ext.rest_framework.OAuth2Authentication',
     ),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
@@ -9,7 +9,7 @@ REST_FRAMEWORK = {
 }
 
 OAUTH2_PROVIDER = {
-    # this is the list of available scopes
+    # List of available scopes
     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
