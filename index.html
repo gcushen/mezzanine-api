@@ -5,14 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="RESTful web API for Mezzanine CMS">
-        
+        <meta name="author" content="George Cushen">
         <link rel="canonical" href="http://gcushen.github.io/mezzanine-api/">
         <link rel="shortcut icon" href="./img/favicon.ico">
 
 	<title>Mezzanine REST API</title>
 
         <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="./css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="./css/highlight.css">
         <link href="./css/extra.css" rel="stylesheet">
@@ -78,34 +78,35 @@
                 </ul>
             
 
-            
-            <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                
-                
-                <li class="disabled">
-                    <a rel="next" >
-                        <i class="fa fa-arrow-left"></i> Previous
-                    </a>
-                </li>
-                <li >
-                    <a rel="prev" href="release-notes/">
-                        Next <i class="fa fa-arrow-right"></i>
-                    </a>
-                </li>
-                
-                
                 <li>
-                    <a href="https://github.com/gcushen/mezzanine-api/">
-                        
-                            <i class="fa fa-github"></i>
-                        
-                        GitHub
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
                     </a>
                 </li>
+                
+                    <li class="disabled">
+                        <a rel="next" >
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="release-notes/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/gcushen/mezzanine-api/">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
                 
             </ul>
-            
         </div>
     </div>
 </div>
@@ -127,6 +128,10 @@
         
             <li><a href="#permissions">Permissions</a></li>
         
+            <li><a href="#secure-communication">Secure communication</a></li>
+        
+            <li><a href="#authenticate-with-sessions">Authenticate with sessions</a></li>
+        
             <li><a href="#authenticate-with-oauth2">Authenticate with OAuth2</a></li>
         
             <li><a href="#getting-help">Getting help</a></li>
@@ -146,7 +151,7 @@
 <h2 id="overview">Overview</h2>
 <p>Mezzanine API is a <strong>RESTful API</strong> using <strong>JSON</strong> serialization and protected with <strong>OAuth 2</strong>. It is an extension 
 for the <a href="http://mezzanine.jupo.org/">Mezzanine</a> content management platform, built using the <a href="http://djangoproject.com/">Django</a> framework. The API empowers developers to <strong>automate, 
-extend and combine Mezzanine with other services</strong> such as Ember.js or a mobile app.</p>
+extend and combine Mezzanine with other services</strong> such as mobile apps.</p>
 <hr />
 <p><strong>Mezzanine API is in development.</strong></p>
 <p>Check back regularly here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. </p>
@@ -177,7 +182,7 @@ UI</a>.</p>
 </code></pre>
 </li>
 <li>
-<p>Add the following apps in this order to INSTALLED_APPS in your Mezzanine <code>settings.py</code>:</p>
+<p>Add the following apps in this order to <em>INSTALLED_APPS</em> in your Mezzanine <code>settings.py</code>:</p>
 <pre><code>INSTALLED_APPS = (
     ...
     'mezzanine_api',
@@ -199,11 +204,9 @@ except ImportError as e:
 </code></pre>
 </li>
 <li>
-<p>Add the following code in your Mezzanine <code>urls.py</code> somewhere after the <code>urlpatterns = []</code> line:</p>
+<p>For Mezzanine 4.1.0 and above, add the following code in your Mezzanine <code>urls.py</code> somewhere after <code>urlpatterns += [</code> (approx line 29):</p>
 <pre><code># REST API URLs
-urlpatterns += patterns("",
-    ("^api/", include("mezzanine_api.urls")),
-)
+url("^api/", include("mezzanine_api.urls")),
 </code></pre>
 </li>
 <li>
@@ -243,14 +246,19 @@ provide a structure that allows for pagination. Please use a "page" parameter to
 }
 </code></pre>
 <h2 id="permissions">Permissions</h2>
-<p>Currently, the API is readonly with the exception of the <code>categories</code> resource. Categories may be created or updated 
-over the API by a <em>superuser</em>. The rest of the API will also gradually be opened up for write access over forthcoming 
-releases. This would allow you to make new blog posts, for example, using your own innovative frontend or web hooks.</p>
+<p>Blog posts and categories may be created or updated over the API by a <em>superuser</em>. This enables you to make new blog posts, for 
+example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
+feature and should be used with caution. There are plans to gradually open up the rest of the API for write access over forthcoming releases. </p>
 <p>Note that the <code>users</code> resource is provided so that you can carry out tasks such as retrieving the current user's 
 details, view a blog post author's name, and list suggested usernames for predicted text entry. For privacy, the email 
 field can only be accessed by the relevant owner or a <em>superuser</em>. However, the author's full name is accessible to all
 by default (if provided) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
 at the <code>UserSerializer</code> class.</p>
+<h2 id="secure-communication">Secure communication</h2>
+<p><strong>You SHOULD use HTTPS in production!</strong></p>
+<p>In this guide, we consider a development environment on a local machine and connect to the server over HTTP. Whereas for production, you SHOULD use HTTPS for secure communication over the internet. Without it, all the API and Mezzanine authentication mechanisms can be compromised.</p>
+<h2 id="authenticate-with-sessions">Authenticate with sessions</h2>
+<p>Session authentication is enabled by default. It can be disabled by commenting out the relevant line in <code>settings.py</code>. If you wish to use session based authentication for write access as well as read access, you will need to setup a valid CSRF token for any PUT or POST requests. See the <a href="https://docs.djangoproject.com/en/dev/ref/csrf/#ajax">Django CSRF documentation</a> for more details.</p>
 <h2 id="authenticate-with-oauth2">Authenticate with OAuth2</h2>
 <h3 id="register">Register</h3>
 <p>Open up <a href="http://127.0.0.1:8000/api/oauth2/applications/register/">http://127.0.0.1:8000/api/oauth2/applications/register/</a> in your browser. (If you are using API version &lt;= 0.3.0, you may experience a 404 error. To resolve this, add the line <code>LOGIN_URL = "/api/auth/login/"</code> to your <code>settings.py</code>.)</p>
@@ -287,7 +295,7 @@ at the <code>UserSerializer</code> class.</p>
 <p>You can also test your access token by entering it at the top of your interactive 
 <a href="http://127.0.0.1:8000/api/docs/">API Resource Documentation</a> page.</p>
 <h2 id="getting-help">Getting help</h2>
-<p>If you have questions about the API, consider using the <a href="http://groups.google.com/group/mezzanine-users/topics">Mezzanine discussion group</a>.</p>
+<p>If you have questions about the API, consider leaving a message in our <a href="https://gitter.im/gcushen/mezzanine-api">Gitter chat room</a> or using the general <a href="http://groups.google.com/group/mezzanine-users/topics">Mezzanine discussion group</a>.</p>
 <p>Otherwise, if you think you have found a bug, please use <a href="https://github.com/gcushen/mezzanine-api/issues">GitHub issues</a> and include the steps necessary to reproduce
  it.</p>
 <h2 id="contributing">Contributing</h2>
@@ -296,10 +304,10 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
 <h2 id="roadmap">Roadmap</h2>
 <ul>
 <li>Refinement</li>
-<li>Example API client</li>
 <li>Gradual roll-out of writeable API access</li>
-<li>Test Suite</li>
+<li>More tests</li>
 <li>Further documentation</li>
+<li>Example API client </li>
 </ul></div>
             
         </div>
@@ -307,21 +315,47 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
         <footer class="col-md-12">
             <hr>
             
-            <p>Copyright &copy; 2015 <a href="https://github.com/gcushen/">George Cushen</a>.</p>
+                <p>Copyright &copy; 2015 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.</p>
             
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        
-
         <script src="./js/jquery-1.10.2.min.js"></script>
         <script src="./js/bootstrap-3.0.3.min.js"></script>
         <script src="./js/highlight.pack.js"></script>
+        <script>var base_url = '.';</script>
+        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
         <script src="./js/base.js"></script>
 
-        <!--
-        MkDocs version  : 0.12.2
-        Docs Build Date : 2015-05-22 21:41:00.877469
-        -->
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
+
+<!--
+MkDocs version : 0.15.3
+Build Date UTC : 2016-03-02 03:17:34.350632
+-->
