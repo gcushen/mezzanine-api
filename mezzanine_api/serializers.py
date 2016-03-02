@@ -1,8 +1,9 @@
 from rest_framework import serializers
+from django.template.defaultfilters import strip_tags
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
-from django.contrib.sites.models import Site
 from mezzanine.generic.models import Comment
 from mezzanine.conf import settings
 
@@ -91,18 +92,62 @@ class PageSerializer(serializers.ModelSerializer):
                   'login_required', 'meta_description', 'tags')
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostInputSerializer(serializers.ModelSerializer):
     """
-    Serializing all the blog posts
+    Serializing write access to blog posts
     """
-    user = UserSerializer(required=False)
+    # `categories` input should be a comma delimited list
+    categories = serializers.CharField(required=False)
+
+    def create(self, validated_data):
+        try:
+            categories = validated_data.pop("categories")
+        except KeyError:
+            categories = None
+
+        initial = {
+            "title": validated_data.pop("title"),
+            "user": self.context['request'].user,
+        }
+        post = Post.objects.create(**initial)
+
+        for k, v in validated_data.items():
+            setattr(post, k, v)
+
+        if categories:
+            for name in categories.split(','):
+                name = name.strip()
+                cat, created = BlogCategory.objects.get_or_create(title=name)
+                post.categories.add(cat)
+
+        post.save()
+        return post
+
+        # TODO: Handle updating the `categories` field of blog posts using flat representation as above
+        # ...
+
+    class Meta:
+        model = Post
+        # TODO: fix 'categories' incorrectly showing 'blog.BlogCategory.None' after creating blog post with categories
+        fields = ('id', 'title', 'content', 'categories', 'status', 'publish_date', 'expiry_date', 'allow_comments')
+
+
+class PostOutputSerializer(serializers.ModelSerializer):
+    """
+    Serializing read access to blog posts
+    """
+    user = UserSerializer(required=False, read_only=True)
     categories = CategorySerializer(many=True, required=False, read_only=True)
     url = serializers.URLField(source='get_absolute_url_with_host', read_only=True)
     tags = serializers.CharField(source='keywords_string', read_only=True)
     short_url = serializers.CharField(source='get_absolute_url', read_only=True)
-    comments = CommentSerializer(many=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    excerpt = serializers.SerializerMethodField()
+
+    def get_excerpt(self, obj):
+        return strip_tags(obj.description_from_content())
 
     class Meta:
         model = Post
-        fields = ('id', 'user', 'publish_date', 'updated', 'title', 'url', 'short_url', 'content', 'slug',
+        fields = ('id', 'user', 'publish_date', 'updated', 'title',  'content', 'excerpt', 'slug', 'url', 'short_url',
                   'categories', 'allow_comments', 'comments_count', 'comments', 'tags', 'featured_image')
