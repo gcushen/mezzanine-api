@@ -11,7 +11,7 @@ Mezzanine API
 .. image:: https://badges.gitter.im/gcushen/mezzanine-api.svg
    :target: https://gitter.im/gcushen/mezzanine-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 
-Mezzanine API is a RESTful API using JSON serialization and protected with OAuth 2. It is an extension for the `Mezzanine`_ content management platform, built using the `Django`_ framework. The API empowers developers to automate, extend and combine Mezzanine with other services such as Ember.js or a mobile app.
+Mezzanine API is a RESTful API using JSON serialization and protected with OAuth 2. It is an extension for the `Mezzanine`_ content management platform, built using the `Django`_ framework. The API empowers developers to automate, extend and combine Mezzanine with other services such as mobile apps.
 
 Features
 ========
@@ -19,7 +19,7 @@ Features
 * Apply filters and search queries to narrow down results
 * OAuth 2.0 allows users to authorize and revoke access to third party applications
 * Web browsable API
-* Interactive API Resource Documentation
+* Interactive API resource documentation
 
 Installation, Documentation and Roadmap
 =======================================
