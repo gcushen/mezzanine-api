@@ -1,7 +1,7 @@
 from __future__ import unicode_literals, print_function
 from django.core.urlresolvers import reverse
 from rest_framework import status
-from mezzanine.blog.models import BlogPost as Post, BlogCategory
+from mezzanine.blog.models import BlogPost as Post
 from tests.utils import TestCase
 
 
