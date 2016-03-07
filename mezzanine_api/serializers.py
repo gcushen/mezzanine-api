@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.core.urlresolvers import NoReverseMatch
 from django.template.defaultfilters import strip_tags
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -6,6 +7,7 @@ from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
 from mezzanine.generic.models import Comment
 from mezzanine.conf import settings
+from mezzanine.utils.sites import current_request
 
 
 class PrivateField(serializers.ReadOnlyField):
@@ -96,24 +98,42 @@ class PostInputSerializer(serializers.ModelSerializer):
     """
     Serializing write access to blog posts
     """
-    # `categories` input should be a comma delimited list
-    categories = serializers.CharField(required=False)
+    title = serializers.CharField(required=True)
+    content = serializers.CharField(required=True, style={'type': 'textarea'})
 
+    # `categories` field accepts a comma delimited list. Accept blank string to disassociate all categories.
+    categories = serializers.CharField(required=False, allow_blank=True)
+
+    # Override class init so that `title` and `content` fields are not required for PUT updates
+    def __init__(self, *args, **kwargs):
+        super(PostInputSerializer, self).__init__(*args, **kwargs)
+
+        request = kwargs['context']['request']
+
+        if request.method == "PUT":
+            self.fields['title'] = serializers.CharField(required=False)
+            self.fields['content'] = serializers.CharField(required=False, style={'type': 'textarea'})
+
+    # Create a blog post
     def create(self, validated_data):
+        # Pop categories attribute to process later
         try:
             categories = validated_data.pop("categories")
         except KeyError:
             categories = None
 
+        # Create a new blog post with core attributes
         initial = {
             "title": validated_data.pop("title"),
             "user": self.context['request'].user,
         }
         post = Post.objects.create(**initial)
 
+        # Update all other object attributes that were supplied in the request (except categories)
         for k, v in validated_data.items():
             setattr(post, k, v)
 
+        # Create categories as necessary from a comma delimited representation and associate them with the blog post
         if categories:
             for name in categories.split(','):
                 name = name.strip()
@@ -121,14 +141,49 @@ class PostInputSerializer(serializers.ModelSerializer):
                 post.categories.add(cat)
 
         post.save()
+
+        # Note: response body returned by API on CREATE shows "categories": "blog.BlogCategory.None" rather than
+        # the successfully processed comma delimited category list specified in the request.
+
         return post
 
-        # TODO: Handle updating the `categories` field of blog posts using flat representation as above
-        # ...
+    # Update a blog post
+    def update(self, instance, validated_data):
+        # Pop categories attribute to process later
+        try:
+            categories = validated_data.pop("categories")
+        except KeyError:
+            categories = None
+
+        # Update all object attributes that were supplied in the request (except categories)
+        for k, v in validated_data.items():
+            setattr(instance, k, v)
+
+        # Handle updating the `categories` field of blog posts using flat representation (comma delimited)
+        if categories is not None:
+            if categories:
+                # Disassociate any blog post categories not included in the request
+                cat_titles = [name for name in categories.split(',')]
+                for category in instance.categories.all():
+                    if category.title not in cat_titles:
+                        instance.categories.remove(category)
+
+                # Add any new categories from the request that are not already associated with the blog post
+                for name in categories.split(','):
+                    name = name.strip()
+                    cat, created = BlogCategory.objects.get_or_create(title=name)
+                    instance.categories.add(cat)
+            else:
+                # Categories is an empty string, so disassociate all categories from the blog post
+                for category in instance.categories.all():
+                    instance.categories.remove(category)
+
+        instance.save()
+
+        return instance
 
     class Meta:
         model = Post
-        # TODO: fix 'categories' incorrectly showing 'blog.BlogCategory.None' after creating blog post with categories
         fields = ('id', 'title', 'content', 'categories', 'status', 'publish_date', 'expiry_date', 'allow_comments')
 
 
@@ -138,13 +193,34 @@ class PostOutputSerializer(serializers.ModelSerializer):
     """
     user = UserSerializer(required=False, read_only=True)
     categories = CategorySerializer(many=True, required=False, read_only=True)
-    url = serializers.URLField(source='get_absolute_url_with_host', read_only=True)
     tags = serializers.CharField(source='keywords_string', read_only=True)
-    short_url = serializers.CharField(source='get_absolute_url', read_only=True)
+    short_url = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
     comments = CommentSerializer(many=True, read_only=True)
     excerpt = serializers.SerializerMethodField()
 
+    def get_short_url(self, obj):
+        """
+        Get short URL of blog post like '/blog/<slug>/' using ``get_absolute_url`` if available.
+        Removes dependency on reverse URLs of Mezzanine views when deploying Mezzanine only as an API backend.
+        """
+        try:
+            url = obj.get_absolute_url()
+        except NoReverseMatch:
+            url = '/blog/' + obj.slug
+        return url
+
+    def get_url(self, obj):
+        """
+        Get full URL of blog post as host + ``get_short_url``, inspired by method ``get_absolute_url_with_host``.
+        Removes dependency on reverse URLs of Mezzanine views when deploying Mezzanine only as an API backend.
+        """
+        return current_request().build_absolute_uri(self.get_short_url(obj))
+
     def get_excerpt(self, obj):
+        """
+        Get plain text excerpt of blog post
+        """
         return strip_tags(obj.description_from_content())
 
     class Meta:
