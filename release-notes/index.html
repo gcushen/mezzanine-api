@@ -120,6 +120,8 @@
         
             <li><a href="#upgrading">Upgrading</a></li>
         
+            <li><a href="#version-041-2016-03-07">Version 0.4.1 (2016-03-07)</a></li>
+        
             <li><a href="#version-040-2016-03-02">Version 0.4.0 (2016-03-02)</a></li>
         
             <li><a href="#version-030-2015-05-17">Version 0.3.0 (2015-05-17)</a></li>
@@ -138,6 +140,14 @@
 <p>You can determine your currently installed version using <code>pip freeze</code>:</p>
 <pre><code>$ pip freeze | grep mezzanine-api
 </code></pre>
+<h2 id="version-041-2016-03-07">Version 0.4.1 (2016-03-07)</h2>
+<ul>
+<li>Add logic for updating blog post categories</li>
+<li>No longer require title and content fields when updating a blog post</li>
+<li>Remove dependency on reverse URLs of Mezzanine views when deploying Mezzanine only as an API backend</li>
+<li>Add tests for creating and updating blog post categories</li>
+<li>Tidy up API template</li>
+</ul>
 <h2 id="version-040-2016-03-02">Version 0.4.0 (2016-03-02)</h2>
 <ul>
 <li>Add superuser write access (POST and PUT) for blog posts</li>
