@@ -1,7 +1,7 @@
 from __future__ import unicode_literals, print_function
 from django.core.urlresolvers import reverse
 from rest_framework import status
-from mezzanine.blog.models import BlogPost as Post
+from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from tests.utils import TestCase
 
 
@@ -78,7 +78,7 @@ class TestPostViewSet(TestCase):
         # Note: we do not directly provide user here, as API should automatically get and
         # authenticate current user as the author
         post_data = {'title': 'title1', 'content': 'content1', 'publish_date': '2016-01-01T00:00',
-                     'categories': 'Machine Learning, Statistics'}
+                     'categories': 'Machine Learning,Statistics'}
         url = '/api/posts'
         response = self.client.post(url, post_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
 
@@ -86,8 +86,8 @@ class TestPostViewSet(TestCase):
         self.assertEqual(Post.objects.get(pk=response.data['id']).user, self.superuser)
         self.assertEqual(Post.objects.get(pk=response.data['id']).title, post_data['title'])
         self.assertEqual(Post.objects.get(pk=response.data['id']).content, post_data['content'])
-        # TODO fix serializer category response
-        # self.assertEqual(Post.objects.get(pk=response.data['id']).categories, post_data['categories'])
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=response.data['id'])),
+                         post_data['categories'])
 
     def test_create_as_superuser(self):
         """
@@ -103,8 +103,8 @@ class TestPostViewSet(TestCase):
         self.assertEqual(Post.objects.get(pk=response.data['id']).user, self.superuser)
         self.assertEqual(Post.objects.get(pk=response.data['id']).title, post_data['title'])
         self.assertEqual(Post.objects.get(pk=response.data['id']).content, post_data['content'])
-        # TODO fix serializer category response
-        # self.assertEqual(Post.objects.get(pk=response.data['id']).categories, post_data['categories'])
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=response.data['id'])),
+                         post_data['categories'])
 
     def test_create_as_user(self):
         """
@@ -132,14 +132,15 @@ class TestPostViewSet(TestCase):
         """
         Test API PUT UPDATE whilst authenticated via OAuth2 as a superuser
         """
-        # TODO: Add PUT functionality for categories to BlogPost serializer and then test put categories
-        put_data = {'title': 'a', 'content': 'b'}
+        put_data = {'title': 'a', 'content': 'b', 'categories': 'cat1,cat2'}
         url = '/api/posts/{}'.format(self.post_published.pk)
         response = self.client.put(url, put_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Post.objects.get(pk=self.post_published.pk).title, put_data['title'])
         self.assertEqual(Post.objects.get(pk=self.post_published.pk).content, put_data['content'])
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=self.post_published.pk)),
+                         put_data['categories'])
 
     def test_update_as_user(self):
         """
@@ -162,3 +163,75 @@ class TestPostViewSet(TestCase):
         response = self.client.put(url, put_data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_update_categories_unchanged(self):
+        """
+        Test API PUT UPDATE title and test categories remain unchanged
+        whilst authenticated via OAuth2 as a superuser
+        """
+        original_content = Post.objects.get(pk=self.post_published.pk).content
+        original_categories = self.get_categories_as_delim_str(Post.objects.get(pk=self.post_published.pk))
+
+        put_data = {'title': 'updated title'}
+        url = '/api/posts/{}'.format(self.post_published.pk)
+        response = self.client.put(url, put_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).title, put_data['title'])
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).content, original_content)
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=self.post_published.pk)),
+                         original_categories)
+
+    def test_update_categories_disassociate_one(self):
+        """
+        Test API PUT UPDATE disassociate category 'cat2'
+        whilst authenticated via OAuth2 as a superuser
+        """
+        original_title = Post.objects.get(pk=self.post_published.pk).title
+        original_content = Post.objects.get(pk=self.post_published.pk).content
+
+        put_data = {'categories': 'cat1'}
+        url = '/api/posts/{}'.format(self.post_published.pk)
+        response = self.client.put(url, put_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).title, original_title)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).content, original_content)
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=self.post_published.pk)),
+                         put_data['categories'])
+
+    def test_update_categories_associate_three(self):
+        """
+        Test API PUT UPDATE associate three new categories
+        whilst authenticated via OAuth2 as a superuser
+        """
+        original_title = Post.objects.get(pk=self.post_published.pk).title
+        original_content = Post.objects.get(pk=self.post_published.pk).content
+
+        put_data = {'categories': 'cat1,cat2,cat3,cat4'}
+        url = '/api/posts/{}'.format(self.post_published.pk)
+        response = self.client.put(url, put_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).title, original_title)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).content, original_content)
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=self.post_published.pk)),
+                         put_data['categories'])
+
+    def test_update_categories_disassociate_all(self):
+        """
+        Test API PUT UPDATE disassociate all categories
+        whilst authenticated via OAuth2 as a superuser
+        """
+        original_title = Post.objects.get(pk=self.post_published.pk).title
+        original_content = Post.objects.get(pk=self.post_published.pk).content
+
+        put_data = {'categories': ''}
+        url = '/api/posts/{}'.format(self.post_published.pk)
+        response = self.client.put(url, put_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).title, original_title)
+        self.assertEqual(Post.objects.get(pk=self.post_published.pk).content, original_content)
+        self.assertEqual(self.get_categories_as_delim_str(Post.objects.get(pk=self.post_published.pk)),
+                         put_data['categories'])

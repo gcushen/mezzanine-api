@@ -44,3 +44,6 @@ class TestCase(BaseAPITestCase):
         self.user.delete()
         self.app.delete()
         self.access_token.delete()
+
+    def get_categories_as_delim_str(self, obj):
+        return ",".join([p.title for p in obj.categories.all()])
