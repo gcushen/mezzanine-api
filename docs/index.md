@@ -6,31 +6,20 @@ RESTful API for Mezzanine CMS
 
 ## Overview
 
-Mezzanine API is a **RESTful API** using **JSON** serialization and protected with **OAuth 2**. It is an extension 
-for the [Mezzanine] content management platform, built using the [Django] framework. The API empowers developers to **automate, 
-extend and combine Mezzanine with other services** such as mobile apps.
+Mezzanine API is a **RESTful web API** for the popular [Mezzanine] content management platform. 
+It is built upon the [Django] framework, using **JSON** for serialization and **OAuth2** for secure authentication. 
+The API empowers developers to **automate, extend and combine Mezzanine with other services** such as mobile apps.
 
----
+#### Access all the data your app needs
 
-**Mezzanine API is in development.**
+Intuitive REST API resources for posts, categories, comments, pages, users, and site/app metadata. Retrieving or updating data involves simply sending a HTTP request.
 
-Check back regularly here and on [PyPi]/[Github] for updates to the documentation and package, respectively. 
+#### Industry standard security
 
-Tell us what you need from the API so we can prioritize improvements. 
+OAuth2, the industry standard for API authentication, allows users to authorize and revoke access to third party 
+applications without the need for those applications to request the user's confidential credentials.
 
----
-
-#### Access all the data your frontend needs
-
-REST API resources for posts, categories, comments, pages, users, and public site data.
-
-#### We care about security
-
-That's why OAuth2 is utilized for authentication, allowing users to authorize and revoke access to third party 
-applications without the need for those applications to request the user's confidential credentials. Member's only 
-pages can only be accessed over the API if the requesting user is authenticated and has permission.
-
-#### Filter and search results
+#### Filter and search website data
 Apply filters such as `posts?date_min=2015-01-01&category=2` or search `posts?search=fitness` to narrow down results. 
 Results are paginated to handle large datasets.
 
@@ -38,10 +27,6 @@ Results are paginated to handle large datasets.
 
 The best way to learn about the API is via the interactive resource documentation which utilizes the popular [Swagger 
 UI].
-
-#### Easy to customize
-
-The API leverages [Django Rest Framework] which has a large active community.
 
 ![mezzanine api](img/api_resources.png)
 
@@ -88,103 +73,72 @@ In order to install Mezzanine API you'll need [Python] installed on your system,
 
         $ python manage.py runserver
 
+Remember to regularly check back here and on [PyPi]/[Github] for updates to the documentation and package, respectively. [Upgrade instructions and release notes](release-notes.md) are also available. 
+
 ---
 
-
-## Endpoint Resources
+## Getting started
 
 The best way to learn about the API resources is via the interactive resource documentation which utilizes the popular [Swagger 
-UI]. Open up [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/) in your browser, and you'll see the 
-interactive endpoint resource documentation being displayed (refer to above screenshot). Here you can easily test out the 
+UI]. Open up [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/) in your browser, and if installation was successfull, you'll see the 
+interactive endpoint resource documentation (refer to above screenshot). Here you can easily test out the 
 different kinds of endpoint, method, and query parameter whilst you are learning.
 
 Also, if you attempt to access the API itself directly in your browser, you will be shown a browsable web API:
 ![browsable api](img/browsable_api.png)
 
+In order to explore the restricted parts of the API, you can login via the browsable web API, or [retrieve your OAuth2 Access Token](authentication.md) 
+to login at the top of the Interactive Resource Documentation page, or [login via command line with *curl*](authentication.md#basic-authentication).
+
 Enjoy designing a frontend to interact with the REST API using your technology of choice! Alternatively, you can use it 
 to automate, analyse, extend and combine Mezzanine with other services.
-
-## Pagination
-
-In order to handle large datasets, pagination is employed. To be consistent, all *listing* type endpoints 
-provide a structure that allows for pagination. Please use a "page" parameter to fetch multiple pages of records. For
- example listing categories with `categories?page=2` will return a JSON structure similar to this:
- 
-    {
-        "count": ...,
-        "next": "http://127.0.0.1:8000/api/categories?page=3",
-        "previous": "http://127.0.0.1:8000/api/categories",
-        "results": [
-            {
-                ...
-            }
-        ]
-    } 
-
-## Permissions
-Blog posts and categories may be created or updated over the API by a *superuser*. This enables you to make new blog posts, for 
-example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
-feature and should be used with caution. There are plans to gradually open up the rest of the API for write access over forthcoming releases. 
-
-Note that the `users` resource is provided so that you can carry out tasks such as retrieving the current user's 
-details, view a blog post author's name, and list suggested usernames for predicted text entry. For privacy, the email 
-field can only be accessed by the relevant owner or a *superuser*. However, the author's full name is accessible to all
-by default (if provided) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
-at the `UserSerializer` class.
 
 ## Secure communication
 **You SHOULD use HTTPS in production!**
 
 In this guide, we consider a development environment on a local machine and connect to the server over HTTP. Whereas for production, you SHOULD use HTTPS for secure communication over the internet. Without it, all the API and Mezzanine authentication mechanisms can be compromised.
 
-## Authenticate with sessions
-Session authentication is enabled by default. It can be disabled by commenting out the relevant line in `settings.py`. If you wish to use session based authentication for write access as well as read access, you will need to setup a valid CSRF token for any PUT or POST requests. See the [Django CSRF documentation](https://docs.djangoproject.com/en/dev/ref/csrf/#ajax) for more details.
+## Authentication
+There are three options for authenticating with the API. The most appropriate option can be determined by considering if the API client is:
 
-## Authenticate with OAuth2
+* another Django app running on the site (such as the built-in browsable API)? Use *session* authentication.
+* a desktop/web/mobile client accessing the site externally? Use *OAuth2* authentication.
+* a very simple external client mainly for development and debugging? Use *basic* authentication.
 
-### Register
+Please see the [Authentication](authentication.md) page for further details.
 
-Open up [http://127.0.0.1:8000/api/oauth2/applications/register/](http://127.0.0.1:8000/api/oauth2/applications/register/) in your browser. (If you are using API version <= 0.3.0, you may experience a 404 error. To resolve this, add the line `LOGIN_URL = "/api/auth/login/"` to your `settings.py`.)
+## Permissions
+Some parts of the API are restricted and require authentication as a Mezzanine *user* or *superuser*.
 
-Go ahead and register a new OAuth application. Just enter a reference name, choose `confidential` client type and 
-`...password-based` authorization grant type:
+Blog posts and categories may be created or updated over the API by a *superuser*. This enables you to make new blog posts, for 
+example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
+feature and should be used with caution. There are plans to gradually open up the rest of the API for write access over forthcoming releases. 
 
-![OAuth Screenshot](img/oauth_register.png)
+Member's only pages can only be accessed over the API if the requesting user is authenticated and has permission.
 
-Request your access token to use for API authentication:
+The `users` resource is generally restricted to superusers. However, a user may request to see their own details, and the blog post resource will embed the author's name (if they provided it) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
+at the `UserSerializer` class.
 
-    $ curl -X POST -H "Accept: application/json; indent=4" \
-      -d "grant_type=password&username=<username>&password=<password>" -u"<client_id>:<client_secret>" \
-      http://localhost:8000/api/oauth2/token/
+## Parameters
+Your local Resource Documentation at [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/) includes a list of all available parameters for each possible request, but this section highlights some of the main categories.
 
-For `client_id` and `client_secret`, copy and paste those that you were given in the previous step. The `username` and 
-`password` are the credentials of the Mezzanine user you wish to login as. You will get a JSON response like:
+### Filtering
+The Resource Documentation shows you which resources you can filter on, and what to include in your URL query string. 
+For example, to view only blog posts that mention fitness, use `/posts?search=fitness`.
 
+### Pagination
+
+In order to handle large datasets, pagination is employed. To be consistent, all *listing* type endpoints 
+provide a structure that allows for pagination. Please use a "page" parameter to fetch multiple pages of records. For
+ example listing categories with `categories?page=2` will return a JSON structure similar to this:
+ 
     {
-        "access_token": "<your_access_token>",
-        "token_type": "Bearer",
-        "expires_in": 36000,
-        "refresh_token": "<your_refresh_token>",
-        "scope": "read write groups"
-    }
+        "count": 30,
+        "next": "http://127.0.0.1:8000/api/categories?page=3",
+        "previous": "http://127.0.0.1:8000/api/categories",
+        "results": [{ ... }]
+    } 
 
-### Test
-
-The following test should *fail* (i.e. no user listings shown) if you are not currently authenticated:
-
-    $ curl http://localhost:8000/api/users
-
-    {
-        "detail": "Authentication credentials were not provided."
-    }
-
-The following authenticated test should *succeed* and show you a list of users if you registered OAuth with a 
-*superuser* account:    
-
-    $ curl -H "Authorization: Bearer <your_access_token>" http://localhost:8000/api/users
-
-You can also test your access token by entering it at the top of your interactive 
-[API Resource Documentation](http://127.0.0.1:8000/api/docs/) page.
 
 ## Getting help
 If you have questions about the API, consider leaving a message in our [Gitter chat room] or using the general [Mezzanine discussion group].
@@ -192,17 +146,23 @@ If you have questions about the API, consider leaving a message in our [Gitter c
 Otherwise, if you think you have found a bug, please use [GitHub issues] and include the steps necessary to reproduce
  it.
 
+## Customizing
+The API is designed to be as easy as possible to customize by leveraging the [Django Rest Framework], which has a large active community.
+
 ## Contributing
 Mezzanine API is an open source project managed using the Git version control system. The repository is hosted
 on [GitHub], so contributing is as easy as forking the project and committing back your enhancements.
 
 ## Roadmap
-* Refinement
+We're always working to improve the Mezzanine REST API. Check out the list below of planned enhancements for future releases, in no particular order. Tell us what you need from the API via [Twitter] or our [Gitter chat room] so we can prioritize improvements. 
+
+* Refinement of code and API resources
 * Gradual roll-out of writeable API access
 * More tests
 * Further documentation
 * Example API client 
 
+[Twitter]: https://twitter.com/GeorgeCushen
 [Python]: https://www.python.org/
 [Mezzanine]: http://mezzanine.jupo.org/
 [Django]: http://djangoproject.com/
