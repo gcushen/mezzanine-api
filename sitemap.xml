@@ -4,7 +4,15 @@
     
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/</loc>
-     <lastmod>2016-03-07</lastmod>
+     <lastmod>2016-03-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>http://gcushen.github.io/mezzanine-api/authentication/</loc>
+     <lastmod>2016-03-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +20,7 @@
     
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/release-notes/</loc>
-     <lastmod>2016-03-07</lastmod>
+     <lastmod>2016-03-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

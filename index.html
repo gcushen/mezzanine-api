@@ -71,6 +71,12 @@
                 
                 
                     <li >
+                        <a href="authentication/">Authentication</a>
+                    </li>
+                
+                
+                
+                    <li >
                         <a href="release-notes/">Release notes</a>
                     </li>
                 
@@ -91,7 +97,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="release-notes/">
+                        <a rel="prev" href="authentication/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -122,19 +128,19 @@
         
             <li><a href="#installation">Installation</a></li>
         
-            <li><a href="#endpoint-resources">Endpoint Resources</a></li>
-        
-            <li><a href="#pagination">Pagination</a></li>
-        
-            <li><a href="#permissions">Permissions</a></li>
+            <li><a href="#getting-started">Getting started</a></li>
         
             <li><a href="#secure-communication">Secure communication</a></li>
         
-            <li><a href="#authenticate-with-sessions">Authenticate with sessions</a></li>
+            <li><a href="#authentication">Authentication</a></li>
         
-            <li><a href="#authenticate-with-oauth2">Authenticate with OAuth2</a></li>
+            <li><a href="#permissions">Permissions</a></li>
+        
+            <li><a href="#parameters">Parameters</a></li>
         
             <li><a href="#getting-help">Getting help</a></li>
+        
+            <li><a href="#customizing">Customizing</a></li>
         
             <li><a href="#contributing">Contributing</a></li>
         
@@ -149,28 +155,20 @@
 <p>RESTful API for Mezzanine CMS</p>
 <hr />
 <h2 id="overview">Overview</h2>
-<p>Mezzanine API is a <strong>RESTful API</strong> using <strong>JSON</strong> serialization and protected with <strong>OAuth 2</strong>. It is an extension 
-for the <a href="http://mezzanine.jupo.org/">Mezzanine</a> content management platform, built using the <a href="http://djangoproject.com/">Django</a> framework. The API empowers developers to <strong>automate, 
-extend and combine Mezzanine with other services</strong> such as mobile apps.</p>
-<hr />
-<p><strong>Mezzanine API is in development.</strong></p>
-<p>Check back regularly here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. </p>
-<p>Tell us what you need from the API so we can prioritize improvements. </p>
-<hr />
-<h4 id="access-all-the-data-your-frontend-needs">Access all the data your frontend needs</h4>
-<p>REST API resources for posts, categories, comments, pages, users, and public site data.</p>
-<h4 id="we-care-about-security">We care about security</h4>
-<p>That's why OAuth2 is utilized for authentication, allowing users to authorize and revoke access to third party 
-applications without the need for those applications to request the user's confidential credentials. Member's only 
-pages can only be accessed over the API if the requesting user is authenticated and has permission.</p>
-<h4 id="filter-and-search-results">Filter and search results</h4>
+<p>Mezzanine API is a <strong>RESTful web API</strong> for the popular <a href="http://mezzanine.jupo.org/">Mezzanine</a> content management platform. 
+It is built upon the <a href="http://djangoproject.com/">Django</a> framework, using <strong>JSON</strong> for serialization and <strong>OAuth2</strong> for secure authentication. 
+The API empowers developers to <strong>automate, extend and combine Mezzanine with other services</strong> such as mobile apps.</p>
+<h4 id="access-all-the-data-your-app-needs">Access all the data your app needs</h4>
+<p>Intuitive REST API resources for posts, categories, comments, pages, users, and site/app metadata. Retrieving or updating data involves simply sending a HTTP request.</p>
+<h4 id="industry-standard-security">Industry standard security</h4>
+<p>OAuth2, the industry standard for API authentication, allows users to authorize and revoke access to third party 
+applications without the need for those applications to request the user's confidential credentials.</p>
+<h4 id="filter-and-search-website-data">Filter and search website data</h4>
 <p>Apply filters such as <code>posts?date_min=2015-01-01&amp;category=2</code> or search <code>posts?search=fitness</code> to narrow down results. 
 Results are paginated to handle large datasets.</p>
 <h4 id="interactive-endpoint-documentation">Interactive endpoint documentation</h4>
 <p>The best way to learn about the API is via the interactive resource documentation which utilizes the popular <a href="http://swagger.io/">Swagger 
 UI</a>.</p>
-<h4 id="easy-to-customize">Easy to customize</h4>
-<p>The API leverages <a href="http://www.django-rest-framework.org/">Django Rest Framework</a> which has a large active community.</p>
 <p><img alt="mezzanine api" src="./img/api_resources.png" /></p>
 <hr />
 <h2 id="installation">Installation</h2>
@@ -220,90 +218,67 @@ url("^api/", include("mezzanine_api.urls")),
 </code></pre>
 </li>
 </ol>
+<p>Remember to regularly check back here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. <a href="release-notes/">Upgrade instructions and release notes</a> are also available. </p>
 <hr />
-<h2 id="endpoint-resources">Endpoint Resources</h2>
+<h2 id="getting-started">Getting started</h2>
 <p>The best way to learn about the API resources is via the interactive resource documentation which utilizes the popular <a href="http://swagger.io/">Swagger 
-UI</a>. Open up <a href="http://127.0.0.1:8000/api/docs/">http://127.0.0.1:8000/api/docs/</a> in your browser, and you'll see the 
-interactive endpoint resource documentation being displayed (refer to above screenshot). Here you can easily test out the 
+UI</a>. Open up <a href="http://127.0.0.1:8000/api/docs/">http://127.0.0.1:8000/api/docs/</a> in your browser, and if installation was successfull, you'll see the 
+interactive endpoint resource documentation (refer to above screenshot). Here you can easily test out the 
 different kinds of endpoint, method, and query parameter whilst you are learning.</p>
 <p>Also, if you attempt to access the API itself directly in your browser, you will be shown a browsable web API:
 <img alt="browsable api" src="./img/browsable_api.png" /></p>
+<p>In order to explore the restricted parts of the API, you can login via the browsable web API, or <a href="authentication/">retrieve your OAuth2 Access Token</a> 
+to login at the top of the Interactive Resource Documentation page, or <a href="authentication/#basic-authentication">login via command line with <em>curl</em></a>.</p>
 <p>Enjoy designing a frontend to interact with the REST API using your technology of choice! Alternatively, you can use it 
 to automate, analyse, extend and combine Mezzanine with other services.</p>
-<h2 id="pagination">Pagination</h2>
+<h2 id="secure-communication">Secure communication</h2>
+<p><strong>You SHOULD use HTTPS in production!</strong></p>
+<p>In this guide, we consider a development environment on a local machine and connect to the server over HTTP. Whereas for production, you SHOULD use HTTPS for secure communication over the internet. Without it, all the API and Mezzanine authentication mechanisms can be compromised.</p>
+<h2 id="authentication">Authentication</h2>
+<p>There are three options for authenticating with the API. The most appropriate option can be determined by considering if the API client is:</p>
+<ul>
+<li>another Django app running on the site (such as the built-in browsable API)? Use <em>session</em> authentication.</li>
+<li>a desktop/web/mobile client accessing the site externally? Use <em>OAuth2</em> authentication.</li>
+<li>a very simple external client mainly for development and debugging? Use <em>basic</em> authentication.</li>
+</ul>
+<p>Please see the <a href="authentication/">Authentication</a> page for further details.</p>
+<h2 id="permissions">Permissions</h2>
+<p>Some parts of the API are restricted and require authentication as a Mezzanine <em>user</em> or <em>superuser</em>.</p>
+<p>Blog posts and categories may be created or updated over the API by a <em>superuser</em>. This enables you to make new blog posts, for 
+example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
+feature and should be used with caution. There are plans to gradually open up the rest of the API for write access over forthcoming releases. </p>
+<p>Member's only pages can only be accessed over the API if the requesting user is authenticated and has permission.</p>
+<p>The <code>users</code> resource is generally restricted to superusers. However, a user may request to see their own details, and the blog post resource will embed the author's name (if they provided it) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
+at the <code>UserSerializer</code> class.</p>
+<h2 id="parameters">Parameters</h2>
+<p>Your local Resource Documentation at <a href="http://127.0.0.1:8000/api/docs/">http://127.0.0.1:8000/api/docs/</a> includes a list of all available parameters for each possible request, but this section highlights some of the main categories.</p>
+<h3 id="filtering">Filtering</h3>
+<p>The Resource Documentation shows you which resources you can filter on, and what to include in your URL query string. 
+For example, to view only blog posts that mention fitness, use <code>/posts?search=fitness</code>.</p>
+<h3 id="pagination">Pagination</h3>
 <p>In order to handle large datasets, pagination is employed. To be consistent, all <em>listing</em> type endpoints 
 provide a structure that allows for pagination. Please use a "page" parameter to fetch multiple pages of records. For
  example listing categories with <code>categories?page=2</code> will return a JSON structure similar to this:</p>
 <pre><code>{
-    "count": ...,
+    "count": 30,
     "next": "http://127.0.0.1:8000/api/categories?page=3",
     "previous": "http://127.0.0.1:8000/api/categories",
-    "results": [
-        {
-            ...
-        }
-    ]
+    "results": [{ ... }]
 }
 </code></pre>
-<h2 id="permissions">Permissions</h2>
-<p>Blog posts and categories may be created or updated over the API by a <em>superuser</em>. This enables you to make new blog posts, for 
-example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
-feature and should be used with caution. There are plans to gradually open up the rest of the API for write access over forthcoming releases. </p>
-<p>Note that the <code>users</code> resource is provided so that you can carry out tasks such as retrieving the current user's 
-details, view a blog post author's name, and list suggested usernames for predicted text entry. For privacy, the email 
-field can only be accessed by the relevant owner or a <em>superuser</em>. However, the author's full name is accessible to all
-by default (if provided) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
-at the <code>UserSerializer</code> class.</p>
-<h2 id="secure-communication">Secure communication</h2>
-<p><strong>You SHOULD use HTTPS in production!</strong></p>
-<p>In this guide, we consider a development environment on a local machine and connect to the server over HTTP. Whereas for production, you SHOULD use HTTPS for secure communication over the internet. Without it, all the API and Mezzanine authentication mechanisms can be compromised.</p>
-<h2 id="authenticate-with-sessions">Authenticate with sessions</h2>
-<p>Session authentication is enabled by default. It can be disabled by commenting out the relevant line in <code>settings.py</code>. If you wish to use session based authentication for write access as well as read access, you will need to setup a valid CSRF token for any PUT or POST requests. See the <a href="https://docs.djangoproject.com/en/dev/ref/csrf/#ajax">Django CSRF documentation</a> for more details.</p>
-<h2 id="authenticate-with-oauth2">Authenticate with OAuth2</h2>
-<h3 id="register">Register</h3>
-<p>Open up <a href="http://127.0.0.1:8000/api/oauth2/applications/register/">http://127.0.0.1:8000/api/oauth2/applications/register/</a> in your browser. (If you are using API version &lt;= 0.3.0, you may experience a 404 error. To resolve this, add the line <code>LOGIN_URL = "/api/auth/login/"</code> to your <code>settings.py</code>.)</p>
-<p>Go ahead and register a new OAuth application. Just enter a reference name, choose <code>confidential</code> client type and 
-<code>...password-based</code> authorization grant type:</p>
-<p><img alt="OAuth Screenshot" src="./img/oauth_register.png" /></p>
-<p>Request your access token to use for API authentication:</p>
-<pre><code>$ curl -X POST -H "Accept: application/json; indent=4" \
-  -d "grant_type=password&amp;username=&lt;username&gt;&amp;password=&lt;password&gt;" -u"&lt;client_id&gt;:&lt;client_secret&gt;" \
-  http://localhost:8000/api/oauth2/token/
-</code></pre>
-<p>For <code>client_id</code> and <code>client_secret</code>, copy and paste those that you were given in the previous step. The <code>username</code> and 
-<code>password</code> are the credentials of the Mezzanine user you wish to login as. You will get a JSON response like:</p>
-<pre><code>{
-    "access_token": "&lt;your_access_token&gt;",
-    "token_type": "Bearer",
-    "expires_in": 36000,
-    "refresh_token": "&lt;your_refresh_token&gt;",
-    "scope": "read write groups"
-}
-</code></pre>
-<h3 id="test">Test</h3>
-<p>The following test should <em>fail</em> (i.e. no user listings shown) if you are not currently authenticated:</p>
-<pre><code>$ curl http://localhost:8000/api/users
-
-{
-    "detail": "Authentication credentials were not provided."
-}
-</code></pre>
-<p>The following authenticated test should <em>succeed</em> and show you a list of users if you registered OAuth with a 
-<em>superuser</em> account:    </p>
-<pre><code>$ curl -H "Authorization: Bearer &lt;your_access_token&gt;" http://localhost:8000/api/users
-</code></pre>
-<p>You can also test your access token by entering it at the top of your interactive 
-<a href="http://127.0.0.1:8000/api/docs/">API Resource Documentation</a> page.</p>
 <h2 id="getting-help">Getting help</h2>
 <p>If you have questions about the API, consider leaving a message in our <a href="https://gitter.im/gcushen/mezzanine-api">Gitter chat room</a> or using the general <a href="http://groups.google.com/group/mezzanine-users/topics">Mezzanine discussion group</a>.</p>
 <p>Otherwise, if you think you have found a bug, please use <a href="https://github.com/gcushen/mezzanine-api/issues">GitHub issues</a> and include the steps necessary to reproduce
  it.</p>
+<h2 id="customizing">Customizing</h2>
+<p>The API is designed to be as easy as possible to customize by leveraging the <a href="http://www.django-rest-framework.org/">Django Rest Framework</a>, which has a large active community.</p>
 <h2 id="contributing">Contributing</h2>
 <p>Mezzanine API is an open source project managed using the Git version control system. The repository is hosted
 on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributing is as easy as forking the project and committing back your enhancements.</p>
 <h2 id="roadmap">Roadmap</h2>
+<p>We're always working to improve the Mezzanine REST API. Check out the list below of planned enhancements for future releases, in no particular order. Tell us what you need from the API via <a href="https://twitter.com/GeorgeCushen">Twitter</a> or our <a href="https://gitter.im/gcushen/mezzanine-api">Gitter chat room</a> so we can prioritize improvements. </p>
 <ul>
-<li>Refinement</li>
+<li>Refinement of code and API resources</li>
 <li>Gradual roll-out of writeable API access</li>
 <li>More tests</li>
 <li>Further documentation</li>
@@ -357,5 +332,5 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-03-07 14:03:43.233046
+Build Date UTC : 2016-03-10 00:31:28.365116
 -->
