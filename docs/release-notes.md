@@ -12,6 +12,10 @@ You can determine your currently installed version using `pip freeze`:
 
     $ pip freeze | grep mezzanine-api
 
+## Version 0.4.2 (2016-03-14)
+
+* Fix Issue #3: `KeyError: 'context'`
+
 ## Version 0.4.1 (2016-03-07)
 
 * Add logic for updating blog post categories
