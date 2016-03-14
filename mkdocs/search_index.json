@@ -142,7 +142,7 @@
         },
         {
             "location": "/release-notes/",
-            "text": "Release Notes\n\n\n\n\nUpgrading\n\n\nTo upgrade Mezzanine API to the latest version, use pip:\n\n\npip install -U mezzanine-api\n\n\n\nYou can determine your currently installed version using \npip freeze\n:\n\n\n$ pip freeze | grep mezzanine-api\n\n\n\nVersion 0.4.1 (2016-03-07)\n\n\n\n\nAdd logic for updating blog post categories\n\n\nNo longer require title and content fields when updating a blog post\n\n\nRemove dependency on reverse URLs of Mezzanine views when deploying Mezzanine only as an API backend\n\n\nAdd tests for creating and updating blog post categories\n\n\nTidy up API template\n\n\n\n\nVersion 0.4.0 (2016-03-02)\n\n\n\n\nAdd superuser write access (POST and PUT) for blog posts\n\n\nAdd support for Mezzanine 4.1.0, Django 1.9, and latest versions of other dependencies\n\n\nSwitch test suite from factory to client based tests\n\n\nAdd tests for blog posts\n\n\nUpdate docs\n\n\n\n\nVersion 0.3.0 (2015-05-17)\n\n\n\n\nAdd superuser write access (POST and PUT) for categories\n\n\nAdd site endpoint\n\n\nAdd themes\n\n\nUpdate filters\n\n\nUpdate permission handling and security\n\n\nUpdate settings\n\n\nExpose more model fields to API",
+            "text": "Release Notes\n\n\n\n\nUpgrading\n\n\nTo upgrade Mezzanine API to the latest version, use pip:\n\n\npip install -U mezzanine-api\n\n\n\nYou can determine your currently installed version using \npip freeze\n:\n\n\n$ pip freeze | grep mezzanine-api\n\n\n\nVersion 0.4.2 (2016-03-14)\n\n\n\n\nFix Issue #3: \nKeyError: 'context'\n\n\n\n\nVersion 0.4.1 (2016-03-07)\n\n\n\n\nAdd logic for updating blog post categories\n\n\nNo longer require title and content fields when updating a blog post\n\n\nRemove dependency on reverse URLs of Mezzanine views when deploying Mezzanine only as an API backend\n\n\nAdd tests for creating and updating blog post categories\n\n\nTidy up API template\n\n\n\n\nVersion 0.4.0 (2016-03-02)\n\n\n\n\nAdd superuser write access (POST and PUT) for blog posts\n\n\nAdd support for Mezzanine 4.1.0, Django 1.9, and latest versions of other dependencies\n\n\nSwitch test suite from factory to client based tests\n\n\nAdd tests for blog posts\n\n\nUpdate docs\n\n\n\n\nVersion 0.3.0 (2015-05-17)\n\n\n\n\nAdd superuser write access (POST and PUT) for categories\n\n\nAdd site endpoint\n\n\nAdd themes\n\n\nUpdate filters\n\n\nUpdate permission handling and security\n\n\nUpdate settings\n\n\nExpose more model fields to API",
             "title": "Release notes"
         },
         {
@@ -154,6 +154,11 @@
             "location": "/release-notes/#upgrading",
             "text": "To upgrade Mezzanine API to the latest version, use pip:  pip install -U mezzanine-api  You can determine your currently installed version using  pip freeze :  $ pip freeze | grep mezzanine-api",
             "title": "Upgrading"
+        },
+        {
+            "location": "/release-notes/#version-042-2016-03-14",
+            "text": "Fix Issue #3:  KeyError: 'context'",
+            "title": "Version 0.4.2 (2016-03-14)"
         },
         {
             "location": "/release-notes/#version-041-2016-03-07",
