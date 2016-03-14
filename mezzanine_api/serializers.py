@@ -15,6 +15,7 @@ class PrivateField(serializers.ReadOnlyField):
     A Serializer Field class that can be used to hide sensitive User data in the JSON output
     """
 
+    # user needs to be got a diff way for client credentials auth
     def get_attribute(self, instance):
         if instance.id == self.context.get('request').user.id or self.context.get('request').user.is_superuser:
             return super(PrivateField, self).get_attribute(instance)
@@ -94,25 +95,15 @@ class PageSerializer(serializers.ModelSerializer):
                   'login_required', 'meta_description', 'tags')
 
 
-class PostInputSerializer(serializers.ModelSerializer):
+class PostCreateSerializer(serializers.ModelSerializer):
     """
-    Serializing write access to blog posts
+    Serializing write access to CREATE a blog post
     """
     title = serializers.CharField(required=True)
     content = serializers.CharField(required=True, style={'type': 'textarea'})
 
     # `categories` field accepts a comma delimited list. Accept blank string to disassociate all categories.
     categories = serializers.CharField(required=False, allow_blank=True)
-
-    # Override class init so that `title` and `content` fields are not required for PUT updates
-    def __init__(self, *args, **kwargs):
-        super(PostInputSerializer, self).__init__(*args, **kwargs)
-
-        request = kwargs['context']['request']
-
-        if request.method == "PUT":
-            self.fields['title'] = serializers.CharField(required=False)
-            self.fields['content'] = serializers.CharField(required=False, style={'type': 'textarea'})
 
     # Create a blog post
     def create(self, validated_data):
@@ -146,6 +137,21 @@ class PostInputSerializer(serializers.ModelSerializer):
         # the successfully processed comma delimited category list specified in the request.
 
         return post
+
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'content', 'categories', 'status', 'publish_date', 'expiry_date', 'allow_comments')
+
+
+class PostUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializing write access to UPDATE a blog post
+    """
+    title = serializers.CharField(required=False)
+    content = serializers.CharField(required=False, style={'type': 'textarea'})
+
+    # `categories` field accepts a comma delimited list. Accept blank string to disassociate all categories.
+    categories = serializers.CharField(required=False, allow_blank=True)
 
     # Update a blog post
     def update(self, instance, validated_data):

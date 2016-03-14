@@ -2,15 +2,15 @@ from rest_framework import viewsets, filters, permissions, mixins
 from rest_framework.pagination import PageNumberPagination
 import django_filters
 
-from .serializers import UserSerializer, CategorySerializer, PostInputSerializer, PostOutputSerializer
-from .serializers import PageSerializer, SiteSerializer
+from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
+from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
 from .permissions import IsAdminOrReadOnly
 from .mixins import PutUpdateModelMixin
 
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
-from django.contrib.sites.models import Site
 
 # from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
@@ -211,10 +211,12 @@ class PostViewSet(mixins.CreateModelMixin,
     permission_classes = [IsAdminOrReadOnly]
 
     def get_serializer_class(self):
-            if self.request.method in permissions.SAFE_METHODS:
-                return PostOutputSerializer
-            else:
-                return PostInputSerializer
+        if self.request.method in ('PUT', 'PATCH'):
+            return PostUpdateSerializer
+        elif self.request.method == 'POST':
+            return PostCreateSerializer
+        else:
+            return PostOutputSerializer
 
     def get_filter_class(self):
             if self.request.method in permissions.SAFE_METHODS:
