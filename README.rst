@@ -11,13 +11,20 @@ Mezzanine API
 .. image:: https://badges.gitter.im/gcushen/mezzanine-api.svg
    :target: https://gitter.im/gcushen/mezzanine-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 
-Mezzanine API is a RESTful API using JSON serialization and protected with OAuth 2. It is an extension for the `Mezzanine`_ content management platform, built using the `Django`_ framework. The API empowers developers to automate, extend and combine Mezzanine with other services such as mobile apps.
+Mezzanine API is a **RESTful web API** for the popular `Mezzanine`_ content management platform.
+It is built upon the `Django`_ framework, using **JSON** for serialization and **OAuth2** for secure authentication.
+The API empowers developers to **automate, extend and combine Mezzanine with other services** such as mobile apps.
+
+Why use the API?
+================
+* Freedom: build mobile, web, or server apps and use whatever programming language you want
+* Speed: harness a significant speed advantage over Mezzanine's Python based page views
 
 Features
 ========
-* REST API resources for posts, comments, pages, users, categories and public site data
-* Apply filters and search queries to narrow down results
-* OAuth 2.0 allows users to authorize and revoke access to third party applications
+* Intuitive REST API resources for posts, categories, comments, pages, users, and site/app metadata. Retrieving or updating data involves simply sending a HTTP request.
+* Easily filter and search content
+* Industry standard OAuth2 API authentication allows users to authorize and revoke access to third party applications
 * Web browsable API
 * Interactive API resource documentation
 
