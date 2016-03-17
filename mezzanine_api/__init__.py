@@ -1,2 +1,2 @@
-__version__ = "0.4.2"
-VERSION = __version__  # synonym
+__version__ = '0.4.2'
+default_app_config = 'mezzanine_api.apps.MezzanineAPIAppConfig'
