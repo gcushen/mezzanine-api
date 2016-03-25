@@ -1,31 +1,28 @@
 # Mezzanine API
 
-RESTful API for Mezzanine CMS
-
----
-
 ## Overview
 
-Mezzanine API is a **RESTful web API** for the popular [Mezzanine] content management platform. 
-It is built upon the [Django] framework, using **JSON** for serialization and **OAuth2** for secure authentication. 
-The API empowers developers to **automate, extend and combine Mezzanine with other services** such as mobile apps.
+Mezzanine API is a **RESTful web API** for the popular [Mezzanine] content management platform. It is built upon the [Django] framework, using **JSON** for serialization and **OAuth2** for secure authentication. The API empowers developers to **automate, extend and combine Mezzanine with other services** such as mobile apps.
 
-#### Access all the data your app needs
+### Why use the API?
+
+* **Freedom**: build mobile, web, or server apps and use whatever programming language you want
+* **Speed**: harness a significant speed advantage over Mezzanine's Python based page views
+
+### Access all the data your app needs
 
 Intuitive REST API resources for posts, categories, comments, pages, users, and site/app metadata. Retrieving or updating data involves simply sending a HTTP request.
 
-#### Industry standard security
+### Industry standard security
 
-OAuth2, the industry standard for API authentication, allows users to authorize and revoke access to third party 
-applications without the need for those applications to request the user's confidential credentials.
+OAuth2, the industry standard for API authentication, allows users to authorize and revoke access to third party applications without the need for those applications to request the user's confidential credentials.
 
-#### Filter and search website data
-Apply filters such as `posts?date_min=2015-01-01&category=2` or search `posts?search=fitness` to narrow down results. 
-Results are paginated to handle large datasets.
+### Easily filter and search content
+Apply filters such as `posts?date_min=2015-01-01&category=2` or search `posts?search=fitness` to narrow down results. Results are paginated to handle large datasets.
 
-#### Interactive endpoint documentation
+### Interactive endpoint documentation
 
-The best way to learn about the API is via the interactive resource documentation which utilizes the popular [Swagger 
+The best way to learn about the API resources is via the interactive endpoint documentation which utilizes the popular [Swagger 
 UI].
 
 ![mezzanine api](img/api_resources.png)
@@ -38,7 +35,7 @@ In order to install Mezzanine API you'll need [Python] installed on your system,
 
 1. Install the `mezzanine-api` package using pip:
 
-        $ pip install mezzanine-api
+        $ pip install --upgrade mezzanine-api
 
 2. Add the following apps in this order to *INSTALLED_APPS* in your Mezzanine `settings.py`:
 
@@ -78,6 +75,8 @@ Remember to regularly check back here and on [PyPi]/[Github] for updates to the 
 ---
 
 ## Getting started
+
+We recommend downloading the [Mezzanine Client](client.md) to get started using the API remotely.
 
 The best way to learn about the API resources is via the interactive resource documentation which utilizes the popular [Swagger 
 UI]. Open up [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/) in your browser, and if installation was successfull, you'll see the 

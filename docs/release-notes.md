@@ -1,7 +1,5 @@
 # Release Notes
 
----
-
 ## Upgrading
 
 To upgrade Mezzanine API to the latest version, use pip:

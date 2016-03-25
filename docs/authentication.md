@@ -54,6 +54,8 @@ For `client_id` and `client_secret`, copy and paste those that you were given in
          ...
     }
 
+For security, tokens currently last two weeks and then users will need to re-authenticate with your app once the token expires, or automatically renew the access token using the refresh token flow.
+
 ### Testing an app as client owner
 
 The following test should *fail* (i.e. no user listings shown) if you are not currently authenticated:

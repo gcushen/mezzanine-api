@@ -1,12 +1,33 @@
 site_name: Mezzanine REST API
-site_url: http://gcushen.github.io/mezzanine-api
 site_description: RESTful web API for Mezzanine CMS
 site_author: George Cushen
+site_url: http://gcushen.github.io/mezzanine-api
 
-repo_url: https://github.com/gcushen/mezzanine-api/
+repo_name: 'GitHub'
+repo_url: https://github.com/gcushen/mezzanine-api
+
+copyright: 'Copyright &copy; 2016 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.'
+
+theme: 'material'
+
+extra:
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  author:
+    github: 'gcushen'
+    twitter: 'GeorgeCushen'
+
+pages:
+- Mezzanine API: 'index.md'
+- Authentication: 'authentication.md'
+- Release Notes: 'release-notes.md'
+- Client SDK: 'client.md'
 
 markdown_extensions:
-    - admonition:
+  - codehilite(css_class=code)
+  - admonition
 
-copyright: Copyright &copy; 2015 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.
-google_analytics: ['UA-62992791-1', 'auto']
+google_analytics:
+  - 'UA-62992791-1'
+  - 'auto'

@@ -17,8 +17,8 @@ The API empowers developers to **automate, extend and combine Mezzanine with oth
 
 Why use the API?
 ================
-* Freedom: build mobile, web, or server apps and use whatever programming language you want
-* Speed: harness a significant speed advantage over Mezzanine's Python based page views
+* **Freedom**: build mobile, web, or server apps and use whatever programming language you want
+* **Speed**: harness a significant speed advantage over Mezzanine's Python based page views
 
 Features
 ========
