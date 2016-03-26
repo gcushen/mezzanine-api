@@ -285,7 +285,7 @@
 <p>Prerequisites: install <a href="http://mezzanine.jupo.org">Mezzanine</a> and <a href="..#installation">Mezzanine API</a> either locally or remotely, as we need an API to connect to.</p>
 <ol>
 <li>Login to your Mezzanine CMS Admin Panel</li>
-<li>In the menu, click OAuth &gt; Applications</li>
+<li>In the menu, click <em>OAuth</em> &gt; <em>Applications</em></li>
 <li>Create a new application with the following details:<pre class="code"><code>App Name: Mezzanine Python Client
 App Key: key
 App Secret: secret
@@ -296,14 +296,23 @@ Grant Type: Code</code></pre>
 </li>
 </ol>
 <h2 id="examples">Examples</h2>
-<p>Download the examples from <a href="https://github.com/gcushen/mezzanine-client-python">https://github.com/gcushen/mezzanine-client-python</a> .</p>
+<p>Download the examples included in <a href="https://github.com/gcushen/mezzanine-client-python/archive/master.zip">https://github.com/gcushen/mezzanine-client-python/archive/master.zip</a> , or directly with <code>wget</code>:</p>
+<pre class="code"><code>$ mkdir mezzanine-client-examples &amp;&amp; cd $_ &amp;&amp; wget https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_list.py \
+https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_retrieve.py \
+https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_create.py</code></pre>
+
+
+<p>Allow examples to be executed without explicit <code>python</code> command:</p>
+<pre class="code"><code>$ chmod u+x posts_*.py</code></pre>
+
+
 <p>Prior to running the examples, export your app key and secret to your terminal environment:</p>
-<pre class="code"><code>$ export MN_KEY='key'
+<pre class="code"><code>$ export MN_ID='key'
 $ export MN_SECRET='secret'</code></pre>
 
 
 <p>Then run an example:</p>
-<pre class="code"><code>$ ./posts_list_recent.py</code></pre>
+<pre class="code"><code>$ ./posts_list.py</code></pre>
 
 
 <p>The first time the app attempts to access the API, it will ask you to click a link to authorize it. The web page will redirect you to a page with some data similar to below.</p>
