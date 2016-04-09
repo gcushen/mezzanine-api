@@ -284,13 +284,14 @@
 <h2 id="getting-started">Getting Started</h2>
 <p>Prerequisites: install <a href="http://mezzanine.jupo.org">Mezzanine</a> and <a href="..#installation">Mezzanine API</a> either locally or remotely, as we need an API to connect to.</p>
 <ol>
-<li>Login to your Mezzanine CMS Admin Panel</li>
+<li>Login to your Mezzanine CMS Admin Panel (e.g. <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>)</li>
 <li>In the menu, click <em>OAuth</em> &gt; <em>Applications</em></li>
 <li>Create a new application with the following details:<pre class="code"><code>App Name: Mezzanine Python Client
-App Key: key
+App ID: id
 App Secret: secret
 Client Type: Confidential
-Grant Type: Code</code></pre>
+Grant Type: Code
+Redirect URI: https://httpbin.org/get</code></pre>
 
 
 </li>
@@ -313,7 +314,7 @@ https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/example
 
 
 <p>Prior to running the examples, export your app key and secret to your terminal environment:</p>
-<pre class="code"><code>$ export MN_ID='key'
+<pre class="code"><code>$ export MN_ID='id'
 $ export MN_SECRET='secret'</code></pre>
 
 
