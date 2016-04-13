@@ -6,6 +6,7 @@
 
 
 {% block title %}
+{% if name %}{{ name }} – {% endif %}
 Mezzanine API
 {% endblock %}
 
@@ -18,24 +19,8 @@ Mezzanine API
         {% endblock %}
         <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
         <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static "mezzanine_api/css/default.css" %}"/>
     {% endcompress %}
-
-    <style media="screen" type="text/css">
-    .navbar {
-        background: #BD362F;
-    }
-    .navbar-inverse .navbar-brand {
-        color: #FFF;
-    }
-    .btn-primary {
-        color: #FFF;
-        background-color: #BD362F;
-        border-color: #EE5F5B;
-    }
-    .content-main p:nth-of-type(1) {
-        display: none;
-    }
-    </style>
 {% endblock %}
 
 
@@ -45,6 +30,7 @@ Mezzanine API
             <span>
                 {% block branding %}
                     <a class='navbar-brand' rel="nofollow" href='http://gcushen.github.io/mezzanine-api' target="_blank">
+                        <img src="{% static "mezzanine_api/img/mezzanine_api_logo.png" %}"/>
                         Mezzanine API <span class="version">{% get_mezzanine_api_version %}</span>
                     </a>
                 {% endblock %}

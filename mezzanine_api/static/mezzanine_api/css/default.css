@@ -1,0 +1,50 @@
+:root {
+    /** Define a Google Material based theme **/
+    --material-primary1: #F44336;
+    --material-primary2: #FFEBEE;
+    --material-accent: #00C853;
+}
+
+body {
+    background: #fafafa;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .pagination .active a {
+    background-color: var(--material-accent) !important;
+    border: 0;
+}
+
+.breadcrumb {
+    background-color: var(--material-primary2);
+}
+
+.navbar {
+    background: var(--material-primary1);
+    border-top: 0;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-brand {
+    padding: 5px 0 5px 15px;
+    height: auto;
+    min-height: 50px;
+}
+
+.navbar-brand img {
+    display: inline;
+    height: 40px;
+    width: 40px;
+    margin: 2px;
+    border:2px solid #FFF;
+    border-radius: 42px;
+    -webkit-border-radius: 42px;
+    -moz-border-radius: 42px;
+}
+
+.content-main p:nth-of-type(1) {
+    /** Hide endpoint descriptions as they are in Swagger format and do not display correctly in the browsable API **/
+    display: none;
+}
