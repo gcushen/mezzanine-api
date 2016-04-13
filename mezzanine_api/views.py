@@ -12,8 +12,6 @@ from .permissions import IsAdminOrReadOnly
 from .pagination import MezzaninePagination, PostPagination
 from .mixins import PutUpdateModelMixin
 
-# from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
-
 
 class ListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
@@ -80,6 +78,9 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Page.objects.published()
     serializer_class = PageSerializer
     pagination_class = MezzaninePagination
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('id', 'parent', 'title',)
+    ordering = ('title',)
 
     def get_queryset(self):
         queryset = self.queryset
@@ -111,11 +112,13 @@ class CategoryViewSet(mixins.CreateModelMixin,
               paramType: query
     """
     queryset = BlogCategory.objects.all()
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('title',)
     serializer_class = CategorySerializer
     pagination_class = MezzaninePagination
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
+    ordering_fields = ('id', 'title',)
+    ordering = ('title',)
+    search_fields = ('title',)
 
 
 class PostFilter(django_filters.FilterSet):
@@ -187,11 +190,14 @@ class PostViewSet(mixins.CreateModelMixin,
               description: Page number
               paramType: query
     """
-    queryset = Post.objects.published().order_by("-publish_date")
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter,)
-    search_fields = ('title', 'content',)
+    queryset = Post.objects.published()
     pagination_class = PostPagination
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
+    filter_class = PostFilter
+    ordering_fields = ('id', 'title', 'publish_date', 'updated', 'user',)
+    ordering = ('-publish_date',)
+    search_fields = ('title', 'content',)
 
     def get_serializer_class(self):
         if self.request.method in ('PUT', 'PATCH'):
@@ -200,9 +206,3 @@ class PostViewSet(mixins.CreateModelMixin,
             return PostCreateSerializer
         else:
             return PostOutputSerializer
-
-    def get_filter_class(self):
-            if self.request.method in permissions.SAFE_METHODS:
-                return PostFilter
-            else:
-                return None
