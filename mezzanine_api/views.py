@@ -1,35 +1,18 @@
-from rest_framework import viewsets, filters, permissions, mixins
-from rest_framework.pagination import PageNumberPagination
-import django_filters
-
-from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
-from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
-from .permissions import IsAdminOrReadOnly
-from .mixins import PutUpdateModelMixin
-
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
 
+from rest_framework import viewsets, filters, permissions, mixins
+import django_filters
+
+from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
+from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
+from .permissions import IsAdminOrReadOnly
+from .pagination import MezzaninePagination, PostPagination
+from .mixins import PutUpdateModelMixin
+
 # from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
-
-
-class CustomPagination(PageNumberPagination):
-    """
-    Default pagination class.
-    Let large result sets be split into individual pages of data.
-    """
-    page_size = 20
-    page_size_query_param = 'page_size'
-    max_page_size = 100
-
-
-class PostPagination(CustomPagination):
-    """
-    Pagination for Blog Posts
-    """
-    page_size = 5
 
 
 class ListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -79,7 +62,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     filter_class = UserFilter
     filter_backends = (filters.DjangoFilterBackend,)
     serializer_class = UserSerializer
-    pagination_class = CustomPagination
+    pagination_class = MezzaninePagination
     permission_classes = (permissions.IsAdminUser,)
 
 
@@ -96,7 +79,7 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = Page.objects.published()
     serializer_class = PageSerializer
-    pagination_class = CustomPagination
+    pagination_class = MezzaninePagination
 
     def get_queryset(self):
         queryset = self.queryset
@@ -131,7 +114,7 @@ class CategoryViewSet(mixins.CreateModelMixin,
     filter_backends = (filters.SearchFilter,)
     search_fields = ('title',)
     serializer_class = CategorySerializer
-    pagination_class = CustomPagination
+    pagination_class = MezzaninePagination
     permission_classes = [IsAdminOrReadOnly]
 
 
