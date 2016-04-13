@@ -1,13 +1,15 @@
-from rest_framework import serializers
 from django.core.urlresolvers import NoReverseMatch
 from django.template.defaultfilters import strip_tags
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
 from mezzanine.generic.models import Comment
 from mezzanine.conf import settings
 from mezzanine.utils.sites import current_request
+
+from rest_framework import serializers
 
 
 class PrivateField(serializers.ReadOnlyField):
@@ -49,7 +51,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'is_staff')
 
 
 class CategorySerializer(serializers.ModelSerializer):
