@@ -1,5 +1,6 @@
 include README.rst
 include LICENSE
+recursive-include mezzanine_api/project_template *.template *.html
 recursive-include mezzanine_api/static *.js *.css *.png
 recursive-include mezzanine_api/templates *.html
 recursive-exclude * __pycache__
