@@ -21,10 +21,12 @@
     
     <meta property="og:url" content="http://gcushen.github.io/mezzanine-api/release-notes/">
     <meta property="og:title" content="Mezzanine REST API">
-    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api/release-notes//../">
+    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api/release-notes//../img/mezzanine_api_logo.png">
     <meta name="apple-mobile-web-app-title" content="Mezzanine REST API">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+      <link rel="apple-touch-icon" href="../img/mezzanine_api_logo.png">
     
     
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
@@ -138,6 +140,10 @@
   <a href="https://github.com/gcushen/mezzanine-api" class="project">
     <div class="banner">
       
+        <div class="logo">
+          <img src="../img/mezzanine_api_logo.png">
+        </div>
+      
       <div class="name">
         <strong>Mezzanine REST API </strong>
         
@@ -202,6 +208,12 @@
             <li class="anchor">
               <a title="Upgrading" href="#upgrading">
                 Upgrading
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Version 0.5.0 (2016-04-15)" href="#version-050-2016-04-15">
+                Version 0.5.0 (2016-04-15)
               </a>
             </li>
           
@@ -285,6 +297,17 @@
 <pre class="code"><code>$ pip freeze | grep mezzanine-api</code></pre>
 
 
+<h2 id="version-050-2016-04-15">Version 0.5.0 (2016-04-15)</h2>
+<ul>
+<li>Add API middleware (support CORS)</li>
+<li>Switch from Page Number to Limit Offset Pagination</li>
+<li>Add project_template for easy API project creation</li>
+<li>Add Material theme</li>
+<li>Add Order By filter</li>
+<li>Fix blog post Field filter</li>
+<li>Update default settings</li>
+<li>Advise importing <code>mezzanine_api.settings</code> prior to <code>local_settings.py</code> in Mezzanine's <code>settings.py</code>, as per revised installation docs</li>
+</ul>
 <h2 id="version-042-2016-03-14">Version 0.4.2 (2016-03-14)</h2>
 <ul>
 <li>Fix Issue #3: <code>KeyError: 'context'</code></li>

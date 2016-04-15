@@ -23,10 +23,12 @@
     
     <meta property="og:url" content="http://gcushen.github.io/mezzanine-api/">
     <meta property="og:title" content="Mezzanine REST API">
-    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api//./">
+    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api//./img/mezzanine_api_logo.png">
     <meta name="apple-mobile-web-app-title" content="Mezzanine REST API">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+      <link rel="apple-touch-icon" href="./img/mezzanine_api_logo.png">
     
     
     <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon-e565ddfa3b.ico">
@@ -140,6 +142,10 @@
   <a href="https://github.com/gcushen/mezzanine-api" class="project">
     <div class="banner">
       
+        <div class="logo">
+          <img src="./img/mezzanine_api_logo.png">
+        </div>
+      
       <div class="name">
         <strong>Mezzanine REST API </strong>
         
@@ -222,6 +228,12 @@
             <li class="anchor">
               <a title="Parameters" href="#parameters">
                 Parameters
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="CORS" href="#cors">
+                CORS
               </a>
             </li>
           
@@ -333,34 +345,55 @@ UI</a>.</p>
 <p><img alt="mezzanine api" src="./img/api_resources.png" /></p>
 <hr />
 <h2 id="installation">Installation</h2>
-<p>In order to install Mezzanine API you'll need <a href="https://www.python.org/">Python</a> installed on your system, as well as the <a href="http://mezzanine.jupo.org/">Mezzanine</a> CMS.  </p>
+<p>In this section, we first explain how to create a new CMS API project. Alternatively, the latter sub-sections explain how to install into an existing Mezzanine project, or to install with Docker.</p>
+<p>Remember to regularly check back here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. <a href="release-notes/">Upgrade instructions and release notes</a> are also available.</p>
+<h3 id="new-project">New Project</h3>
+<p>Once you have <a href="https://www.python.org/">Python</a> (2.7 or 3.3+) installed on your system, a new API project can be created by running the following commands:</p>
+<pre class="code"><code>$ pip install -U mezzanine-api
+$ mezzanine-project -a mezzanine_api project_name &amp;&amp; cd $_
+$ python manage.py createdb --noinput
+$ python manage.py runserver</code></pre>
+
+
+<p>You should then be able to browse to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a> and login using the default account (username: admin, password: default).</p>
+<h3 id="existing-project">Existing project</h3>
+<p>Assuming you have an existing <a href="http://mezzanine.jupo.org/">Mezzanine</a> CMS project, the API can be installed into it as follows:</p>
 <ol>
 <li>
 <p>Install the <code>mezzanine-api</code> package using pip:</p>
-<pre class="code"><code>$ pip install --upgrade mezzanine-api</code></pre>
+<pre class="code"><code>$ pip install -U mezzanine-api</code></pre>
 
 
 </li>
 <li>
-<p>Add the following apps in this order to <em>INSTALLED_APPS</em> in your Mezzanine <code>settings.py</code>:</p>
+<p>Add the following apps in this order to the top of <code>INSTALLED_APPS</code> in your Mezzanine <code>settings.py</code>:</p>
 <pre class="code"><code>INSTALLED_APPS = (
-    ...
     'mezzanine_api',
     'rest_framework',
     'rest_framework_swagger',
     'oauth2_provider',
+    ...
 )</code></pre>
 
 
 </li>
 <li>
-<p>Also, add the following lines at the end of your <code>settings.py</code> module:</p>
+<p>Add the API middleware to the top of <code>MIDDLEWARE_CLASSES</code> in <code>settings.py</code>:</p>
+<pre class="code"><code>MIDDLEWARE_CLASSES = (
+    'mezzanine_api.middleware.ApiMiddleware',
+    ...</code></pre>
+
+
+</li>
+<li>
+<p>Also, add the following lines in your <code>settings.py</code> module
+somewhere <em>before</em> the <code>LOCAL SETTINGS</code> block which is near the end:</p>
 <pre class="code"><code>#####################
 # REST API SETTINGS #
 #####################
 try:
     from mezzanine_api.settings import *
-except ImportError as e:
+except ImportError:
     pass</code></pre>
 
 
@@ -385,7 +418,8 @@ url(&quot;^api/&quot;, include(&quot;mezzanine_api.urls&quot;)),</code></pre>
 
 </li>
 </ol>
-<p>Remember to regularly check back here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. <a href="release-notes/">Upgrade instructions and release notes</a> are also available. </p>
+<h3 id="docker">Docker</h3>
+<p>A <a href="https://github.com/gcushen/mezzanine-api-docker">Docker file</a> is available for the API in a separate Github project. The Docker file is currently in beta and we welcome your feedback.</p>
 <hr />
 <h2 id="getting-started">Getting started</h2>
 <p>We recommend downloading the <a href="client/">Mezzanine Client</a> to get started using the API remotely.</p>
@@ -433,6 +467,12 @@ provide a structure that allows for pagination. Please use a "page" parameter to
     &quot;previous&quot;: &quot;http://127.0.0.1:8000/api/categories&quot;,
     &quot;results&quot;: [{ ... }]
 }</code></pre>
+
+
+<h2 id="cors">CORS</h2>
+<p>The API supports requests and responses using Cross-Origin Resource Sharing (CORS). You may want to check out this excellent <a href="http://www.html5rocks.com/en/tutorials/cors/">tutorial</a> for an overview on how to use CORS.</p>
+<p>By default, API requests are allowed from any origin so you do not need to worry about the URIs of your API and client apps. You may disable this by adding the following line to your <code>local_settings.py</code>:</p>
+<pre class="code"><code>MZN_API_CORS_ORIGIN_ALLOW_ALL = False</code></pre>
 
 
 <h2 id="getting-help">Getting help</h2>
