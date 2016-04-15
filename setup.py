@@ -16,14 +16,14 @@ version = get_version('mezzanine_api')
 
 
 if sys.argv[-1] == 'publish':
-    if os.system("pip freeze | grep wheel"):
+    if os.system('pip freeze | grep wheel'):
         print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
         sys.exit()
-    if os.system("pip freeze | grep twine"):
+    if os.system('pip freeze | grep twine'):
         print("twine not installed.\nUse `pip install twine`.\nExiting.")
         sys.exit()
-    os.system("python setup.py sdist bdist_wheel")
-    os.system("twine upload dist/*")
+    os.system('python setup.py sdist bdist_wheel')
+    os.system('twine upload dist/*')
     print("You probably want to also tag the version now:")
     print("  git tag -a {0} -m 'version {0}'".format(version))
     print("  git push --tags")
@@ -40,33 +40,33 @@ setup(
     author_email='mezzanine-users@googlegroups.com',   
     url='http://gcushen.github.io/mezzanine-api',
     description='A RESTful web API for Mezzanine CMS.',
-    long_description=open("README.rst", 'rb').read().decode('utf-8'),
+    long_description=open('README.rst', 'rb').read().decode('utf-8'),
     keywords='mezzanine cms api rest restful web',
     include_package_data=True,
     license='BSD',
     packages=find_packages(exclude=['tests', 'site']),
     install_requires=[
-        "Mezzanine>=4.1.0",
-        "django-rest-swagger>=0.3.5, <1.0.0",
-        "djangorestframework>=3.3.2, <4.0.0",
-        "django-filter",
-        "django-oauth-toolkit>=0.10.0, <1.0.0"
+        'Mezzanine>=4.1.0',
+        'django-rest-swagger>=0.3.5, <1.0.0',
+        'djangorestframework>=3.3.3, <4.0.0',
+        'django-filter',
+        'django-oauth-toolkit>=0.10.0, <1.0.0',
     ],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 4 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        'Topic :: Internet :: WWW/HTTP :: WSGI',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
 )
