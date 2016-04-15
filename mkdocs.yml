@@ -11,6 +11,7 @@ copyright: 'Copyright &copy; 2016 <a href="https://twitter.com/GeorgeCushen">Geo
 theme: 'material'
 
 extra:
+  logo: img/mezzanine_api_logo.png
   font:
     text: 'Roboto'
     code: 'Roboto Mono'

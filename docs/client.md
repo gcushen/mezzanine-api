@@ -6,33 +6,49 @@ Mezzanine client is a **Python SDK** and **remote CLI** for [Mezzanine API](inde
 
     pip install --upgrade mezzanine-client
 
+[*Star* the Client on Github](https://github.com/gcushen/mezzanine-client-python/) to help support further development. You can also *watch* it on Github to keep track of updates.
+
 ## Getting Started
 
-Prerequisites: install [Mezzanine](http://mezzanine.jupo.org) and [Mezzanine API](index.md#installation) either locally or remotely, as we need an API to connect to.
+Prerequisites: install [Mezzanine API](index.md#installation) either locally or remotely, as we need an API to connect to.
 
-1. Login to your Mezzanine CMS Admin Panel
-2. In the menu, click OAuth > Applications
+1. Login to your Mezzanine CMS Admin Panel (e.g. [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/))
+2. In the menu, click *OAuth* > *Applications*
 3. Create a new application with the following details:
 
         App Name: Mezzanine Python Client
-        App Key: key
+        App ID: id
         App Secret: secret
         Client Type: Confidential
         Grant Type: Code
+        Redirect URI: https://httpbin.org/get
 
 ## Examples
 
-Download the examples from <https://github.com/gcushen/mezzanine-client-python> .
+The client's `Mezzanine` class in the `api` module contains a set of methods for accessing the API. Some of the most common methods are demonstrated in the following command line interface examples:
+
+- `posts_list.py` List published blog posts
+- `posts_retrieve.py <post_id>` Retrieve the specified blog post
+- `posts_create.py` Create a new blog post
+
+Start by downloading the examples included in <https://github.com/gcushen/mezzanine-client-python/archive/master.zip> , or directly with `wget`:
+
+    $ mkdir mezzanine-client-examples && cd $_ && wget https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_list.py \
+    https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_retrieve.py \
+    https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_create.py
+
+Allow examples to be executed without explicit `python` command:
+
+    $ chmod u+x posts_*.py
 
 Prior to running the examples, export your app key and secret to your terminal environment:
 
-    $ export MN_KEY='key'
+    $ export MN_ID='id'
     $ export MN_SECRET='secret'
-
 
 Then run an example:
 
-    $ ./posts_list_recent.py
+    $ ./posts_list.py
 
 The first time the app attempts to access the API, it will ask you to click a link to authorize it. The web page will redirect you to a page with some data similar to below.
 
@@ -41,7 +57,7 @@ The first time the app attempts to access the API, it will ask you to click a li
         "state": "Euf91j3H6uEE9VQ9mWsvFC5s3eEMJt"
     },
 
-The code in this case is "vYQqcQSHmqkezX09xh8qflGVYUw6F8" *without* the speech marks and should be pasted back into the app within 1 minute to complete the authorization.
+The code in this case is "vYQqcQSHmqkezX09xh8qflGVYUw6F8" *without* the speech marks and should be pasted back into the app within one hour to complete the authorization.
 
 ## Community
 

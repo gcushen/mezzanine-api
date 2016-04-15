@@ -10,6 +10,17 @@ You can determine your currently installed version using `pip freeze`:
 
     $ pip freeze | grep mezzanine-api
 
+## Version 0.5.0 (2016-04-15)
+
+* Add API middleware (support CORS)
+* Switch from Page Number to Limit Offset Pagination
+* Add project_template for easy API project creation
+* Add Material theme
+* Add Order By filter
+* Fix blog post Field filter
+* Update default settings
+* Advise importing `mezzanine_api.settings` prior to `local_settings.py` in Mezzanine's `settings.py`, as per revised installation docs
+
 ## Version 0.4.2 (2016-03-14)
 
 * Fix Issue #3: `KeyError: 'context'`

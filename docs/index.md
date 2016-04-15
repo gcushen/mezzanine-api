@@ -31,46 +31,73 @@ UI].
 
 ## Installation
 
-In order to install Mezzanine API you'll need [Python] installed on your system, as well as the [Mezzanine] CMS.  
+In this section, we first explain how to create a new CMS API project. Alternatively, the latter sub-sections explain how to install into an existing Mezzanine project, or to install with Docker.
+
+Remember to regularly check back here and on [PyPi]/[Github] for updates to the documentation and package, respectively. [Upgrade instructions and release notes](release-notes.md) are also available.
+
+
+### New Project
+
+Once you have [Python] (2.7 or 3.3+) installed on your system, a new API project can be created by running the following commands:
+
+    $ pip install -U mezzanine-api
+    $ mezzanine-project -a mezzanine_api project_name && cd $_
+    $ python manage.py createdb --noinput
+    $ python manage.py runserver
+
+You should then be able to browse to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) and login using the default account (username: admin, password: default).
+
+### Existing project
+
+Assuming you have an existing [Mezzanine] CMS project, the API can be installed into it as follows:
 
 1. Install the `mezzanine-api` package using pip:
 
-        $ pip install --upgrade mezzanine-api
+        $ pip install -U mezzanine-api
 
-2. Add the following apps in this order to *INSTALLED_APPS* in your Mezzanine `settings.py`:
+2. Add the following apps in this order to the top of `INSTALLED_APPS` in your Mezzanine `settings.py`:
 
         INSTALLED_APPS = (
-            ...
             'mezzanine_api',
             'rest_framework',
             'rest_framework_swagger',
             'oauth2_provider',
+            ...
         )
 
-3. Also, add the following lines at the end of your `settings.py` module:
+3. Add the API middleware to the top of `MIDDLEWARE_CLASSES` in `settings.py`:
+
+        MIDDLEWARE_CLASSES = (
+            'mezzanine_api.middleware.ApiMiddleware',
+            ...
+
+4. Also, add the following lines in your `settings.py` module
+somewhere *before* the `LOCAL SETTINGS` block which is near the end:
 
         #####################
         # REST API SETTINGS #
         #####################
         try:
             from mezzanine_api.settings import *
-        except ImportError as e:
+        except ImportError:
             pass
 
-4. For Mezzanine 4.1.0 and above, add the following code in your Mezzanine `urls.py` somewhere after ``urlpatterns += [`` (approx line 29):
+5. For Mezzanine 4.1.0 and above, add the following code in your Mezzanine `urls.py` somewhere after `urlpatterns += [` (approx line 29):
 
         # REST API URLs
         url("^api/", include("mezzanine_api.urls")),
 
-5. Migrate the database to support OAuth2:
+6. Migrate the database to support OAuth2:
 
         $ python manage.py migrate
 
-6. Start the server:
+7. Start the server:
 
         $ python manage.py runserver
 
-Remember to regularly check back here and on [PyPi]/[Github] for updates to the documentation and package, respectively. [Upgrade instructions and release notes](release-notes.md) are also available. 
+### Docker
+
+A [Docker file](https://github.com/gcushen/mezzanine-api-docker) is available for the API in a separate Github project. The Docker file is currently in beta and we welcome your feedback.
 
 ---
 
@@ -138,6 +165,12 @@ provide a structure that allows for pagination. Please use a "page" parameter to
         "results": [{ ... }]
     } 
 
+## CORS
+The API supports requests and responses using Cross-Origin Resource Sharing (CORS). You may want to check out this excellent [tutorial](http://www.html5rocks.com/en/tutorials/cors/) for an overview on how to use CORS.
+
+By default, API requests are allowed from any origin so you do not need to worry about the URIs of your API and client apps. You may disable this by adding the following line to your `local_settings.py`:
+
+    MZN_API_CORS_ORIGIN_ALLOW_ALL = False
 
 ## Getting help
 If you have questions about the API, consider leaving a message in our [Gitter chat room] or using the general [Mezzanine discussion group].
