@@ -1,5 +1,34 @@
+# Default REST API settings
+# This module should be imported into your Django `settings.py`
+# Edit your `local_settings.py` to customize
+
 from django.core.urlresolvers import reverse_lazy
 
+
+allow_headers = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'user-agent',
+    'accept-encoding',
+)
+
+MZN_API_CORS_ORIGIN_ALLOW_ALL = True
+MZN_API_CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+MZN_API_CORS_ALLOW_HEADERS = allow_headers
+MZN_API_DOC_TITLE = "API Resource Documentation"
+MZN_API_DOC_INTRO = """
+The RESTful web API exposes Mezzanine data using JSON serialization and OAuth2 protection.
+This interactive document will guide you through the relevant API endpoints, data structures,
+and query parameters for filtering, searching and pagination.
+Otherwise, for general information and examples, consult the
+<a href="http://gcushen.github.io/mezzanine-api" target="_blank">Mezzanine API Documentation</a>.
+The <a href="http://gcushen.github.io/mezzanine-api/client/" target="_blank">API Client SDK</a> and
+<a href="../oauth2/applications/">OAuth App Manager</a> are available for app development.
+"""
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -22,18 +51,6 @@ OAUTH2_PROVIDER = {
 
 # Django login URL required for authentication with oauth2_provider package
 LOGIN_URL = reverse_lazy('rest_framework:login')
-
-MZN_API_DOC_TITLE = "API Resource Documentation"
-
-MZN_API_DOC_INTRO = """
-The RESTful web API exposes Mezzanine data using JSON serialization and OAuth2 protection.
-This interactive document will guide you through the relevant API endpoints, data structures,
-and query parameters for filtering, searching and pagination.
-Otherwise, for general information and examples, consult the
-<a href="http://gcushen.github.io/mezzanine-api" target="_blank">Mezzanine API Documentation</a>.
-The <a href="http://gcushen.github.io/mezzanine-api/client/" target="_blank">API Client SDK</a> and
-<a href="../oauth2/applications/">OAuth App Manager</a> are available for app development.
-"""
 
 SWAGGER_SETTINGS = {
     'api_version': '',

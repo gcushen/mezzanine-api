@@ -96,6 +96,10 @@ if DJANGO_VERSION < (1, 9):
     del TEMPLATES[0]["OPTIONS"]["builtins"]
 
 INSTALLED_APPS = (
+    'mezzanine_api',
+    'rest_framework',
+    'rest_framework_swagger',
+    'oauth2_provider',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -113,10 +117,6 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    'mezzanine_api',
-    'rest_framework',
-    'rest_framework_swagger',
-    'oauth2_provider',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -168,6 +168,15 @@ OPTIONAL_APPS = (
 # Included above
 
 
+#####################
+# REST API SETTINGS #
+#####################
+try:
+    from mezzanine_api.settings import *  # NOQA
+except ImportError:
+    pass
+
+
 ####################
 # DYNAMIC SETTINGS #
 ####################
@@ -177,12 +186,3 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
-
-
-#####################
-# REST API SETTINGS #
-#####################
-try:
-    from mezzanine_api.settings import *  # NOQA
-except ImportError as e:
-    pass
