@@ -1,4 +1,3 @@
-
 from __future__ import absolute_import, unicode_literals
 import os
 
@@ -230,6 +229,10 @@ if DJANGO_VERSION < (1, 9):
 ################
 
 INSTALLED_APPS = (
+    'mezzanine_api',
+    'rest_framework',
+    'rest_framework_swagger',
+    'oauth2_provider',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -249,10 +252,6 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     # "mezzanine.accounts",
     # "mezzanine.mobile",
-    'mezzanine_api',
-    'rest_framework',
-    'rest_framework_swagger',
-    'oauth2_provider',
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -303,6 +302,7 @@ OPTIONAL_APPS = (
     PACKAGE_NAME_GRAPPELLI,
 )
 
+
 ##################
 #  API SETTINGS  #
 ##################
@@ -311,7 +311,7 @@ OPTIONAL_APPS = (
 # Use local_settings.py to customize API settings
 
 try:
-    from mezzanine_api.settings import *
+    from mezzanine_api.settings import *  # NOQA
 except ImportError:
     pass
 
