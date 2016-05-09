@@ -9,19 +9,19 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Client SDK - Mezzanine REST API</title>
+        <title>Remote CLI - Mezzanine REST API</title>
       
       
       
-        <link rel="canonical" href="http://gcushen.github.io/mezzanine-api/client/">
+        <link rel="canonical" href="http://gcushen.github.io/mezzanine-api/cli/">
       
       
         <meta name="author" content="George Cushen">
       
     
-    <meta property="og:url" content="http://gcushen.github.io/mezzanine-api/client/">
+    <meta property="og:url" content="http://gcushen.github.io/mezzanine-api/cli/">
     <meta property="og:title" content="Mezzanine REST API">
-    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api/client//../img/mezzanine_api_logo.png">
+    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api/cli//../img/mezzanine_api_logo.png">
     <meta name="apple-mobile-web-app-title" content="Mezzanine REST API">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -98,7 +98,7 @@
             
           </span>
         
-        Client SDK
+        Remote CLI
       </div>
     </div>
     
@@ -209,8 +209,17 @@
           
             
   <li>
-    <a class="current" title="Client SDK" href="./">
+    <a class="" title="Client SDK" href="../client/">
       Client SDK
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Remote CLI" href="./">
+      Remote CLI
     </a>
     
       
@@ -232,14 +241,20 @@
             </li>
           
             <li class="anchor">
-              <a title="Getting started" href="#getting-started">
-                Getting started
+              <a title="Configuration" href="#configuration">
+                Configuration
               </a>
             </li>
           
             <li class="anchor">
               <a title="Authorize the app" href="#authorize-the-app">
                 Authorize the app
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Getting started" href="#getting-started">
+                Getting started
               </a>
             </li>
           
@@ -257,15 +272,6 @@
           
         </ul>
       
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="Remote CLI" href="../cli/">
-      Remote CLI
-    </a>
     
   </li>
 
@@ -301,81 +307,63 @@
       <article class="article">
         <div class="wrapper">
           
-          <h1 id="client-sdk">Client SDK</h1>
-<p>Mezzanine Client is a <strong>Python SDK</strong> and <strong>remote CLI</strong> for <a href="..">Mezzanine API</a>. It enables a user or service to remotely read or write to Mezzanine CMS using Python or the command line. For example, you can write an article in Markdown on your laptop and type a simple command to automatically upload it and create a new blog post from it on your website.</p>
-<p>This page concerns mainly the Python SDK part of the Mezzanine Client package. You can also refer to the <a href="../cli/">CLI page</a> for information on the command line tool.</p>
+          <h1 id="remote-command-line-interface-cli">Remote Command Line Interface (CLI)</h1>
+<p>Mezzanine Client CLI is a <strong>remote CLI</strong> for <a href="..">Mezzanine API</a>. It enables a user or service to remotely read or write to <a href="http://mezzanine.jupo.org/">Mezzanine CMS</a> using the command line. For example, you can write an article in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a> on your laptop and type a simple command to automatically upload it and create a new blog post from it on your website.</p>
 <h2 id="installation">Installation</h2>
-<pre class="code"><code>pip install -U mezzanine-client</code></pre>
+<pre class="code"><code>$ pip install -U mezzanine-client</code></pre>
 
 
-<p><a href="https://github.com/gcushen/mezzanine-client-python/"><em>Star</em> the Client on Github</a> to help support further development. You can also <em>watch</em> it on Github to keep track of updates.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>Install <a href="..#installation">Mezzanine API</a> either locally (for development) or remotely (for production), as we need an API to connect to.</p>
-<p>Once Mezzanine API is installed,</p>
-<ol>
-<li>Login to your Mezzanine CMS Admin Panel (e.g. <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>)</li>
-<li>In the menu, click <em>OAuth</em> &gt; <em>Applications</em></li>
-<li>Create a new application with the following details:<pre class="code"><code>App Name: Mezzanine Python Client
-App ID: id
-App Secret: secret
-Client Type: Confidential
-Grant Type: Code
-Redirect URI: https://httpbin.org/get</code></pre>
+<p>Refer to <a href="../client/#prerequisites">Mezzanine Client Prerequisites</a>.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Generally, you must set at least three configuration options: API URL, OAuth App ID, and OAuth App Secret. These settings correspond to the location of your Mezzanine API instance and your OAuth credentials to authenticate with it (as was discussed further in the above <em>Prerequisites</em> section).</p>
+<pre class="code"><code>$ mezzanine-cli config api_url http://127.0.0.1:8000/api
+$ mezzanine-cli config client_id id
+$ mezzanine-cli config client_secret secret</code></pre>
 
 
-</li>
-</ol>
-<p>For development purposes, you can define the simple app ID and secret above, otherwise use the automatically generated ones.</p>
-<h2 id="getting-started">Getting started</h2>
-<p>The client's <code>Mezzanine</code> class in the <code>api</code> module contains a set of methods for accessing the API. Some of the most common methods are demonstrated in the following command line interface examples:</p>
-<ul>
-<li><code>posts_list.py</code> List published blog posts</li>
-<li><code>posts_retrieve.py &lt;post_id&gt;</code> Retrieve the specified blog post</li>
-<li><code>posts_create.py</code> Create a new blog post</li>
-</ul>
-<p>Start by downloading the examples included in <a href="https://github.com/gcushen/mezzanine-client-python/archive/master.zip">https://github.com/gcushen/mezzanine-client-python/archive/master.zip</a> , or directly with <code>wget</code>:</p>
-<pre class="code"><code>$ mkdir mezzanine-client-examples &amp;&amp; cd $_ &amp;&amp; wget https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_list.py \
-https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_retrieve.py \
-https://raw.githubusercontent.com/gcushen/mezzanine-client-python/master/examples/posts_create.py</code></pre>
-
-
-<p>Allow examples to be executed without explicit <code>python</code> command:</p>
-<pre class="code"><code>$ chmod u+x posts_*.py</code></pre>
-
-
-<p>Prior to running the examples, export your app ID and secret to your terminal environment:</p>
-<pre class="code"><code>$ export MZN_ID='id'
-$ export MZN_SECRET='secret'</code></pre>
-
-
-<p>Then run an example:</p>
-<pre class="code"><code>$ ./posts_list.py</code></pre>
-
-
+<p>You can also see your current configuration and available options by issuing the <code>mezzanine-cli config</code> command without any arguments. Note that the <code>refresh_token</code> setting should not be altered.</p>
 <h2 id="authorize-the-app">Authorize the app</h2>
-<p>If you have previously used apps for platforms like Facebook, Google, or Twitter, then you may be familiar with the OAuth app authorization process. More specifically, the Mezzanine Client uses the latest OAuth2 code authorization flow.</p>
-<p>The first time that the Client app attempts to access the API, it will ask you to click a link to authorize it. First you will be taken to the login page on your API website, where you should login using your Mezzanine account:</p>
-<p><img alt="mezzanine api" src="../img/client_app_login.png" /></p>
-<p>Next, you will be asked if you wish to authorize the Mezzanine Client app:</p>
-<p><img alt="mezzanine api" src="../img/client_app_authorize.png" /></p>
-<p>If you confirm the authorization request, you will be given a confirmation code, displayed similar to that below.</p>
-<pre class="code"><code>&quot;args&quot;: {
-    &quot;code&quot;: &quot;vYQqcQSHmqkezX09xh8qflGVYUw6F8&quot;,
-    &quot;state&quot;: &quot;Euf91j3H6uEE9VQ9mWsvFC5s3eEMJt&quot;
-},</code></pre>
+<p>Run a command that attempts to access the API:</p>
+<pre class="code"><code>$ mezzanine-cli posts list</code></pre>
 
 
-<p>The confirmation code in this case is "vYQqcQSHmqkezX09xh8qflGVYUw6F8" <em>without</em> the speech marks and should be pasted back into the app within one hour to complete the authorization.</p>
-<p>After successful authentication, Mezzanine Client stores the OAuth refresh token in <code>~/.mezzanine.cfg</code> to prevent you needing to manually re-authenticate every time you run the app. If you wish to completely logout of the app, you can delete this file.</p>
-<p>Now you can have fun trying some of the CLI or SDK examples!</p>
-<p>Otherwise, if there were any issues authorizing the app, it is worth checking that you followed all the <a href="#prerequisites">prerequisite</a> steps. Or for help, refer to the <a href="#community">Community</a> section below.</p>
+<p>Then follow the guide to <a href="../client/#authorize-the-app">authorize the app</a>.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>Some examples:</p>
+<pre class="code"><code># List all posts (most recent first).
+$ mezzanine-cli posts list
+
+# Get the post with the ID of 2.
+$ mezzanine-cli posts get 2
+
+# Create a post from a Markdown file.
+$ mezzanine-cli posts create \
+  --title='Test Post from API Client' \
+  --content-file=~/Desktop/test.md \
+  --categories='Test,Fun' \
+  --markdown</code></pre>
+
+
+<p>Just add <code>--help</code> to any command in order to get help on the command line:</p>
+<pre class="code"><code># General help.
+$ mezzanine-cli
+
+# View available options for creating posts.
+$ mezzanine-cli posts create --help</code></pre>
+
+
+<p>Finally, if you wish to clear the credentials and reset CLI configuration, you can do so by running:</p>
+<pre class="code"><code>$ mezzanine-cli logout</code></pre>
+
+
 <h2 id="community">Community</h2>
-<p><a href="https://gitter.im/gcushen/mezzanine-api?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge">Chat Room</a> - if the room is quiet, feel free to leave a message and someone will try to get back to you.</p>
-<p><a href="https://github.com/gcushen/mezzanine-client-python/issues">Report a bug or feature request</a> for the client.</p>
+<p>Join us in the <a href="https://gitter.im/gcushen/mezzanine-api?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge">Mezzanine API chat room</a> or leave a message and we will try to get back to you.</p>
+<p>Feel free to <a href="https://github.com/gcushen/mezzanine-client-python/">star</a> Mezzanine Client on Github to show your support and monitor updates.</p>
+<p>Please file a <a href="https://github.com/gcushen/mezzanine-client-python/issues">ticket</a> or contribute a pull request on GitHub for bugs or feature requests.</p>
 <h2 id="roadmap">Roadmap</h2>
 <ul>
-<li>Test suite</li>
-<li>Further documentation and examples</li>
+<li>Add further CLI resources to interact with the API</li>
 </ul>
           <aside class="copyright" role="note">
             
@@ -395,7 +383,7 @@ $ export MZN_SECRET='secret'</code></pre>
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../release-notes/" title="Release Notes">
+        <a href="../client/" title="Client SDK">
           <span class="direction">
             Previous
           </span>
@@ -405,7 +393,7 @@ $ export MZN_SECRET='secret'</code></pre>
             </div>
             <div class="stretch">
               <div class="title">
-                Release Notes
+                Client SDK
               </div>
             </div>
           </div>
@@ -413,22 +401,6 @@ $ export MZN_SECRET='secret'</code></pre>
       
     </div>
     <div class="next">
-      
-        <a href="../cli/" title="Remote CLI">
-          <span class="direction">
-            Next
-          </span>
-          <div class="page">
-            <div class="stretch">
-              <div class="title">
-                Remote CLI
-              </div>
-            </div>
-            <div class="button button-next" role="button" aria-label="Next">
-              <i class="icon icon-forward"></i>
-            </div>
-          </div>
-        </a>
       
     </div>
   </nav>
