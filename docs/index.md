@@ -103,7 +103,7 @@ A [Docker file](https://github.com/gcushen/mezzanine-api-docker) is available fo
 
 ## Getting started
 
-We recommend downloading the [Mezzanine Client](client.md) to get started using the API remotely.
+We recommend installing the [Mezzanine Client CLI](cli.md) or [Mezzanine Client SDK](client.md) on your local machine to get started using the API service remotely.
 
 The best way to learn about the API resources is via the interactive resource documentation which utilizes the popular [Swagger 
 UI]. Open up [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/) in your browser, and if installation was successfull, you'll see the 

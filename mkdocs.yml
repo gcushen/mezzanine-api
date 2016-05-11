@@ -24,6 +24,7 @@ pages:
 - Authentication: 'authentication.md'
 - Release Notes: 'release-notes.md'
 - Client SDK: 'client.md'
+- Remote CLI: 'cli.md'
 
 markdown_extensions:
   - codehilite(css_class=code)
