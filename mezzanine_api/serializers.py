@@ -82,6 +82,7 @@ class PageSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField('get_page_content')
     meta_description = serializers.CharField(source='description', read_only=True)
     tags = serializers.CharField(source='keywords_string', read_only=True)
+    gallery_items = serializers.SerializerMethodField('get_gallery_content')
 
     def get_page_content(self, obj):
         if obj.content_model == 'richtextpage':
@@ -91,10 +92,18 @@ class PageSerializer(serializers.ModelSerializer):
         else:
             return None
 
+    def get_gallery_content(self, obj):
+        items = []
+        if hasattr(obj, 'gallery'):
+            for item in obj.gallery.images.values():
+                item['url'] = settings.MEDIA_URL + item['file']
+                items.append(item)
+        return items
+
     class Meta:
         model = Page
         fields = ('id', 'parent', 'title', 'content', 'content_model', 'slug', 'publish_date',
-                  'login_required', 'meta_description', 'tags')
+                  'login_required', 'meta_description', 'tags', 'gallery_items')
 
 
 class PostCreateSerializer(serializers.ModelSerializer):
