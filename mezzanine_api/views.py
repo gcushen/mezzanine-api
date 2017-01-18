@@ -131,8 +131,8 @@ class PostFilter(django_filters.FilterSet):
     tag = django_filters.CharFilter(name='keywords_string')
     author_id = django_filters.NumberFilter(name="user__id")
     author_name = django_filters.CharFilter(name="user__username")
-    date_min = django_filters.DateFilter(name='publish_date')
-    date_max = django_filters.DateFilter(name='publish_date')
+    date_min = django_filters.DateFilter(name='publish_date', lookup_expr='gte')
+    date_max = django_filters.DateFilter(name='publish_date', lookup_expr='lte')
 
     class Meta:
         model = Post
