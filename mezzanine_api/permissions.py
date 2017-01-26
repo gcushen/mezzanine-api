@@ -22,8 +22,7 @@ class IsAppAuthenticated(permissions.BasePermission):
     
     def has_permission(self, request, view):
         if(request.auth!=None and request.auth.application!=None):
-           #TODO - Consider settle for auth existence only and avoid checking for the app id - in favor of open source contribution
-           if(request.auth.application.client_id==settings.ENGAGEMENT_MANAGER_ID):
-               return True
-           
-        return False
+            return True
+			
+        print("permission is denied, valid authentication token wasn't found")   
+        return False 

@@ -66,5 +66,3 @@ SWAGGER_SETTINGS = {
     },
     'doc_expansion': 'none',
 }
-
-ENGAGEMENT_MANAGER_ID="id2"
