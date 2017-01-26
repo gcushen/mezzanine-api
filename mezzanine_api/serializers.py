@@ -19,8 +19,9 @@ class PrivateField(serializers.ReadOnlyField):
 
     # user needs to be got a diff way for client credentials auth
     def get_attribute(self, instance):
-        if instance.id == self.context.get('request').user.id or self.context.get('request').user.is_superuser:
-            return super(PrivateField, self).get_attribute(instance)
+        if(self.context.get('request').user!=None): # To prevent null pointer when grant type isn't binded to user (e.g Clietn Credentials)
+            if instance.id == self.context.get('request').user.id or self.context.get('request').user.is_superuser:
+                return super(PrivateField, self).get_attribute(instance)
         return None
 
 
