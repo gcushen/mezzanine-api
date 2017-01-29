@@ -8,7 +8,7 @@ import django_filters
 
 from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
 from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsAppAuthenticated
 from .pagination import MezzaninePagination, PostPagination
 from .mixins import PutUpdateModelMixin
 
@@ -34,7 +34,7 @@ class UserFilter(django_filters.FilterSet):
     """
     A class for filtering users.
     """
-    username = django_filters.CharFilter(name="username", lookup_type='istartswith')
+    username = django_filters.CharFilter(name="username")
 
     class Meta:
         model = User
@@ -86,7 +86,7 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = self.queryset
         user = self.request.user
 
-        if not user.is_authenticated():
+        if user and not user.is_authenticated():
             queryset = queryset.filter(login_required=False)
 
         return queryset
@@ -114,7 +114,8 @@ class CategoryViewSet(mixins.CreateModelMixin,
     queryset = BlogCategory.objects.all()
     serializer_class = CategorySerializer
     pagination_class = MezzaninePagination
-    permission_classes = [IsAdminOrReadOnly]
+#     permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated] # IsAppAuthenticated added to support authentication via client credentials
     filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
     ordering_fields = ('id', 'title',)
     ordering = ('title',)
@@ -126,13 +127,13 @@ class PostFilter(django_filters.FilterSet):
     A class for filtering blog posts.
     """
     category_id = django_filters.NumberFilter(name="categories__id")
-    category_name = django_filters.CharFilter(name="categories__title", lookup_type='contains')
-    category_slug = django_filters.CharFilter(name="categories__slug", lookup_type='exact')
-    tag = django_filters.CharFilter(name='keywords_string', lookup_type='contains')
+    category_name = django_filters.CharFilter(name="categories__title")
+    category_slug = django_filters.CharFilter(name="categories__slug")
+    tag = django_filters.CharFilter(name='keywords_string')
     author_id = django_filters.NumberFilter(name="user__id")
-    author_name = django_filters.CharFilter(name="user__username", lookup_type='istartswith')
-    date_min = django_filters.DateFilter(name='publish_date', lookup_type='gte')
-    date_max = django_filters.DateFilter(name='publish_date', lookup_type='lte')
+    author_name = django_filters.CharFilter(name="user__username")
+    date_min = django_filters.DateFilter(name='publish_date', lookup_expr='gte')
+    date_max = django_filters.DateFilter(name='publish_date', lookup_expr='lte')
 
     class Meta:
         model = Post
@@ -192,7 +193,8 @@ class PostViewSet(mixins.CreateModelMixin,
     """
     queryset = Post.objects.published()
     pagination_class = PostPagination
-    permission_classes = [IsAdminOrReadOnly]
+    # permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated] # IsAppAuthenticated added to support authentication via client credentials
     filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
     filter_class = PostFilter
     ordering_fields = ('id', 'title', 'publish_date', 'updated', 'user',)
