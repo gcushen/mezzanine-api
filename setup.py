@@ -48,8 +48,8 @@ setup(
     install_requires=[
         'Mezzanine>=4.1.0',
         'django-rest-swagger>=0.3.5, <1.0.0',
-        'djangorestframework>=3.3.3, <4.0.0',
-        'django-filter',
+        'djangorestframework>=3.5.3, <4.0.0',
+        'django-filter>=1.0',
         'django-oauth-toolkit>=0.10.0, <1.0.0',
     ],
     classifiers=[
