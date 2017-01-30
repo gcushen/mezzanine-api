@@ -4,11 +4,11 @@ matrix:
   fast_finish: true
   include:
     - { python: '2.7', env: TOX_ENV=flake8 }
-    - { python: '2.7', env: TOX_ENV=py27-django1.9-drf3.3-mezzanine4.1 }
-    - { python: '3.5', env: TOX_ENV=py35-django1.9-drf3.3-mezzanine4.1 }
-    - { python: '3.5', env: TOX_ENV=py35-mezzaninemaster }
+    - { python: '2.7', env: TOX_ENV=py27-django1.10-drf3.5-mezzanine4.2 }
+    - { python: '3.6', env: TOX_ENV=py36-django1.10-drf3.5-mezzanine4.2 }
+    - { python: '3.6', env: TOX_ENV=py36-mezzaninemaster }
   allow_failures:
-    - env: TOX_ENV=py35-mezzaninemaster
+    - env: TOX_ENV=py36-mezzaninemaster
 
 install:
   - pip install tox
