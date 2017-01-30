@@ -47,7 +47,7 @@ setup(
     packages=find_packages(exclude=['tests', 'site']),
     install_requires=[
         'Mezzanine>=4.1.0',
-        'django-rest-swagger>=0.3.5, <1.0.0',
+        'django-rest-swagger>=2.1.1, <3.0.0',
         'djangorestframework>=3.5.3, <4.0.0',
         'django-filter>=1.0',
         'django-oauth-toolkit>=0.10.0, <1.0.0',
@@ -62,8 +62,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
