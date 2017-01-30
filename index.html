@@ -1,16 +1,10 @@
+
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
-<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
-<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
-<!--[if IE 9 ]><html class="no-js ie9"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
-      
-        <title>Mezzanine REST API - RESTful web API for Mezzanine CMS</title>
-      
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
       
         <meta name="description" content="RESTful web API for Mezzanine CMS">
       
@@ -20,326 +14,630 @@
       
         <meta name="author" content="George Cushen">
       
-    
-    <meta property="og:url" content="http://gcushen.github.io/mezzanine-api/">
-    <meta property="og:title" content="Mezzanine REST API">
-    <meta property="og:image" content="http://gcushen.github.io/mezzanine-api//./img/mezzanine_api_logo.png">
-    <meta name="apple-mobile-web-app-title" content="Mezzanine REST API">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-      <link rel="apple-touch-icon" href="./img/mezzanine_api_logo.png">
-    
-    
-    <link rel="shortcut icon" type="image/x-icon" href="./None">
-    <link rel="icon" type="image/x-icon" href="./None">
-    <style>
-      @font-face {
-      	font-family: 'Icon';
-      	src: url('./assets/fonts/icon.eot?52m981');
-      	src: url('./assets/fonts/icon.eot?#iefix52m981')
-               format('embedded-opentype'),
-      		   url('./assets/fonts/icon.woff?52m981')
-               format('woff'),
-      		   url('./assets/fonts/icon.ttf?52m981')
-               format('truetype'),
-      		   url('./assets/fonts/icon.svg?52m981#icon')
-               format('svg');
-      	font-weight: normal;
-      	font-style: normal;
-      }
-    </style>
-    <link rel="stylesheet" href="./assets/stylesheets/application-54f87043f3.css">
+      
+        <link rel="shortcut icon" href="./assets/images/favicon.ico">
+      
+      <meta name="generator" content="mkdocs+mkdocs-material#1.0.3">
     
     
       
+        <title>Mezzanine API - Mezzanine REST API</title>
+      
+    
+    
+      <script src="./assets/javascripts/modernizr-facb31f4a3.js"></script>
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="./assets/stylesheets/application-f3ab63f78a.css">
+      
+        <link rel="stylesheet" href="./assets/stylesheets/application-02ce7adcc2.palette.css">
       
       
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Mono">
-      <style>
-        body, input {
-          font-family: 'Roboto', Helvetica, Arial, sans-serif;
-        }
-        pre, code {
-          font-family: 'Roboto Mono', 'Courier New', 'Courier', monospace;
-        }
-      </style>
+        <link rel="stylesheet" href="./css/extra.css">
+      
     
-    
-      <link rel="stylesheet" href="./css/extra.css">
-    
-    <script src="./assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
   
   
-  <body class=" ">
-    
-      
-      
-    
-    <div class="backdrop">
-      <div class="backdrop-paper"></div>
-    </div>
-    <input class="toggle" type="checkbox" id="toggle-drawer">
-    <input class="toggle" type="checkbox" id="toggle-search">
-    <label class="toggle-button overlay" for="toggle-drawer"></label>
-    <header class="header">
-      <nav aria-label="Header">
-  <div class="bar default">
-    <div class="button button-menu" role="button" aria-label="Menu">
-      <label class="toggle-button icon icon-menu" for="toggle-drawer">
-        <span></span>
-      </label>
-    </div>
-    <div class="stretch">
-      <div class="title">
-        
-          <span class="path">
-            
-          </span>
-        
-        Mezzanine REST API
-      </div>
-    </div>
-    
-      
-      <div class="button button-twitter" role="button" aria-label="Twitter">
-        <a href="https://twitter.com/GeorgeCushen" title="@GeorgeCushen on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
-      </div>
-    
-    
-      
-      <div class="button button-github" role="button" aria-label="GitHub">
-        <a href="https://github.com/gcushen" title="@gcushen on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
-      </div>
-    
-    <div class="button button-search" role="button" aria-label="Search">
-      <label class="toggle-button icon icon-search" title="Search" for="toggle-search"></label>
-    </div>
-  </div>
-  <div class="bar search">
-    <div class="button button-close" role="button" aria-label="Close">
-      <label class="toggle-button icon icon-back" for="toggle-search"></label>
-    </div>
-    <div class="stretch">
-      <div class="field">
-        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
-      </div>
-    </div>
-    <div class="button button-reset" role="button" aria-label="Search">
-      <button class="toggle-button icon icon-close" id="reset-search"></button>
-    </div>
-  </div>
-</nav>
-    </header>
-    <main class="main">
-      
-      <div class="drawer">
-        <nav aria-label="Navigation">
   
-  <a href="https://github.com/gcushen/mezzanine-api" class="project">
-    <div class="banner">
-      
-        <div class="logo">
-          <img src="./img/mezzanine_api_logo.png">
-        </div>
-      
-      <div class="name">
-        <strong>
-          Mezzanine REST API
-          <span class="version">
-            
-          </span>
-        </strong>
+    <body data-md-color-primary="red" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
         
-          <br>
-          gcushen/mezzanine-api
         
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="." title="Mezzanine REST API" class=" md-logo  md-header-nav__button">
+          
+            <img src="./img/mezzanine_api_logo.png" width="24" height="24">
+          
+        </a>
       </div>
-    </div>
-  </a>
-  <div class="scrollable">
-    <div class="wrapper">
-      
-        <ul class="repo">
-          <li class="repo-download">
-            
-            <a href="https://github.com/gcushen/mezzanine-api/archive/master.zip" target="_blank" title="Download" data-action="download">
-              <i class="icon icon-download"></i> Download
-            </a>
-          </li>
-          <li class="repo-stars">
-            <a href="https://github.com/gcushen/mezzanine-api/stargazers" target="_blank" title="Stargazers" data-action="star">
-              <i class="icon icon-star"></i> Stars
-              <span class="count">&ndash;</span>
-            </a>
-          </li>
-        </ul>
-        <hr>
-      
-      <div class="toc">
-        <ul>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
           
             
-  <li>
-    <a class="current" title="Mezzanine API" href=".">
+              
+            
+            Mezzanine API
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <div class="md-search__overlay"></div>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false">
+      <label class="md-icon md-search__icon" for="search"></label>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+              
+
+
+  
+
+
+  <a href="https://github.com/gcushen/mezzanine-api" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+            
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <i class=" md-logo  md-nav__button">
+      
+        <img src="./img/mezzanine_api_logo.png">
+      
+    </i>
+    Mezzanine REST API
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/gcushen/mezzanine-api" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  <li class="md-nav__item">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Mezzanine API
+      </label>
+    
+    <a href="." title="Mezzanine API" class="md-nav__link md-nav__link--active">
       Mezzanine API
     </a>
     
       
-        
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
       
-      
-        <ul>
-          
-            <li class="anchor">
-              <a title="Overview" href="#overview">
-                Overview
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Installation" href="#installation">
-                Installation
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Getting started" href="#getting-started">
-                Getting started
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Secure communication" href="#secure-communication">
-                Secure communication
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Authentication" href="#authentication">
-                Authentication
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Permissions" href="#permissions">
-                Permissions
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Parameters" href="#parameters">
-                Parameters
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="CORS" href="#cors">
-                CORS
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Getting help" href="#getting-help">
-                Getting help
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Customizing" href="#customizing">
-                Customizing
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Contributing" href="#contributing">
-                Contributing
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Roadmap" href="#roadmap">
-                Roadmap
-              </a>
-            </li>
-          
-        </ul>
-      
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="Authentication" href="authentication/">
-      Authentication
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="Release Notes" href="release-notes/">
-      Release Notes
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="Client SDK" href="client/">
-      Client SDK
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="Remote CLI" href="cli/">
-      Remote CLI
-    </a>
-    
-  </li>
-
-          
-        </ul>
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
-          <hr>
-          <span class="section">The author</span>
-          <ul>
-            
-              
-              <li>
-                <a href="https://twitter.com/GeorgeCushen" target="_blank" title="@GeorgeCushen on Twitter">
-                  @GeorgeCushen on Twitter
-                </a>
-              </li>
-            
-            
-              
-              <li>
-                <a href="https://github.com/gcushen" target="_blank" title="@gcushen on GitHub">
-                  @gcushen on GitHub
-                </a>
-              </li>
-            
-          </ul>
+          <li class="md-nav__item">
+  <a href="#why-use-the-api" title="Why use the API?" class="md-nav__link">
+    Why use the API?
+  </a>
+  
+</li>
         
-      </div>
-    </div>
-  </div>
+          <li class="md-nav__item">
+  <a href="#access-all-the-data-your-app-needs" title="Access all the data your app needs" class="md-nav__link">
+    Access all the data your app needs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#industry-standard-security" title="Industry standard security" class="md-nav__link">
+    Industry standard security
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easily-filter-and-search-content" title="Easily filter and search content" class="md-nav__link">
+    Easily filter and search content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-endpoint-documentation" title="Interactive endpoint documentation" class="md-nav__link">
+    Interactive endpoint documentation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-project" title="New Project" class="md-nav__link">
+    New Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-project" title="Existing project" class="md-nav__link">
+    Existing project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" title="Docker" class="md-nav__link">
+    Docker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" title="Getting started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-communication" title="Secure communication" class="md-nav__link">
+    Secure communication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" title="Authentication" class="md-nav__link">
+    Authentication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" title="Permissions" class="md-nav__link">
+    Permissions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtering" title="Filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagination" title="Pagination" class="md-nav__link">
+    Pagination
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" title="CORS" class="md-nav__link">
+    CORS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting help" class="md-nav__link">
+    Getting help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing" title="Customizing" class="md-nav__link">
+    Customizing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" title="Contributing" class="md-nav__link">
+    Contributing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" title="Roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-      </div>
-      <article class="article">
-        <div class="wrapper">
+    
+  </li>
+
+    
+      
+      
+  <li class="md-nav__item">
+    
+      <a href="authentication/" title="Authentication" class="md-nav__link">
+        Authentication
+      </a>
+    
+  </li>
+
+    
+      
+      
+  <li class="md-nav__item">
+    
+      <a href="release-notes/" title="Release Notes" class="md-nav__link">
+        Release Notes
+      </a>
+    
+  </li>
+
+    
+      
+      
+  <li class="md-nav__item">
+    
+      <a href="client/" title="Client SDK" class="md-nav__link">
+        Client SDK
+      </a>
+    
+  </li>
+
+    
+      
+      
+  <li class="md-nav__item">
+    
+      <a href="cli/" title="Remote CLI" class="md-nav__link">
+        Remote CLI
+      </a>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-use-the-api" title="Why use the API?" class="md-nav__link">
+    Why use the API?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-all-the-data-your-app-needs" title="Access all the data your app needs" class="md-nav__link">
+    Access all the data your app needs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#industry-standard-security" title="Industry standard security" class="md-nav__link">
+    Industry standard security
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easily-filter-and-search-content" title="Easily filter and search content" class="md-nav__link">
+    Easily filter and search content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-endpoint-documentation" title="Interactive endpoint documentation" class="md-nav__link">
+    Interactive endpoint documentation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-project" title="New Project" class="md-nav__link">
+    New Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-project" title="Existing project" class="md-nav__link">
+    Existing project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" title="Docker" class="md-nav__link">
+    Docker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" title="Getting started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-communication" title="Secure communication" class="md-nav__link">
+    Secure communication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" title="Authentication" class="md-nav__link">
+    Authentication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" title="Permissions" class="md-nav__link">
+    Permissions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtering" title="Filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagination" title="Pagination" class="md-nav__link">
+    Pagination
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" title="CORS" class="md-nav__link">
+    CORS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting help" class="md-nav__link">
+    Getting help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing" title="Customizing" class="md-nav__link">
+    Customizing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" title="Contributing" class="md-nav__link">
+    Contributing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" title="Roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
-          <h1 id="mezzanine-api">Mezzanine API</h1>
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+               
+                 <a href="https://github.com/gcushen/mezzanine-api/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__edit">edit</a>
+               
+              
+                
+                <h1 id="mezzanine-api">Mezzanine API</h1>
 <h2 id="overview">Overview</h2>
 <p>Mezzanine API is a <strong>RESTful web API</strong> for the popular <a href="http://mezzanine.jupo.org/">Mezzanine</a> content management platform. It is built upon the <a href="http://djangoproject.com/">Django</a> framework, using <strong>JSON</strong> for serialization and <strong>OAuth2</strong> for secure authentication. The API empowers developers to <strong>automate, extend and combine Mezzanine with other services</strong> such as mobile apps.</p>
 <h3 id="why-use-the-api">Why use the API?</h3>
@@ -363,73 +661,65 @@ UI</a>.</p>
 <p>Remember to regularly check back here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. <a href="release-notes/">Upgrade instructions and release notes</a> are also available.</p>
 <h3 id="new-project">New Project</h3>
 <p>Once you have <a href="https://www.python.org/">Python</a> (2.7 or 3.3+) installed on your system, a new API project can be created by running the following commands:</p>
-<pre class="code"><code>$ pip install -U mezzanine-api
+<pre><code>$ pip install -U mezzanine-api
 $ mezzanine-project -a mezzanine_api project_name &amp;&amp; cd $_
 $ python manage.py createdb --noinput
-$ python manage.py runserver</code></pre>
-
-
+$ python manage.py runserver
+</code></pre>
 <p>You should then be able to browse to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a> and login using the default account (username: admin, password: default).</p>
 <h3 id="existing-project">Existing project</h3>
 <p>Assuming you have an existing <a href="http://mezzanine.jupo.org/">Mezzanine</a> CMS project, the API can be installed into it as follows:</p>
 <ol>
 <li>
 <p>Install the <code>mezzanine-api</code> package using pip:</p>
-<pre class="code"><code>$ pip install -U mezzanine-api</code></pre>
-
-
+<pre><code>$ pip install -U mezzanine-api
+</code></pre>
 </li>
 <li>
 <p>Add the following apps in this order to the top of <code>INSTALLED_APPS</code> in your Mezzanine <code>settings.py</code>:</p>
-<pre class="code"><code>INSTALLED_APPS = (
+<pre><code>INSTALLED_APPS = (
     'mezzanine_api',
     'rest_framework',
     'rest_framework_swagger',
     'oauth2_provider',
     ...
-)</code></pre>
-
-
+)
+</code></pre>
 </li>
 <li>
 <p>Add the API middleware to the top of <code>MIDDLEWARE_CLASSES</code> in <code>settings.py</code>:</p>
-<pre class="code"><code>MIDDLEWARE_CLASSES = (
+<pre><code>MIDDLEWARE_CLASSES = (
     'mezzanine_api.middleware.ApiMiddleware',
-    ...</code></pre>
-
-
+    ...
+</code></pre>
 </li>
 <li>
 <p>Also, add the following lines in your <code>settings.py</code> module
 somewhere <em>before</em> the <code>LOCAL SETTINGS</code> block which is near the end:</p>
-<pre class="code"><code>#####################
+<pre><code>#####################
 # REST API SETTINGS #
 #####################
 try:
     from mezzanine_api.settings import *
 except ImportError:
-    pass</code></pre>
-
-
+    pass
+</code></pre>
 </li>
 <li>
 <p>For Mezzanine 4.1.0 and above, add the following code in your Mezzanine <code>urls.py</code> somewhere after <code>urlpatterns += [</code> (approx line 29):</p>
-<pre class="code"><code># REST API URLs
-url(&quot;^api/&quot;, include(&quot;mezzanine_api.urls&quot;)),</code></pre>
-
-
+<pre><code># REST API URLs
+url("^api/", include("mezzanine_api.urls")),
+</code></pre>
 </li>
 <li>
 <p>Migrate the database to support OAuth2:</p>
-<pre class="code"><code>$ python manage.py migrate</code></pre>
-
-
+<pre><code>$ python manage.py migrate
+</code></pre>
 </li>
 <li>
 <p>Start the server:</p>
-<pre class="code"><code>$ python manage.py runserver</code></pre>
-
-
+<pre><code>$ python manage.py runserver
+</code></pre>
 </li>
 </ol>
 <h3 id="docker">Docker</h3>
@@ -475,20 +765,18 @@ For example, to view only blog posts that mention fitness, use <code>/posts?sear
 <p>In order to handle large datasets, pagination is employed. To be consistent, all <em>listing</em> type endpoints 
 provide a structure that allows for pagination. Please use a "page" parameter to fetch multiple pages of records. For
  example listing categories with <code>categories?page=2</code> will return a JSON structure similar to this:</p>
-<pre class="code"><code>{
-    &quot;count&quot;: 30,
-    &quot;next&quot;: &quot;http://127.0.0.1:8000/api/categories?page=3&quot;,
-    &quot;previous&quot;: &quot;http://127.0.0.1:8000/api/categories&quot;,
-    &quot;results&quot;: [{ ... }]
-}</code></pre>
-
-
+<pre><code>{
+    "count": 30,
+    "next": "http://127.0.0.1:8000/api/categories?page=3",
+    "previous": "http://127.0.0.1:8000/api/categories",
+    "results": [{ ... }]
+}
+</code></pre>
 <h2 id="cors">CORS</h2>
 <p>The API supports requests and responses using Cross-Origin Resource Sharing (CORS). You may want to check out this excellent <a href="http://www.html5rocks.com/en/tutorials/cors/">tutorial</a> for an overview on how to use CORS.</p>
 <p>By default, API requests are allowed from any origin so you do not need to worry about the URIs of your API and client apps. You may disable this by adding the following line to your <code>local_settings.py</code>:</p>
-<pre class="code"><code>MZN_API_CORS_ORIGIN_ALLOW_ALL = False</code></pre>
-
-
+<pre><code>MZN_API_CORS_ORIGIN_ALLOW_ALL = False
+</code></pre>
 <h2 id="getting-help">Getting help</h2>
 <p>If you have questions about the API, consider leaving a message in our <a href="https://gitter.im/gcushen/mezzanine-api">Gitter chat room</a> or using the general <a href="http://groups.google.com/group/mezzanine-users/topics">Mezzanine discussion group</a>.</p>
 <p>Otherwise, if you think you have found a bug, please use <a href="https://github.com/gcushen/mezzanine-api/issues">GitHub issues</a> and include the steps necessary to reproduce
@@ -507,97 +795,77 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
 <li>Further documentation</li>
 <li>Example API client </li>
 </ul>
-          <aside class="copyright" role="note">
-            
-              Copyright &copy; 2016 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>. &ndash;
-            
-            Documentation built with
-            <a href="http://www.mkdocs.org" target="_blank">MkDocs</a>
-            using the
-            <a href="http://squidfunk.github.io/mkdocs-material/" target="_blank">
-              Material
-            </a>
-            theme.
-          </aside>
-          
-            <footer class="footer">
               
-  <nav class="pagination" aria-label="Footer">
-    <div class="previous">
+            </article>
+          </div>
+        </div>
+      </main>
       
-    </div>
-    <div class="next">
-      
-        <a href="authentication/" title="Authentication">
-          <span class="direction">
-            Next
-          </span>
-          <div class="page">
-            <div class="stretch">
-              <div class="title">
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="authentication/" title="Authentication" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
                 Authentication
-              </div>
+              </span>
             </div>
-            <div class="button button-next" role="button" aria-label="Next">
-              <i class="icon icon-forward"></i>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
             </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.
           </div>
-        </a>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/gcushen" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/GeorgeCushen" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
       
     </div>
-  </nav>
-
-            </footer>
-          
-        </div>
-      </article>
-      <div class="results" role="status" aria-live="polite">
-        <div class="scrollable">
-          <div class="wrapper">
-            <div class="meta"></div>
-            <div class="list"></div>
-          </div>
-        </div>
-      </div>
-    </main>
-    <script>
-      var base_url = '.';
-      var repo_id  = 'gcushen/mezzanine-api';
-    </script>
-    <script src="./assets/javascripts/application-997097ee0c.js"></script>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./assets/javascripts/application-2afe21e0b2.js"></script>
+      <script>var config={url:{base:"."}},app=new Application(config);app.initialize()</script>
+      
     
     
-      <script>
-        (function(i,s,o,g,r,a,m){
-          i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||
-          []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
-          m.parentNode.insertBefore(a,m)
-        })(window, document,
-          'script', '//www.google-analytics.com/analytics.js', 'ga');
-        /* General initialization */
-        ga('create', 'UA-62992791-1', 'auto');
-        ga('set', 'anonymizeIp', true);
-        ga('send', 'pageview');
-        /* Track outbound links */
-        var buttons = document.querySelectorAll('a');
-        Array.prototype.map.call(buttons, function(item) {
-          if (item.host != document.location.host) {
-            item.addEventListener('click', function() {
-              var action = item.getAttribute('data-action') || 'follow';
-              ga('send', 'event', 'outbound', action, item.href);
-            });
-          }
-        });
-        /* Register handler to log search on blur */
-        var query = document.querySelector('.query');
-        query.addEventListener('blur', function() {
-          if (this.value) {
-            var path = document.location.pathname;
-            ga('send', 'pageview', path + '?q=' + this.value);
-          }
-        });
-      </script>
+      
+      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-62992791-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
+      
     
   </body>
 </html>
