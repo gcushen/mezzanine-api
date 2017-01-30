@@ -10,8 +10,9 @@ You can determine your currently installed version using `pip freeze`:
 
     $ pip freeze | grep mezzanine-api
 
-## Version 0.5.1 (2017-01-30)
+## Version 0.6.0 (2017-01-30)
 
+* Add `gallery_items` resource for pages
 * Add support for latest Django Filters (v1)
 * Add support for latest Swagger (v2)
 * Update Tox and Travis for latest dependencies
