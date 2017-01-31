@@ -122,12 +122,16 @@ class CategoryViewSet(mixins.CreateModelMixin,
     search_fields = ('title',)
 
 
+class CharInFilter(django_filters.BaseInFilter, django_filters.CharFilter):
+    pass
+
+
 class PostFilter(django_filters.FilterSet):
     """
     A class for filtering blog posts.
     """
     category_id = django_filters.NumberFilter(name="categories__id")
-    category_name = django_filters.CharFilter(name="categories__title")
+    category_name = CharInFilter(name="categories__title", lookup_expr='in')
     category_slug = django_filters.CharFilter(name="categories__slug")
     tag = django_filters.CharFilter(name='keywords_string')
     author_id = django_filters.NumberFilter(name="user__id")
