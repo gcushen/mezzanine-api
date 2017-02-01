@@ -76,6 +76,23 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'user_name', 'comment', 'submit_date', 'is_public', 'is_removed']
 
 
+class RecursiveField(serializers.Serializer):
+    def to_representation(self, value):
+        serializer = self.parent.parent.__class__(value, context=self.context)
+        return serializer.data
+
+
+class ThinPageSerializer(serializers.ModelSerializer):
+    """
+    Serializing thin version of the page
+    """
+    children = RecursiveField(many=True)
+
+    class Meta:
+        model = Page
+        fields = ('id', 'title', 'children', )
+
+
 class PageSerializer(serializers.ModelSerializer):
     """
     Serializing all the pages
@@ -83,6 +100,7 @@ class PageSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField('get_page_content')
     meta_description = serializers.CharField(source='description', read_only=True)
     tags = serializers.CharField(source='keywords_string', read_only=True)
+    children = ThinPageSerializer(many=True)
 
     def get_page_content(self, obj):
         if obj.content_model == 'richtextpage':
@@ -95,7 +113,7 @@ class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
         fields = ('id', 'parent', 'title', 'content', 'content_model', 'slug', 'publish_date',
-                  'login_required', 'meta_description', 'tags')
+                  'login_required', 'meta_description', 'tags', 'children', )
 
 
 class PostCreateSerializer(serializers.ModelSerializer):
