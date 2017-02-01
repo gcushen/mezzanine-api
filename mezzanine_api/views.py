@@ -64,6 +64,17 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
 
 
+class PageFilter(django_filters.FilterSet):
+    """
+    A class for filtering blog posts.
+    """
+    title = django_filters.CharFilter(name="title")
+
+    class Meta:
+        model = Page
+        fields = ['title']
+
+
 class PageViewSet(viewsets.ReadOnlyModelViewSet):
     """
     For listing or retrieving pages.
@@ -78,7 +89,8 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Page.objects.published()
     serializer_class = PageSerializer
     pagination_class = MezzaninePagination
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter,)
+    filter_class = PageFilter
     ordering_fields = ('id', 'parent', 'title',)
     ordering = ('title',)
 
