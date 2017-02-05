@@ -253,4 +253,4 @@ class PostOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'user', 'publish_date', 'updated', 'title', 'content', 'excerpt', 'slug', 'url', 'short_url',
-                  'categories', 'allow_comments', 'comments_count', 'comments', 'tags', 'featured_image')
+                  'categories', 'allow_comments', 'comments_count', 'comments', 'tags', 'featured_image', 'description')
