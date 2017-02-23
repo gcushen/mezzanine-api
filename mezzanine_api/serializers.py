@@ -79,18 +79,27 @@ class CommentSerializer(serializers.ModelSerializer):
 class RecursiveField(serializers.Serializer):
     def to_representation(self, value):
         serializer = self.parent.parent.__class__(value, context=self.context)
-        return serializer.data
+        if serializer.cond is not None:
+            return serializer.cond(serializer.data)
+        else:
+            return serializer.data
 
 
 class ThinPageSerializer(serializers.ModelSerializer):
     """
     Serializing thin version of the page
     """
+    def cond(self, child):
+        if child['status'] == 2:
+            return child
+        else:
+            return None
+
     children = RecursiveField(many=True)
 
     class Meta:
         model = Page
-        fields = ('id', 'title', 'children', )
+        fields = ('id', 'title', 'children', 'status', )
 
 
 class PageSerializer(serializers.ModelSerializer):
