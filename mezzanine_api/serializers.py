@@ -99,7 +99,7 @@ class ThinPageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Page
-        fields = ('id', 'title', 'children', 'status', )
+        fields = ('id', 'title', 'children', 'status', '_order', )
 
 
 class PageSerializer(serializers.ModelSerializer):
