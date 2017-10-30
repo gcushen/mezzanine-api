@@ -43,7 +43,7 @@ setup(
     long_description=open('README.rst', 'rb').read().decode('utf-8'),
     keywords='mezzanine cms api rest restful web',
     include_package_data=True,
-    license='BSD',
+    license='MIT',
     packages=find_packages(exclude=['tests', 'site']),
     install_requires=[
         'Mezzanine>=4.2.3',
