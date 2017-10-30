@@ -24,12 +24,13 @@ class TestPostViewSet(TestCase):
         self.post_draft = Post.objects.create(
             title="Draft Post Title",
             content="Draft Content",
+            status=1,
             user=self.user)
 
         self.post_published = Post.objects.create(
             title="Published Post Title",
             content="Published Content",
-            publish_date='2016-01-01T00:00',
+            publish_date='2016-01-01T00:00Z',
             user=self.user)
 
     def tearDown(self):
@@ -77,7 +78,7 @@ class TestPostViewSet(TestCase):
         """
         # Note: we do not directly provide user here, as API should automatically get and
         # authenticate current user as the author
-        post_data = {'title': 'title1', 'content': 'content1', 'publish_date': '2016-01-01T00:00',
+        post_data = {'title': 'title1', 'content': 'content1', 'publish_date': '2016-01-01T00:00Z',
                      'categories': 'Machine Learning,Statistics'}
         url = '/api/posts'
         response = self.client.post(url, post_data, format='json', HTTP_AUTHORIZATION=self.auth_valid)
@@ -93,7 +94,7 @@ class TestPostViewSet(TestCase):
         """
         Test API POST CREATE whilst authenticated as a superuser
         """
-        post_data = {'title': 'title2', 'content': 'content2', 'publish_date': '2016-01-01T00:00',
+        post_data = {'title': 'title2', 'content': 'content2', 'publish_date': '2016-01-01T00:00Z',
                      'categories': 'Machine Learning'}
         url = '/api/posts'
         self.client.force_authenticate(user=self.superuser)
@@ -110,7 +111,7 @@ class TestPostViewSet(TestCase):
         """
         Test API POST CREATE whilst authenticated as a standard user
         """
-        post_data = {'title': 'a', 'content': 'b', 'publish_date': '2016-01-01T00:00'}
+        post_data = {'title': 'a', 'content': 'b', 'publish_date': '2016-01-01T00:00Z'}
         url = '/api/posts'
         self.client.force_authenticate(user=self.user)
         response = self.client.post(url, post_data, format='json')
@@ -121,7 +122,7 @@ class TestPostViewSet(TestCase):
         """
         Test API POST CREATE whilst unauthenticated as a guest
         """
-        post_data = {'title': 'a', 'content': 'b', 'publish_date': '2016-01-01T00:00'}
+        post_data = {'title': 'a', 'content': 'b', 'publish_date': '2016-01-01T00:00Z'}
         url = '/api/posts'
         self.client.force_authenticate(user=None)
         response = self.client.post(url, post_data, format='json')

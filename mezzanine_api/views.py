@@ -5,6 +5,7 @@ from mezzanine.pages.models import Page
 
 from rest_framework import viewsets, filters, permissions, mixins
 import django_filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
 from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
@@ -58,7 +59,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     filter_class = UserFilter
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend,)
     serializer_class = UserSerializer
     pagination_class = MezzaninePagination
     permission_classes = (permissions.IsAdminUser,)
@@ -193,7 +194,7 @@ class PostViewSet(mixins.CreateModelMixin,
     queryset = Post.objects.filter(status=2)
     pagination_class = PostPagination
     permission_classes = [IsAdminOrReadOnly]
-    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
     filter_class = PostFilter
     ordering_fields = ('id', 'title', 'publish_date', 'updated', 'user',)
     ordering = ('-publish_date',)
