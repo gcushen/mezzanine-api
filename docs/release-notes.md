@@ -10,6 +10,13 @@ You can determine your currently installed version using `pip freeze`:
 
     $ pip freeze | grep mezzanine-api
 
+## Version 0.6.1 (2017-10-30)
+
+* Fix published blog posts queryset not updating
+* Fix errors caused by latest versions of dependencies
+* Update Setup, Tox, and Travis to support latest dependencies
+* Add description field to post endpoint
+
 ## Version 0.6.0 (2017-01-30)
 
 * Add `gallery_items` resource for pages
