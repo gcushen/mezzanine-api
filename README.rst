@@ -6,8 +6,8 @@ Mezzanine API
    :target: `PyPi`_
 .. image:: https://travis-ci.org/gcushen/mezzanine-api.svg?branch=master
    :target: https://travis-ci.org/gcushen/mezzanine-api
-.. image:: https://img.shields.io/pypi/l/mezzanine-api.svg
-   :target: `PyPi`_
+.. image:: https://img.shields.io/github/license/gcushen/mezzanine-api.svg
+   :target: https://github.com/gcushen/mezzanine-api/blob/master/LICENSE
 .. image:: https://badges.gitter.im/gcushen/mezzanine-api.svg
    :target: https://gitter.im/gcushen/mezzanine-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 
