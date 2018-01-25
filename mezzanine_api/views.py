@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
 from mezzanine.pages.models import Page
@@ -12,6 +12,9 @@ from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputS
 from .permissions import IsAdminOrReadOnly
 from .pagination import MezzaninePagination, PostPagination
 from .mixins import PutUpdateModelMixin
+
+# Supports custom user models
+User = get_user_model()
 
 
 class ListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
