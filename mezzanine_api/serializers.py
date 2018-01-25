@@ -1,6 +1,6 @@
 from django.core.urlresolvers import NoReverseMatch
 from django.template.defaultfilters import strip_tags
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
 from mezzanine.blog.models import BlogPost as Post, BlogCategory
@@ -10,6 +10,9 @@ from mezzanine.conf import settings
 from mezzanine.utils.sites import current_request
 
 from rest_framework import serializers
+
+# Supports custom user models
+User = get_user_model()
 
 
 class PrivateField(serializers.ReadOnlyField):
