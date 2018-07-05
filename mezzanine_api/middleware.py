@@ -3,8 +3,14 @@ from django import http
 from rest_framework.reverse import reverse
 from mezzanine.conf import settings
 
+# Add middleware compatibility for django 1.11 and up.
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+    MiddlewareMixin = object
 
-class ApiMiddleware(object):
+
+class ApiMiddleware(MiddlewareMixin):
     """
     Mezzanine API Middleware
     """
