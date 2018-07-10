@@ -4,7 +4,7 @@ from rest_framework.reverse import reverse
 from mezzanine.conf import settings
 
 
-class ApiMiddleware:
+class ApiMiddleware(object):
     """Mezzanine API Middleware"""
 
     def __init__(self, get_response):
