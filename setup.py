@@ -46,7 +46,7 @@ setup(
     license='MIT',
     packages=find_packages(exclude=['tests', 'site']),
     install_requires=[
-        'Mezzanine>=4.2.3',
+        'Mezzanine>=4.3.0',
         'django-rest-swagger>=2.1.1, <3.0.0',
         'djangorestframework>=3.7.1, <4.0.0',
         'django-filter>=1.1.0, <2.0.0',
