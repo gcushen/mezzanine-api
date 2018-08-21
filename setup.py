@@ -37,7 +37,7 @@ setup(
     name='mezzanine-api',
     version=version,
     author='George Cushen',
-    author_email='mezzanine-users@googlegroups.com',   
+    author_email='mezzanine-users@googlegroups.com',
     url='http://gcushen.github.io/mezzanine-api',
     description='A RESTful web API for Mezzanine CMS.',
     long_description=open('README.rst', 'rb').read().decode('utf-8'),
