@@ -49,7 +49,7 @@ setup(
         'Mezzanine>=4.3.0',
         'django-rest-swagger>=2.1.1, <3.0.0',
         'djangorestframework>=3.7.1, <4.0.0',
-        'django-filter>=1.1.0, <2.0.0',
+        'django-filter>=2.0.0',
         'django-oauth-toolkit>=1.1.2, <1.2.0',
     ],
     classifiers=[
