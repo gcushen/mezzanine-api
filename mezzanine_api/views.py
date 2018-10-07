@@ -68,7 +68,6 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
 
 
-
 class PageFilter(django_filters.FilterSet):
     """
     A class for filtering pages by title.

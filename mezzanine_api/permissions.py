@@ -1,5 +1,4 @@
 from rest_framework import permissions
-from mezzanine_api import settings
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -20,7 +19,7 @@ class IsAppAuthenticated(permissions.BasePermission):
     Enable applications to obtain an access token for their own account, outside the context of any specific user.
     """
     def has_permission(self, request, view):
-        if (request.auth != None and request.auth.application != None):
+        if (request.auth is not None and request.auth.application is not None):
             return True
 
         # Permission denied as a valid authentication token was not found.

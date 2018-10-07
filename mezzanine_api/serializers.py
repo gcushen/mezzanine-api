@@ -22,7 +22,7 @@ class PrivateField(serializers.ReadOnlyField):
 
     def get_attribute(self, instance):
         # Check if we have a user context or an app context (e.g Oauth2 Client Credentials)
-        if self.context.get('request').user != None:
+        if self.context.get('request').user is not None:
             if instance.id == self.context.get('request').user.id or self.context.get('request').user.is_superuser:
                 return super(PrivateField, self).get_attribute(instance)
         return None
