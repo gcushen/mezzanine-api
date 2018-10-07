@@ -93,7 +93,7 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Page.objects.published()
     serializer_class = PageSerializer
     pagination_class = MezzaninePagination
-    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter,)
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
     filter_class = PageFilter
     ordering_fields = ('id', 'parent', 'title',)
     ordering = ('title',)
