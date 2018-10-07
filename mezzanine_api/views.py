@@ -38,7 +38,7 @@ class UserFilter(django_filters.FilterSet):
     """
     A class for filtering users.
     """
-    username = django_filters.CharFilter(name="username", lookup_expr='istartswith')
+    username = django_filters.CharFilter(field_name="username", lookup_expr='istartswith')
 
     class Meta:
         model = User
@@ -61,7 +61,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
               paramType: query
     """
     queryset = User.objects.all()
-    filter_class = UserFilter
+    filterset_class = UserFilter
     filter_backends = (DjangoFilterBackend,)
     serializer_class = UserSerializer
     pagination_class = MezzaninePagination
@@ -72,7 +72,7 @@ class PageFilter(django_filters.FilterSet):
     """
     A class for filtering pages by title.
     """
-    title = django_filters.CharFilter(name="title")
+    title = django_filters.CharFilter(field_name="title")
 
     class Meta:
         model = Page
@@ -94,7 +94,7 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PageSerializer
     pagination_class = MezzaninePagination
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
-    filter_class = PageFilter
+    filterset_class = PageFilter
     ordering_fields = ('id', 'parent', 'title',)
     ordering = ('title',)
 
@@ -148,14 +148,14 @@ class PostFilter(django_filters.FilterSet):
     """
     A class for filtering blog posts.
     """
-    category_id = django_filters.NumberFilter(name="categories__id")
-    category_name = CharInFilter(name="categories__title", lookup_expr='in')
-    category_slug = django_filters.CharFilter(name="categories__slug", lookup_expr='exact')
-    tag = django_filters.CharFilter(name='keywords_string', lookup_expr='contains')
-    author_id = django_filters.NumberFilter(name="user__id")
-    author_name = django_filters.CharFilter(name="user__username", lookup_expr='istartswith')
-    date_min = django_filters.DateFilter(name='publish_date', lookup_expr='gte')
-    date_max = django_filters.DateFilter(name='publish_date', lookup_expr='lte')
+    category_id = django_filters.NumberFilter(field_name="categories__id")
+    category_name = CharInFilter(field_name="categories__title", lookup_expr='in')
+    category_slug = django_filters.CharFilter(field_name="categories__slug", lookup_expr='exact')
+    tag = django_filters.CharFilter(field_name='keywords_string', lookup_expr='contains')
+    author_id = django_filters.NumberFilter(field_name="user__id")
+    author_name = django_filters.CharFilter(field_name="user__username", lookup_expr='istartswith')
+    date_min = django_filters.DateFilter(field_name='publish_date', lookup_expr='gte')
+    date_max = django_filters.DateFilter(field_name='publish_date', lookup_expr='lte')
 
     class Meta:
         model = Post
@@ -217,7 +217,7 @@ class PostViewSet(mixins.CreateModelMixin,
     pagination_class = PostPagination
     permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated]
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
-    filter_class = PostFilter
+    filterset_class = PostFilter
     ordering_fields = ('id', 'title', 'publish_date', 'updated', 'user',)
     ordering = ('-publish_date',)
     search_fields = ('title', 'content',)
