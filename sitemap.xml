@@ -1,44 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/</loc>
-     <lastmod>2017-10-30</lastmod>
+     <lastmod>2018-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/authentication/</loc>
-     <lastmod>2017-10-30</lastmod>
+     <lastmod>2018-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/release-notes/</loc>
-     <lastmod>2017-10-30</lastmod>
+     <lastmod>2018-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/client/</loc>
-     <lastmod>2017-10-30</lastmod>
+     <lastmod>2018-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
      <loc>http://gcushen.github.io/mezzanine-api/cli/</loc>
-     <lastmod>2017-10-30</lastmod>
+     <lastmod>2018-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
 </urlset>

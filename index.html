@@ -1,10 +1,14 @@
 
+
+
+
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
       
         <meta name="description" content="RESTful web API for Mezzanine CMS">
       
@@ -15,114 +19,169 @@
         <meta name="author" content="George Cushen">
       
       
-        <link rel="shortcut icon" href="./assets/images/favicon.ico">
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
       
-      <meta name="generator" content="mkdocs+mkdocs-material#1.0.3">
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
     
     
       
-        <title>Mezzanine API - Mezzanine REST API</title>
+        <title>Mezzanine REST API</title>
       
     
     
-      <script src="./assets/javascripts/modernizr-facb31f4a3.js"></script>
-    
-    
+      <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
+      
+        <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
+      
       
         
         
-        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+      <script src="assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+    <link rel="stylesheet" href="assets/fonts/material-icons.css">
     
-      <link rel="stylesheet" href="./assets/stylesheets/application-f3ab63f78a.css">
-      
-        <link rel="stylesheet" href="./assets/stylesheets/application-02ce7adcc2.palette.css">
-      
-      
-        <link rel="stylesheet" href="./css/extra.css">
-      
+      <link rel="stylesheet" href="css/extra.css">
     
     
   </head>
   
-  
-  
-  
-    <body data-md-color-primary="red" data-md-color-accent="red">
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
         
         
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
         
       </defs>
     </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
-    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <header class="md-header">
+      <a href="#mezzanine-api" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="." title="Mezzanine REST API" class=" md-logo  md-header-nav__button">
+        <a href="http://gcushen.github.io/mezzanine-api" title="Mezzanine REST API" class="md-header-nav__button md-logo">
           
-            <img src="./img/mezzanine_api_logo.png" width="24" height="24">
+            <img src="img/mezzanine_api_logo.png" width="24" height="24">
           
         </a>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
-        <span class="md-flex__ellipsis md-header-nav__title">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
             
-              
+              <span class="md-header-nav__topic">
+                Mezzanine REST API
+              </span>
+              <span class="md-header-nav__topic">
+                Mezzanine API
+              </span>
             
-            Mezzanine API
           
-        </span>
+        </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
-          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search">
-  <div class="md-search__overlay"></div>
-  <div class="md-search__inner">
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false">
-      <label class="md-icon md-search__icon" for="search"></label>
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result"></div>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
       </div>
     </div>
   </div>
 </div>
+          
         
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
           <div class="md-header-nav__source">
             
-              
 
 
   
 
 
-  <a href="https://github.com/gcushen/mezzanine-api" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/gcushen/mezzanine-api/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#github" width="24" height="24"></use>
+          <use xlink:href="#__github" width="24" height="24"></use>
         </svg>
       </div>
     
@@ -131,14 +190,18 @@
     </div>
   </a>
 
-            
           </div>
-      </div>
+        </div>
+      
     </div>
   </nav>
 </header>
     
     <div class="md-container">
+      
+        
+      
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -146,13 +209,13 @@
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary">
-  <label class="md-nav__title md-nav__title--site" for="drawer">
-    <i class=" md-logo  md-nav__button">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="http://gcushen.github.io/mezzanine-api" title="Mezzanine REST API" class="md-nav__button md-logo">
       
-        <img src="./img/mezzanine_api_logo.png">
+        <img src="img/mezzanine_api_logo.png" width="48" height="48">
       
-    </i>
+    </a>
     Mezzanine REST API
   </label>
   
@@ -163,11 +226,11 @@
   
 
 
-  <a href="https://github.com/gcushen/mezzanine-api" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/gcushen/mezzanine-api/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#github" width="24" height="24"></use>
+          <use xlink:href="#__github" width="24" height="24"></use>
         </svg>
       </div>
     
@@ -182,14 +245,19 @@
     
       
       
-  <li class="md-nav__item">
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="toc">
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         Mezzanine API
       </label>
     
@@ -204,7 +272,7 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
@@ -379,6 +447,10 @@
   
 </li>
       
+      
+      
+      
+      
     </ul>
   
 </nav>
@@ -388,45 +460,49 @@
     
       
       
+      
+
+
   <li class="md-nav__item">
-    
-      <a href="authentication/" title="Authentication" class="md-nav__link">
-        Authentication
-      </a>
-    
+    <a href="authentication/" title="Authentication" class="md-nav__link">
+      Authentication
+    </a>
   </li>
 
     
       
       
+      
+
+
   <li class="md-nav__item">
-    
-      <a href="release-notes/" title="Release Notes" class="md-nav__link">
-        Release Notes
-      </a>
-    
+    <a href="release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
   </li>
 
     
       
       
+      
+
+
   <li class="md-nav__item">
-    
-      <a href="client/" title="Client SDK" class="md-nav__link">
-        Client SDK
-      </a>
-    
+    <a href="client/" title="Client SDK" class="md-nav__link">
+      Client SDK
+    </a>
   </li>
 
     
       
       
+      
+
+
   <li class="md-nav__item">
-    
-      <a href="cli/" title="Remote CLI" class="md-nav__link">
-        Remote CLI
-      </a>
-    
+    <a href="cli/" title="Remote CLI" class="md-nav__link">
+      Remote CLI
+    </a>
   </li>
 
     
@@ -447,7 +523,7 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
@@ -622,6 +698,10 @@
   
 </li>
       
+      
+      
+      
+      
     </ul>
   
 </nav>
@@ -632,115 +712,132 @@
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
-               
-                 <a href="https://github.com/gcushen/mezzanine-api/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__edit">edit</a>
-               
               
                 
-                <h1 id="mezzanine-api">Mezzanine API</h1>
-<h2 id="overview">Overview</h2>
+                  <a href="https://github.com/gcushen/mezzanine-api/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="mezzanine-api">Mezzanine API<a class="headerlink" href="#mezzanine-api" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Mezzanine API is a <strong>RESTful web API</strong> for the popular <a href="http://mezzanine.jupo.org/">Mezzanine</a> content management platform. It is built upon the <a href="http://djangoproject.com/">Django</a> framework, using <strong>JSON</strong> for serialization and <strong>OAuth2</strong> for secure authentication. The API empowers developers to <strong>automate, extend and combine Mezzanine with other services</strong> such as mobile apps.</p>
-<h3 id="why-use-the-api">Why use the API?</h3>
+<h3 id="why-use-the-api">Why use the API?<a class="headerlink" href="#why-use-the-api" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Freedom</strong>: build mobile, web, or server apps and use whatever programming language you want</li>
 <li><strong>Speed</strong>: harness a significant speed advantage over Mezzanine's Python based page views</li>
 </ul>
-<h3 id="access-all-the-data-your-app-needs">Access all the data your app needs</h3>
+<h3 id="access-all-the-data-your-app-needs">Access all the data your app needs<a class="headerlink" href="#access-all-the-data-your-app-needs" title="Permanent link">&para;</a></h3>
 <p>Intuitive REST API resources for posts, categories, comments, pages, users, and site/app metadata. Retrieving or updating data involves simply sending a HTTP request.</p>
-<h3 id="industry-standard-security">Industry standard security</h3>
+<h3 id="industry-standard-security">Industry standard security<a class="headerlink" href="#industry-standard-security" title="Permanent link">&para;</a></h3>
 <p>OAuth2, the industry standard for API authentication, allows users to authorize and revoke access to third party applications without the need for those applications to request the user's confidential credentials.</p>
-<h3 id="easily-filter-and-search-content">Easily filter and search content</h3>
+<h3 id="easily-filter-and-search-content">Easily filter and search content<a class="headerlink" href="#easily-filter-and-search-content" title="Permanent link">&para;</a></h3>
 <p>Apply filters such as <code>posts?date_min=2015-01-01&amp;category=2</code> or search <code>posts?search=fitness</code> to narrow down results. Results are paginated to handle large datasets.</p>
-<h3 id="interactive-endpoint-documentation">Interactive endpoint documentation</h3>
+<h3 id="interactive-endpoint-documentation">Interactive endpoint documentation<a class="headerlink" href="#interactive-endpoint-documentation" title="Permanent link">&para;</a></h3>
 <p>The best way to learn about the API resources is via the interactive endpoint documentation which utilizes the popular <a href="http://swagger.io/">Swagger 
 UI</a>.</p>
-<p><img alt="mezzanine api" src="./img/api_resources.png" /></p>
+<p><img alt="mezzanine api" src="img/api_resources.png" /></p>
 <hr />
-<h2 id="installation">Installation</h2>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>In this section, we first explain how to create a new CMS API project. Alternatively, the latter sub-sections explain how to install into an existing Mezzanine project, or to install with Docker.</p>
 <p>Remember to regularly check back here and on <a href="https://pypi.python.org/pypi/mezzanine-api">PyPi</a>/<a href="https://github.com/gcushen/mezzanine-api">Github</a> for updates to the documentation and package, respectively. <a href="release-notes/">Upgrade instructions and release notes</a> are also available.</p>
-<h3 id="new-project">New Project</h3>
-<p>Once you have <a href="https://www.python.org/">Python</a> (2.7 or 3.3+) installed on your system, a new API project can be created by running the following commands:</p>
-<pre><code>$ pip install -U mezzanine-api
-$ mezzanine-project -a mezzanine_api project_name &amp;&amp; cd $_
-$ python manage.py createdb --noinput
-$ python manage.py runserver
-</code></pre>
+<h3 id="new-project">New Project<a class="headerlink" href="#new-project" title="Permanent link">&para;</a></h3>
+<p>Once you have <a href="https://www.python.org/">Python</a> 3.3+ installed on your system, a new API project can be created by running the following commands:</p>
+<div class="codehilite"><pre><span></span>pip install -U mezzanine-api
+mezzanine-project -a mezzanine_api project_name <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="nv">$_</span>
+python manage.py createdb --noinput
+python manage.py runserver
+</pre></div>
+
+
 <p>You should then be able to browse to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a> and login using the default account (username: admin, password: default).</p>
-<h3 id="existing-project">Existing project</h3>
+<h3 id="existing-project">Existing project<a class="headerlink" href="#existing-project" title="Permanent link">&para;</a></h3>
 <p>Assuming you have an existing <a href="http://mezzanine.jupo.org/">Mezzanine</a> CMS project, the API can be installed into it as follows:</p>
 <ol>
 <li>
 <p>Install the <code>mezzanine-api</code> package using pip:</p>
-<pre><code>$ pip install -U mezzanine-api
-</code></pre>
+<div class="codehilite"><pre><span></span>$ pip install -U mezzanine-api
+</pre></div>
+
+
 </li>
 <li>
 <p>Add the following apps in this order to the top of <code>INSTALLED_APPS</code> in your Mezzanine <code>settings.py</code>:</p>
-<pre><code>INSTALLED_APPS = (
-    'mezzanine_api',
-    'rest_framework',
-    'rest_framework_swagger',
-    'oauth2_provider',
+<div class="codehilite"><pre><span></span>INSTALLED_APPS = (
+    &#39;mezzanine_api&#39;,
+    &#39;rest_framework&#39;,
+    &#39;django_filters&#39;,
+    &#39;rest_framework_swagger&#39;,
+    &#39;oauth2_provider&#39;,
     ...
 )
-</code></pre>
+</pre></div>
+
+
 </li>
 <li>
-<p>Add the API middleware to the top of <code>MIDDLEWARE_CLASSES</code> in <code>settings.py</code>:</p>
-<pre><code>MIDDLEWARE_CLASSES = (
-    'mezzanine_api.middleware.ApiMiddleware',
+<p>Add the API middleware to the top of <code>MIDDLEWARE</code> in <code>settings.py</code>:</p>
+<div class="codehilite"><pre><span></span>MIDDLEWARE = (
+    &#39;mezzanine_api.middleware.ApiMiddleware&#39;,
     ...
-</code></pre>
+</pre></div>
+
+
 </li>
 <li>
 <p>Also, add the following lines in your <code>settings.py</code> module
 somewhere <em>before</em> the <code>LOCAL SETTINGS</code> block which is near the end:</p>
-<pre><code>#####################
-# REST API SETTINGS #
-#####################
-try:
-    from mezzanine_api.settings import *
-except ImportError:
-    pass
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="c1">#####################</span>
+<span class="c1"># REST API SETTINGS #</span>
+<span class="c1">#####################</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">mezzanine_api.settings</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
 </li>
 <li>
 <p>For Mezzanine 4.1.0 and above, add the following code in your Mezzanine <code>urls.py</code> somewhere after <code>urlpatterns += [</code> (approx line 29):</p>
-<pre><code># REST API URLs
-url("^api/", include("mezzanine_api.urls")),
-</code></pre>
+<div class="codehilite"><pre><span></span># REST API URLs
+url(&quot;^api/&quot;, include(&quot;mezzanine_api.urls&quot;)),
+</pre></div>
+
+
 </li>
 <li>
 <p>Migrate the database to support OAuth2:</p>
-<pre><code>$ python manage.py migrate
-</code></pre>
+<div class="codehilite"><pre><span></span>$ python manage.py migrate
+</pre></div>
+
+
 </li>
 <li>
 <p>Start the server:</p>
-<pre><code>$ python manage.py runserver
-</code></pre>
+<div class="codehilite"><pre><span></span>$ python manage.py runserver
+</pre></div>
+
+
 </li>
 </ol>
-<h3 id="docker">Docker</h3>
+<h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h3>
 <p>A <a href="https://github.com/gcushen/mezzanine-api-docker">Docker file</a> is available for the API in a separate Github project. The Docker file is currently in beta and we welcome your feedback.</p>
 <hr />
-<h2 id="getting-started">Getting started</h2>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <p>We recommend installing the <a href="cli/">Mezzanine Client CLI</a> or <a href="client/">Mezzanine Client SDK</a> on your local machine to get started using the API service remotely.</p>
 <p>The best way to learn about the API resources is via the interactive resource documentation which utilizes the popular <a href="http://swagger.io/">Swagger 
 UI</a>. Open up <a href="http://127.0.0.1:8000/api/docs/">http://127.0.0.1:8000/api/docs/</a> in your browser, and if installation was successfull, you'll see the 
 interactive endpoint resource documentation (refer to above screenshot). Here you can easily test out the 
 different kinds of endpoint, method, and query parameter whilst you are learning.</p>
-<p>Also, if you attempt to access the API itself directly in your browser, you will be shown a browsable web API:
-<img alt="browsable api" src="./img/browsable_api.png" /></p>
+<p>Also, if you attempt to access the API itself directly in your browser, you will be shown a browsable web API:</p>
+<p><img alt="browsable api" src="img/browsable_api.png" /></p>
 <p>In order to explore the restricted parts of the API, you can login via the browsable web API, or <a href="authentication/">retrieve your OAuth2 Access Token</a> 
 to login at the top of the Interactive Resource Documentation page, or <a href="authentication/#basic-authentication">login via command line with <em>curl</em></a>.</p>
 <p>Enjoy designing a frontend to interact with the REST API using your technology of choice! Alternatively, you can use it 
 to automate, analyse, extend and combine Mezzanine with other services.</p>
-<h2 id="secure-communication">Secure communication</h2>
+<h2 id="secure-communication">Secure communication<a class="headerlink" href="#secure-communication" title="Permanent link">&para;</a></h2>
 <p><strong>You SHOULD use HTTPS in production!</strong></p>
 <p>In this guide, we consider a development environment on a local machine and connect to the server over HTTP. Whereas for production, you SHOULD use HTTPS for secure communication over the internet. Without it, all the API and Mezzanine authentication mechanisms can be compromised.</p>
-<h2 id="authentication">Authentication</h2>
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>There are three options for authenticating with the API. The most appropriate option can be determined by considering if the API client is:</p>
 <ul>
 <li>another Django app running on the site (such as the built-in browsable API)? Use <em>session</em> authentication.</li>
@@ -748,7 +845,7 @@ to automate, analyse, extend and combine Mezzanine with other services.</p>
 <li>a very simple external client mainly for development and debugging? Use <em>basic</em> authentication.</li>
 </ul>
 <p>Please see the <a href="authentication/">Authentication</a> page for further details.</p>
-<h2 id="permissions">Permissions</h2>
+<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
 <p>Some parts of the API are restricted and require authentication as a Mezzanine <em>user</em> or <em>superuser</em>.</p>
 <p>Blog posts and categories may be created or updated over the API by a <em>superuser</em>. This enables you to make new blog posts, for 
 example, using your own innovative frontend or web hooks. Note that this writable access is currently an experimental 
@@ -756,37 +853,41 @@ feature and should be used with caution. There are plans to gradually open up th
 <p>Member's only pages can only be accessed over the API if the requesting user is authenticated and has permission.</p>
 <p>The <code>users</code> resource is generally restricted to superusers. However, a user may request to see their own details, and the blog post resource will embed the author's name (if they provided it) since blogs tend to operate on a real name basis. If you wish to customize this, take a look 
 at the <code>UserSerializer</code> class.</p>
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>Your local Resource Documentation at <a href="http://127.0.0.1:8000/api/docs/">http://127.0.0.1:8000/api/docs/</a> includes a list of all available parameters for each possible request, but this section highlights some of the main categories.</p>
-<h3 id="filtering">Filtering</h3>
+<h3 id="filtering">Filtering<a class="headerlink" href="#filtering" title="Permanent link">&para;</a></h3>
 <p>The Resource Documentation shows you which resources you can filter on, and what to include in your URL query string. 
 For example, to view only blog posts that mention fitness, use <code>/posts?search=fitness</code>.</p>
-<h3 id="pagination">Pagination</h3>
+<h3 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h3>
 <p>In order to handle large datasets, pagination is employed. To be consistent, all <em>listing</em> type endpoints 
 provide a structure that allows for pagination. Please use a "page" parameter to fetch multiple pages of records. For
  example listing categories with <code>categories?page=2</code> will return a JSON structure similar to this:</p>
-<pre><code>{
-    "count": 30,
-    "next": "http://127.0.0.1:8000/api/categories?page=3",
-    "previous": "http://127.0.0.1:8000/api/categories",
-    "results": [{ ... }]
+<div class="codehilite"><pre><span></span>{
+    &quot;count&quot;: 30,
+    &quot;next&quot;: &quot;http://127.0.0.1:8000/api/categories?page=3&quot;,
+    &quot;previous&quot;: &quot;http://127.0.0.1:8000/api/categories&quot;,
+    &quot;results&quot;: [{ ... }]
 }
-</code></pre>
-<h2 id="cors">CORS</h2>
+</pre></div>
+
+
+<h2 id="cors">CORS<a class="headerlink" href="#cors" title="Permanent link">&para;</a></h2>
 <p>The API supports requests and responses using Cross-Origin Resource Sharing (CORS). You may want to check out this excellent <a href="http://www.html5rocks.com/en/tutorials/cors/">tutorial</a> for an overview on how to use CORS.</p>
 <p>By default, API requests are allowed from any origin so you do not need to worry about the URIs of your API and client apps. You may disable this by adding the following line to your <code>local_settings.py</code>:</p>
-<pre><code>MZN_API_CORS_ORIGIN_ALLOW_ALL = False
-</code></pre>
-<h2 id="getting-help">Getting help</h2>
+<div class="codehilite"><pre><span></span>MZN_API_CORS_ORIGIN_ALLOW_ALL = False
+</pre></div>
+
+
+<h2 id="getting-help">Getting help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>If you have questions about the API, consider leaving a message in our <a href="https://gitter.im/gcushen/mezzanine-api">Gitter chat room</a> or using the general <a href="http://groups.google.com/group/mezzanine-users/topics">Mezzanine discussion group</a>.</p>
 <p>Otherwise, if you think you have found a bug, please use <a href="https://github.com/gcushen/mezzanine-api/issues">GitHub issues</a> and include the steps necessary to reproduce
  it.</p>
-<h2 id="customizing">Customizing</h2>
+<h2 id="customizing">Customizing<a class="headerlink" href="#customizing" title="Permanent link">&para;</a></h2>
 <p>The API is designed to be as easy as possible to customize by leveraging the <a href="http://www.django-rest-framework.org/">Django Rest Framework</a>, which has a large active community.</p>
-<h2 id="contributing">Contributing</h2>
+<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
 <p>Mezzanine API is an open source project managed using the Git version control system. The repository is hosted
 on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributing is as easy as forking the project and committing back your enhancements.</p>
-<h2 id="roadmap">Roadmap</h2>
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
 <p>We're always working to improve the Mezzanine REST API. Check out the list below of planned enhancements for future releases, in no particular order. Tell us what you need from the API via <a href="https://twitter.com/GeorgeCushen">Twitter</a> or our <a href="https://gitter.im/gcushen/mezzanine-api">Gitter chat room</a> so we can prioritize improvements. </p>
 <ul>
 <li>Refinement of code and API resources</li>
@@ -795,6 +896,14 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
 <li>Further documentation</li>
 <li>Example API client </li>
 </ul>
+                
+                  
+                
+              
+              
+                
+
+
               
             </article>
           </div>
@@ -830,20 +939,19 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2017 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.
+            Copyright &copy; 2015 - present <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.
           </div>
         
         powered by
-        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        <a href="https://www.mkdocs.org">MkDocs</a>
         and
-        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+        <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
       </div>
       
         
   <div class="md-footer-social">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/fonts/font-awesome.css">
     
       <a href="https://github.com/gcushen" class="md-footer-social__link fa fa-github"></a>
     
@@ -858,13 +966,14 @@ on <a href="https://github.com/gcushen/mezzanine-api">GitHub</a>, so contributin
       
     </div>
     
-      <script src="./assets/javascripts/application-2afe21e0b2.js"></script>
-      <script>var config={url:{base:"."}},app=new Application(config);app.initialize()</script>
+      <script src="assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
       
     
     
       
-      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-62992791-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-62992791-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>
