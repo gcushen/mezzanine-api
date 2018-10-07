@@ -23,6 +23,7 @@ This release brings a number of new features as well as adding compatibility for
 
 ### Fixes
 
+* Add compatibility for Mezzanine 4.3.x
 * Add middleware compatibility for Django v1.11+
 * Add compatibility for django-oauth-toolkit version 1.1.2+
 * Add compatibility for django-filter v2+
