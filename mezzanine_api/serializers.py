@@ -20,10 +20,11 @@ class PrivateField(serializers.ReadOnlyField):
     A Serializer Field class that can be used to hide sensitive User data in the JSON output
     """
 
-    # user needs to be got a diff way for client credentials auth
     def get_attribute(self, instance):
-        if instance.id == self.context.get('request').user.id or self.context.get('request').user.is_superuser:
-            return super(PrivateField, self).get_attribute(instance)
+        # Check if we have a user context or an app context (e.g Oauth2 Client Credentials)
+        if self.context.get('request').user != None:
+            if instance.id == self.context.get('request').user.id or self.context.get('request').user.is_superuser:
+                return super(PrivateField, self).get_attribute(instance)
         return None
 
 
