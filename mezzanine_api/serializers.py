@@ -138,7 +138,7 @@ class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
         fields = ('id', 'parent', 'title', 'content', 'content_model', 'slug', 'publish_date',
-                  'login_required', 'meta_description', 'tags', 'gallery_items', 'children',)
+                  'login_required', 'meta_description', 'tags', 'gallery_items', 'children', 'in_menus',)
 
 
 class PostCreateSerializer(serializers.ModelSerializer):
