@@ -14,10 +14,10 @@ def get_version(package):
 version = get_version('mezzanine_api')
 
 if sys.argv[-1] == 'publish':
-    if os.system('pip freeze | grep wheel'):
+    if os.system('pip freeze --all | grep wheel'):
         print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
         sys.exit()
-    if os.system('pip freeze | grep twine'):
+    if os.system('pip freeze --all | grep twine'):
         print("twine not installed.\nUse `pip install twine`.\nExiting.")
         sys.exit()
     os.system('python setup.py sdist bdist_wheel')
