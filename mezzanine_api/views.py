@@ -68,6 +68,18 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
 
 
+
+class PageFilter(django_filters.FilterSet):
+    """
+    A class for filtering pages by title.
+    """
+    title = django_filters.CharFilter(name="title")
+
+    class Meta:
+        model = Page
+        fields = ['title']
+
+
 class PageViewSet(viewsets.ReadOnlyModelViewSet):
     """
     For listing or retrieving pages.
@@ -82,7 +94,8 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Page.objects.published()
     serializer_class = PageSerializer
     pagination_class = MezzaninePagination
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter,)
+    filter_class = PageFilter
     ordering_fields = ('id', 'parent', 'title',)
     ordering = ('title',)
 
@@ -125,12 +138,19 @@ class CategoryViewSet(mixins.CreateModelMixin,
     search_fields = ('title',)
 
 
+class CharInFilter(django_filters.BaseInFilter, django_filters.CharFilter):
+    """
+    Enable multi-category filtering
+    """
+    pass
+
+
 class PostFilter(django_filters.FilterSet):
     """
     A class for filtering blog posts.
     """
     category_id = django_filters.NumberFilter(name="categories__id")
-    category_name = django_filters.CharFilter(name="categories__title", lookup_expr='contains')
+    category_name = CharInFilter(name="categories__title", lookup_expr='in')
     category_slug = django_filters.CharFilter(name="categories__slug", lookup_expr='exact')
     tag = django_filters.CharFilter(name='keywords_string', lookup_expr='contains')
     author_id = django_filters.NumberFilter(name="user__id")
