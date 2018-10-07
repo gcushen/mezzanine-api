@@ -14,16 +14,14 @@ class ApiMiddleware(object):
     def __call__(self, request):
         """Code to be executed by middleware"""
         # Process OPTIONS request
-        if request.method == 'OPTIONS' \
-                and 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
+        if request.method == 'OPTIONS' and 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
             response = http.HttpResponse()
             return response
 
         response = self.get_response(request)
 
         # Add API discovery header for clients
-        response['X-Api-Discovery'] = \
-            request.build_absolute_uri(reverse('api-root'))
+        response['X-Api-Discovery'] = request.build_absolute_uri(reverse('api-root'))
 
         # Add the CORS headers
         if self.is_api_request(request):
@@ -31,10 +29,8 @@ class ApiMiddleware(object):
                 response['Access-Control-Allow-Origin'] = '*'
 
             if request.method == 'OPTIONS':
-                response['Access-Control-Allow-Headers'] = \
-                    ', '.join(settings.MZN_API_CORS_ALLOW_HEADERS)
-                response['Access-Control-Allow-Methods'] = \
-                    ', '.join(settings.MZN_API_CORS_ALLOW_METHODS)
+                response['Access-Control-Allow-Headers'] = ', '.join(settings.MZN_API_CORS_ALLOW_HEADERS)
+                response['Access-Control-Allow-Methods'] = ', '.join(settings.MZN_API_CORS_ALLOW_METHODS)
 
         return response
 
