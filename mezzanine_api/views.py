@@ -9,7 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
 from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
-from .permissions import IsAdminOrReadOnly, IsAppAuthenticated
+from .permissions import IsAdminOrReadOnly  # , IsAppAuthenticated
 from .pagination import MezzaninePagination, PostPagination
 from .mixins import PutUpdateModelMixin
 
@@ -130,7 +130,7 @@ class CategoryViewSet(mixins.CreateModelMixin,
     queryset = BlogCategory.objects.all()
     serializer_class = CategorySerializer
     pagination_class = MezzaninePagination
-    permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]  # IsAppAuthenticated
     filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
     ordering_fields = ('id', 'title',)
     ordering = ('title',)
@@ -215,7 +215,7 @@ class PostViewSet(mixins.CreateModelMixin,
     """
     queryset = Post.objects.filter(status=2)
     pagination_class = PostPagination
-    permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]  # IsAppAuthenticated
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
     filterset_class = PostFilter
     ordering_fields = ('id', 'title', 'publish_date', 'updated', 'user',)
