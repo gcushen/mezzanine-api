@@ -38,7 +38,7 @@ Remember to regularly check back here and on [PyPi]/[Github] for updates to the 
 
 ### New Project
 
-Once you have [Python] (2.7 or 3.3+) installed on your system, a new API project can be created by running the following commands:
+Once you have [Python] 3.3+ installed on your system, a new API project can be created by running the following commands:
 
     $ pip install -U mezzanine-api
     $ mezzanine-project -a mezzanine_api project_name && cd $_
@@ -60,14 +60,15 @@ Assuming you have an existing [Mezzanine] CMS project, the API can be installed 
         INSTALLED_APPS = (
             'mezzanine_api',
             'rest_framework',
+            'django_filters',
             'rest_framework_swagger',
             'oauth2_provider',
             ...
         )
 
-3. Add the API middleware to the top of `MIDDLEWARE_CLASSES` in `settings.py`:
+3. Add the API middleware to the top of `MIDDLEWARE` in `settings.py`:
 
-        MIDDLEWARE_CLASSES = (
+        MIDDLEWARE = (
             'mezzanine_api.middleware.ApiMiddleware',
             ...
 
