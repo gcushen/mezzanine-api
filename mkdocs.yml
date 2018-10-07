@@ -6,27 +6,30 @@ site_url: http://gcushen.github.io/mezzanine-api
 repo_name: 'GitHub'
 repo_url: https://github.com/gcushen/mezzanine-api
 
-copyright: 'Copyright &copy; 2017 <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.'
+copyright: 'Copyright &copy; 2015 - present <a href="https://twitter.com/GeorgeCushen">George Cushen</a>.'
 
-theme: 'material'
-extra_css:
-  - css/extra.css
-
-extra:
+theme:
+  name: 'material'
+  language: 'en'
+  logo: img/mezzanine_api_logo.png
   palette:
     primary: 'red'
     accent: 'red'
-  logo: img/mezzanine_api_logo.png
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
+extra_css:
+  - css/extra.css
+
+
+extra:
   social:
     - type: 'github'
       link: 'https://github.com/gcushen'
     - type: 'twitter'
       link: 'https://twitter.com/GeorgeCushen'
 
-pages:
+nav:
 - Mezzanine API: 'index.md'
 - Authentication: 'authentication.md'
 - Release Notes: 'release-notes.md'
@@ -35,6 +38,10 @@ pages:
 
 markdown_extensions:
   - admonition
+  - codehilite:
+      guess_lang: true
+  - toc:
+      permalink: true
 
 google_analytics:
   - 'UA-62992791-1'

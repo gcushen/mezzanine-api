@@ -29,7 +29,7 @@ This release brings a number of new features as well as adding compatibility for
 * Update test environment to reflect updated dependencies
 * Fix deprecation warnings from Mezzanine and Django
 
-## Other
+### Other
 
 * Change license from BSD to MIT
 * Drop support for older versions of dependencies

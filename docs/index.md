@@ -40,10 +40,12 @@ Remember to regularly check back here and on [PyPi]/[Github] for updates to the 
 
 Once you have [Python] 3.3+ installed on your system, a new API project can be created by running the following commands:
 
-    $ pip install -U mezzanine-api
-    $ mezzanine-project -a mezzanine_api project_name && cd $_
-    $ python manage.py createdb --noinput
-    $ python manage.py runserver
+```bash
+pip install -U mezzanine-api
+mezzanine-project -a mezzanine_api project_name && cd $_
+python manage.py createdb --noinput
+python manage.py runserver
+```
 
 You should then be able to browse to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) and login using the default account (username: admin, password: default).
 
@@ -112,6 +114,7 @@ interactive endpoint resource documentation (refer to above screenshot). Here yo
 different kinds of endpoint, method, and query parameter whilst you are learning.
 
 Also, if you attempt to access the API itself directly in your browser, you will be shown a browsable web API:
+
 ![browsable api](img/browsable_api.png)
 
 In order to explore the restricted parts of the API, you can login via the browsable web API, or [retrieve your OAuth2 Access Token](authentication.md) 
