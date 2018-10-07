@@ -34,7 +34,6 @@ class SiteSerializer(serializers.ModelSerializer):
     """
     title = serializers.SerializerMethodField('get_site_title')
     tagline = serializers.SerializerMethodField('get_site_tagline')
-    settings.use_editable()
 
     def get_site_title(self, obj):
         return settings.SITE_TITLE
