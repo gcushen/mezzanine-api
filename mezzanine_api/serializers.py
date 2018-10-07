@@ -79,6 +79,36 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'user_name', 'comment', 'submit_date', 'is_public', 'is_removed']
 
 
+class RecursiveField(serializers.Serializer):
+    """
+    A serializer field to support parent-child page relationships
+    """
+    def to_representation(self, value):
+        serializer = self.parent.parent.__class__(value, context=self.context)
+        if serializer.cond is not None:
+            return serializer.cond(serializer.data)
+        else:
+            return serializer.data
+
+
+class ChildPageSerializer(serializers.ModelSerializer):
+    """
+    Serializing child pages
+    """
+
+    def cond(self, child):
+        if child['status'] == 2:
+            return child
+        else:
+            return None
+
+    children = RecursiveField(many=True)
+
+    class Meta:
+        model = Page
+        fields = ('id', 'title', 'children', 'status', '_order',)
+
+
 class PageSerializer(serializers.ModelSerializer):
     """
     Serializing all the pages
@@ -86,6 +116,7 @@ class PageSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField('get_page_content')
     meta_description = serializers.CharField(source='description', read_only=True)
     tags = serializers.CharField(source='keywords_string', read_only=True)
+    children = ChildPageSerializer(many=True)
     gallery_items = serializers.SerializerMethodField('get_gallery_content')
 
     def get_page_content(self, obj):
@@ -107,7 +138,7 @@ class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
         fields = ('id', 'parent', 'title', 'content', 'content_model', 'slug', 'publish_date',
-                  'login_required', 'meta_description', 'tags', 'gallery_items')
+                  'login_required', 'meta_description', 'tags', 'gallery_items', 'children',)
 
 
 class PostCreateSerializer(serializers.ModelSerializer):
