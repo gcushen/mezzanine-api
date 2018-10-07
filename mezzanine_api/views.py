@@ -9,7 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import UserSerializer, CategorySerializer, PageSerializer, SiteSerializer
 from .serializers import PostCreateSerializer, PostUpdateSerializer, PostOutputSerializer
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsAppAuthenticated
 from .pagination import MezzaninePagination, PostPagination
 from .mixins import PutUpdateModelMixin
 
@@ -68,6 +68,18 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
 
 
+
+class PageFilter(django_filters.FilterSet):
+    """
+    A class for filtering pages by title.
+    """
+    title = django_filters.CharFilter(name="title")
+
+    class Meta:
+        model = Page
+        fields = ['title']
+
+
 class PageViewSet(viewsets.ReadOnlyModelViewSet):
     """
     For listing or retrieving pages.
@@ -82,7 +94,8 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Page.objects.published()
     serializer_class = PageSerializer
     pagination_class = MezzaninePagination
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter,)
+    filter_class = PageFilter
     ordering_fields = ('id', 'parent', 'title',)
     ordering = ('title',)
 
@@ -90,7 +103,7 @@ class PageViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = self.queryset
         user = self.request.user
 
-        if not user.is_authenticated():
+        if user and not user.is_authenticated():
             queryset = queryset.filter(login_required=False)
 
         return queryset
@@ -118,11 +131,18 @@ class CategoryViewSet(mixins.CreateModelMixin,
     queryset = BlogCategory.objects.all()
     serializer_class = CategorySerializer
     pagination_class = MezzaninePagination
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated]
     filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
     ordering_fields = ('id', 'title',)
     ordering = ('title',)
     search_fields = ('title',)
+
+
+class CharInFilter(django_filters.BaseInFilter, django_filters.CharFilter):
+    """
+    Enable multi-category filtering
+    """
+    pass
 
 
 class PostFilter(django_filters.FilterSet):
@@ -130,7 +150,7 @@ class PostFilter(django_filters.FilterSet):
     A class for filtering blog posts.
     """
     category_id = django_filters.NumberFilter(name="categories__id")
-    category_name = django_filters.CharFilter(name="categories__title", lookup_expr='contains')
+    category_name = CharInFilter(name="categories__title", lookup_expr='in')
     category_slug = django_filters.CharFilter(name="categories__slug", lookup_expr='exact')
     tag = django_filters.CharFilter(name='keywords_string', lookup_expr='contains')
     author_id = django_filters.NumberFilter(name="user__id")
@@ -196,7 +216,7 @@ class PostViewSet(mixins.CreateModelMixin,
     """
     queryset = Post.objects.filter(status=2)
     pagination_class = PostPagination
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly, IsAppAuthenticated]
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
     filter_class = PostFilter
     ordering_fields = ('id', 'title', 'publish_date', 'updated', 'user',)

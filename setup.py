@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import sys
 import re
@@ -13,7 +12,6 @@ def get_version(package):
 
 
 version = get_version('mezzanine_api')
-
 
 if sys.argv[-1] == 'publish':
     if os.system('pip freeze | grep wheel'):
@@ -31,7 +29,6 @@ if sys.argv[-1] == 'publish':
     shutil.rmtree('build')
     shutil.rmtree('mezzanine_api.egg-info')
     sys.exit()
-
 
 setup(
     name='mezzanine-api',
@@ -57,10 +54,9 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
