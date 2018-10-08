@@ -1,4 +1,4 @@
-from django.core.urlresolvers import NoReverseMatch
+from django.urls import NoReverseMatch
 from django.template.defaultfilters import strip_tags
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site

@@ -2,7 +2,7 @@
 # This module should be imported into your Django `settings.py`
 # Edit your `local_settings.py` to customize
 
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 
 allow_headers = (
