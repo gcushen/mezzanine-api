@@ -231,6 +231,7 @@ if DJANGO_VERSION < (1, 9):
 INSTALLED_APPS = (
     'mezzanine_api',
     'rest_framework',
+    'django_filters',
     'rest_framework_swagger',
     'oauth2_provider',
     "django.contrib.admin",
@@ -268,7 +269,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
