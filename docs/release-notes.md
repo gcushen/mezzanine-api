@@ -10,18 +10,24 @@ You can determine your currently installed version using `pip freeze`:
 
     $ pip freeze | grep mezzanine-api
 
+## Version 0.7.1 (2018-10-10)
+
+**Fixes**
+
+* Add compatibility with Django v2
+
 ## Version 0.7.0 (2018-10-08)
 
 This release brings a number of new features as well as adding compatibility for newer versions of dependencies and dropping support for older dependencies.
 
-### What's New
+**What's New**
 
 * Add support for custom user models
 * List child pages at page endpoint
 * Support filtering pages by title
 * Support filtering posts by multiple categories
 
-### Fixes
+**Fixes**
 
 * Add compatibility for Mezzanine 4.3.x
 * Add middleware compatibility for Django v1.11+
@@ -30,7 +36,7 @@ This release brings a number of new features as well as adding compatibility for
 * Update test environment to reflect updated dependencies
 * Fix deprecation warnings from Mezzanine and Django
 
-### Other
+**Other**
 
 * Change license from BSD to MIT
 * Drop support for older versions of dependencies
