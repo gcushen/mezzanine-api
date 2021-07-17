@@ -1,5 +1,5 @@
 =============
-Mezzanine API
+Mezzanine API: Transform Mezzanine into a Headless CMS
 =============
 
 .. image:: https://img.shields.io/pypi/v/mezzanine-api.svg
