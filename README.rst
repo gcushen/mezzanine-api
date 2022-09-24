@@ -8,8 +8,16 @@ Mezzanine API: Transform Mezzanine into a Headless CMS
    :target: https://travis-ci.org/gcushen/mezzanine-api
 .. image:: https://img.shields.io/github/license/gcushen/mezzanine-api.svg
    :target: https://github.com/gcushen/mezzanine-api/blob/master/LICENSE
-.. image:: https://badges.gitter.im/gcushen/mezzanine-api.svg
-   :target: https://gitter.im/gcushen/mezzanine-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+
+No longer maintained - use Wagtail CMS instead
+================
+
+**Mezzanine CMS and Mezzanine API are no longer maintained.**
+
+**To deploy a new CMS with Python, it's recommended to use Wagtail CMS:** https://wagtail.org/
+
+Mezzanine API
+================
 
 Mezzanine API is a **RESTful web API** for the popular `Mezzanine`_ content management platform.
 It is built upon the `Django`_ framework, using **JSON** for serialization and **OAuth2** for secure authentication.
