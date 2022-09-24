@@ -38,7 +38,7 @@ Features
 
 Installation, Documentation and Roadmap
 =======================================
-Please visit http://gcushen.github.io/mezzanine-api
+Check out the `docs` folder
 
 Screenshot
 ==========
