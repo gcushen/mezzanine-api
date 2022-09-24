@@ -38,7 +38,7 @@ Features
 
 Installation, Documentation and Roadmap
 =======================================
-Check out the `docs` folder
+Check out the "docs" folder
 
 Screenshot
 ==========
